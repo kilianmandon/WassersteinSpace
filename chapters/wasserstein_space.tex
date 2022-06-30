@@ -1,0 +1,316 @@
+\begin{definition}[Kanonischer Raum]
+    Sei $p \in [1, \infty)$. Wir definieren iterativ eine Folge von geschachtelten Räumen. Schreibe $(\mathcal{Z}_N, d_{\mathcal{Z}_N}) := (\mathcal{X}_N, d_{\mathcal{X}_N})$ und für $t=N-1, ..., 1$ setze
+    \begin{equation}
+        \mathcal{Z}_t := \mathcal{Z}_t^- \times \mathcal{Z}_t^+ := \mathcal{X}_t \times \mathcal{P}_p(\mathcal{Z}_{t+1})
+    \end{equation}
+    mit der Metrik $d^p_{\mathcal{Z}_t} := d^p_{\mathcal{X}_t} + \mathcal{W}^p_{p, \mathcal{Z}_{t+1}}$. Elemente von $\mathcal{Z}_t$ schreiben wir als $z_t=(z_t^-, z_t^+) \in \mathcal{Z}_t^- \times \mathcal{Z}_t^+$. Der \emph{kanonische filtrierte Raum} ist nun
+    \begin{equation}
+        (\mathcal{Z}, \mathcal{F}^\mathcal{Z}, (\mathcal{F}_t^\mathcal{Z})_{t=1}^N)
+    \end{equation}
+    wobei $\mathcal{Z} = \mathcal{Z}_{1:N}$, $\mathcal{F}^\mathcal{Z}$ die Borelsche $\sigma$-Algebra auf $\mathcal{Z}$ und $\mathcal{F}^\mathcal{Z}_t=\sigma(z \mapsto z_{1:t})$ die kleinste $\sigma$-Algebra, die die Projketionen bis zur $t$-ten Koordinate messbar macht.
+\end{definition}
+Die auf diese Weise konstruierten Räume sind polnisch, da alle verwendeten Operationen abgeschlossen unter dieser Eigenschaft sind.
+\begin{definition}[Der Informationsprozess]
+Für $\mathbb{X}\in \mathcal{FP}_p$ definieren wir rekursiv den assoziierten \emph{Informationsprozess} wie folgt: Für $t=N$ sei $\ip_N(\mathbb{X}):=X_N$ und für $t=N-1,...,1$ sei
+\begin{align*}
+   \ip_t(\mathbb{X})&:=(\ip_t^-(\mathbb{X}), \ip_t^+(\mathbb{X})) \\
+   &:= (X_t, \mathcal{L}(\ip_{t+1}(\mathbb{X}) \vert \mathcal{F}_t^{\mathbb{X}})) \in \mathcal{Z}_t
+\end{align*}
+$\ip_t(\mathbb{X})$ und $\ip_{1:t}(\mathbb{X})$ sind messbar bezüglich $\mathcal{F}_t^\mathbb{X}$, der Informationsprozess ist also adaptiert an $\left(\mathcal{F}_t^\mathbb{X}\right)_{t=1}^N$.
+\end{definition}
+\begin{remark}
+Mit unserer Vorarbeit im letzten Kapitel ist diese Konstruktion wohldefiniert: Mit der zweiten Aussage aus Korollar \ref{thm:pmoments} hat induktiv jedes Paar $(X_t, \mathcal{L}(\ip_{t+1}(\mathbb{X})\vert \mathcal{F}_t^\mathbb{X}))$ wieder $p$-te Momente, während die erste Version liefert, dass wir die bedingte Verteilung als messbare Abbildung mit Werten in $\mathcal{P}_p$ wählen können.
+\end{remark}
+Der eben konstruierte kanonische filtrierte Raum und der Informationsprozess entstehen durch eine iterative Schachtelung von Räumen und Räumen von Verteilungen darauf. Für die Analyse dieser Prozesse ist es nützlich einen Operator einzuführen, der diese Schachtelung wieder ''entfaltet'':
+\begin{definition}[Unfold-Operator]
+Für $1\leq t\leq N$ ist der Unfold-Operator eine Abbildung $\uf_t:\mathcal{P}_p(\mathcal{Z}_t) \rightarrow \mathcal{P}_p(\mathcal{Z}_{t:N})$. Wir definieren ihn durch $\uf_N=\operatorname{id}$ und für $1\leq t\leq N-1$ induktiv durch
+$$\uf_{t}(\mu)(dz_{t:N})=\mu(dz_t)\uf_{t+1}(z_t^+)(dz_{t+1:N})$$
+Für eine messbare Abbildung $f:\mathcal{Z}_{t:N}\rightarrow \mathbb{R}$ und ein Maß $\mu\in\mathcal{P}_p(\mathcal{Z}_t)$ bedeutet das
+$$\int f(z_{t:N}) \uf_t(\mu)(dz_{t:N}) = \int\int ...\int f(z_t,...,z_N)z^+_{N-1}(dz_N)...z_{t}^+(dz_{t+1})\mu(dz_t)$$
+\end{definition}
+\begin{lemma}\label{thm:bounded_unfold}
+    Es gibt Punkte $a_n \in \mathcal{Z}_n, 1\leq t\leq N$ und Zahlen $n_t \in \mathbb{N}$, sodass 
+    $$\int d^p(a_{t+1:n}, z_{t+1:N}) \uf_{t+1}(z_t^+)(dz_{t+1:N})\leq n_td^p(a_t, z_t)$$
+    Weiterhin gibt es für eine Verteilung $\mu \in \mathcal{P}_p(\mathcal{Z}_t)$ eine Zahl $n\in \mathbb{N}$ mit
+    $$\int d^p(z_{t:N}, a_{t:N})\uf_t(\mu)(dz_{t:N})\leq n\int d^p(z_t, a_t)\mu(dz_t)< \infty$$ 
+    Es hat also $\uf_t(\mu)$ $p$-te Momente und der Unfold-Operator ist somit wohldefiniert.
+\end{lemma}
+\begin{proof}
+Wähle die Punkte als $a_N \in \mathcal{X}_N$ und für $1\leq t \leq N-1$ $a_0^-\in\mathcal{X}_t$ und $a_0^+ = \delta_{a_{t+1}}$. 
+Wir zeigen die Behauptung induktiv. Für $t=N-1$ gilt sie, da
+$$\int d^p(a_N, z_N)z_{N-1}^+(dz_N)=\mathcal{W}_p^p(z_{N-1}^+, \delta_{a_N}) \leq d^p(z_{N-1}, a_{N-1})$$
+Beachte hierbei wieder, dass es in der Definition der Wassersteinmetrik bezüglich einem Dirac-Maß nur eine mögliche Kopplung gibt. Nehmen wir nun an, die Aussage gilt für $t+1$. Dann folgt die Aussage für $t$:
+\begin{align*}
+\int &d^p(a_{t+1:N}, z_{t+1}:N) \uf_{t+1}(z_t^+)(dz_{t+1:N}) \\
+&= \int\int d^p(a_{t+2:N}, z_{t+2:N}) + d^p(a_{t+1}, z_{t+1}) \uf_{t+2}(z_{t+1}^+)(dz_{t+2:N})z_t^+(dz_{t+1}) \\
+&\leq \int n_{t+1}d^p(a_{t+1}, z_{t+1}) + d^p(a_{t+1}, z_{t+1}) z_t^+(dz_{t+1}) \\
+&= \int (n_{t+1}+1)d^p(a_{t+1}, z_{t+1}) z_t^-(dz_{t+1}) \\
+&= (n_{t+1}+1)\mathcal{W}_p^p(\delta_{a_{t+1}}, z_t^-) \\
+&\leq (n_{t+1}+1)d_p^p(a_t, z_t)
+\end{align*}
+Mit einem ähnlichen Argument gilt nun auch die zweite Behauptung:
+\begin{align*}
+\int &d^p(z_{t:N}, a_{t:N})\uf_{t}(\mu)(dz_{t:N}) \\
+&= \int\int d^p(z_{t+1:N}, a_{t+1:N})+d^p(z_t, a_t)\uf_{t+1}(z_t^+)(dz_{t+1:N})\mu(dz_t) \\
+&\leq \int (n_{t+1}+1)d^p(z_t, a_t)\mu(dz_t) < \infty
+\end{align*}
+wobei letzte Geichung gilt, da $\mu \in\mathcal{P}_p(\mathcal{Z}_t)$.
+\end{proof}
+\begin{lemma}\label{thm:properties_unfold}
+Für $1\leq t\leq N-1$ gelten die folgenden Eigenschaften:
+\begin{enumerate}
+\item $\uf_t$ ist stetig.
+\item Für $\mathbb{X}\in\mathcal{FP}_p$ gilt
+\begin{align}
+    \mathcal{L}(\ip(\mathbb{X})\vert \mathcal{F}_t^\mathbb{X})=\delta_{\ip_{1:t}(\mathbb{X})}\otimes \uf_{t+1}(\ip_t^+(\mathbb{X}))
+\end{align}
+und 
+$$\mathcal{L}(\ip(\mathbb{X}))=\uf_1(\mathcal{L}(\ip_1(\mathbb{X})))$$
+Für $f:\mathcal{Z}\rightarrow \mathbb{R}$ beschränkt und Borel messbar gilt
+\begin{align}\label{eq:uf_expected_value}
+    \mathbb{E}(f(\ip(\mathbb{X}))\vert \mathcal{F}_t^\mathbb{X}) = \int f(ip_{1:t}(\mathbb{X}), z_{t+1:N}) \uf_{t+1}(ip_{t}^+(\mathbb{X}))(dz_{t+1:N})
+\end{align}
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}
+    \item Wir zeigen die Stetigkeit induktiv. Für $t=N$ ist $\uf_N=\operatorname{id}$ und somit stetig. Nehmen wir nun an, $\uf_{t+1}$ ist stetig. Seien $\mu_n, \mu\in\mathcal{P}_p(\mathcal{Z}_t)$ mit $\mu_n\rightarrow \mu$ und sei $f:\mathcal{Z}_{t:N}\rightarrow\mathbb{R}$ beschränkt und gleichmäßig stetig. Betrachte die Funktion 
+    $$g(z_t)=\int f(z_t, z_{t+1:N}) \uf_{t+1}(z_t^+)(dz_{t+1:N})$$
+    Die Projektion auf $z_t^+$ ist kontrahierend, somit gilt für $z_t^n\rightarrow z_t$ auch $z_t^{n,+}\rightarrow z_t^+$, und da $\uf_{t+1}$ stetig ist folgt $\nu_n:=\uf_{t+1}(z_t^{n,+})\rightarrow \uf_{t+1}(z_t^+)=:\nu$. 
+    \begin{align}\label{eq:g_continuous}
+        \begin{split}
+        |g(z_t^n)-g(z_t)| \leq &\left|\int f(z_t^n, z_{t+1:N})-f(z_t,z_{t+1:N})\nu_n(dz_{t+1:N})\right| \\
+        &+ \left|\int f(z_{t:N})\nu_n(dz_{t+1:N}) - \int f(z_{t:N})\nu(dz_{t+1:N}))\right|
+        \end{split}
+    \end{align}
+    Der erste Term auf der rechten Seite ist beschränkt durch 
+    $$\max\limits_{z_{t+1:N}}\left|f(z_t^n, z_{t+1:N})-f(z_t, z_{t+1:N})\right|\rightarrow 0$$
+    da $f$ gleichmäßig stetig ist. Der zweite Summand auf der rechten Seite konvergiert gegen $0$, da $\nu_n \rightarrow \nu$ in $\mathcal{W}_p$, also insbesondere schwach. $g$ ist also stetig und auch beschränkt, da $f$ beschränkt ist, und somit
+    $$\uf_t(\mu_n)(f)=\int g(z_t)\mu_n(dz_t)\rightarrow \int g(z_t)\mu(dz_t)=\uf_t(\mu)(f)$$
+    Wir haben also $\uf_t(\mu_n)\rightarrow\uf_t(\mu)$ schwach und es bleibt zu zeigen, dass die $p$-ten Momente konvergieren. Wähle dazu die Punkte $a_t$ wie in Lemma \ref{thm:bounded_unfold}. Dann gilt
+    \begin{align*}
+        \uf_{t}&(\mu_n)(d^p(a_{t:N}, \cdot)) \\
+        &= \int\int d^p(a_t, z_t) + d^p(a_{t+1:N}, z_{t+1:N})\uf_{t+1}(z_t^+)(dz_{t+1:N})\mu_n(dz_t) \\
+        &=\int d^p(a_t, z_t)\mu_n(dz_t) + \int\int d^p(a_{t+1:N}, z_{t+1:N})\uf_{t+1}(z_t^+)(dz_{t+1:N})\mu_n(dz_t)
+    \end{align*}
+    Es gilt $\mu_n(d^p(a_t, \cdot))\rightarrow \mu(d^p(a_t, \cdot))$ da $\mu_n\rightarrow\mu$ in $\mathcal{W}_p$.
+    Für den zweiten Term betrachten wir wieder das innere Integral
+    $$g(z_t) = \int d^p(a_{t+1:N}, z_{t+1:N})\uf_{t+1}(z_t^+)(dz_{t+1:N})$$
+    Der Integrand ist Lipschitz stetig, also auch gleichmäßig stetig, und hat $p$-Wachstum. Mit der gleichen Aufteilung der Terme wie in Gleichung \ref{eq:g_continuous} können wir also wieder folgern, dass $g$ stetig ist. Mit Lemma \ref{thm:bounded_unfold} ist $g(z_t)\leq cd^p(a_t, z_t)$, $g$ hat also $p$-Wachstum und somit $\uf_{t}(\mu_n)(g)\rightarrow \uf_{t}(\mu)(g)$. Insgesamt gilt $\uf_{t}(\mu_n)\rightarrow\uf_t(\mu)$ bezüglich $\mathcal{W}_p$.
+    \item $\ip_{1:t}$ ist messbar bezüglich $\mathcal{F}_t^X$ und $\ip_t^+(\mathbb{X})=\mathcal{L}(\ip_{t+1}(\mathbb{X})\vert \mathcal{F}_t^\mathbb{X})$ genauso. Da $\uf_t$ mit der ersten Aussage des Beweises stetig und somit auch messbar ist, ist $\uf_{t+1}(\ip_t^+(\mathbb{X}))$ ein $\mathcal{F}_t^\mathbb{X}$ messbarer Kern. Mit Lemma \ref{thm:kernel_prod} ist somit auch $\delta_{\ip_{1:t}(\mathbb{X})}\otimes \uf_{t+1}(\ip_t^+(\mathbb{X}))$ ein $\mathcal{F}_t^\mathbb{X}$ messbarer Kern. Mit Lemma \ref{thm:law_expectancy_connection} reicht es also für jedes $t$ Gleichung \ref{eq:uf_expected_value} nachzurechnen. Wir zeigen die Behauptung nun durch Induktion über $t$. Für $t=N-1$ ist mit Lemma \ref{thm:determined_kernel} 
+    $$\mathcal{L}(\ip(\mathbb{X})\vert \mathcal{F}_{N-1}^\mathbb{X})=\delta_{\ip_{1:N-1}(\mathbb{X})} \otimes \mathcal{L}(\ip_N(\mathbb{X})\vert \mathcal{F}_{N-1}^\mathbb{X})$$
+    was genau $\delta_{\ip_{1:N-1}(\mathbb{X})}\otimes \uf_{N}(\ip_{N-1}^+(\mathbb{X}))$ entspricht. Nehmen wir nun an, die Gleichung gilt für ein $2\leq t\leq N-1$. Für $f: \mathcal{Z}\rightarrow\mathbb{R}$ beschränkt und messbar, betrachte
+    $$g(z_{1:t})=\int f(z_{1:t}, z_{t+1:N})\uf_{t+1}(z_t^+)(dz_{t+1:N})$$
+    Nach Induktionsvoraussetzung gilt $\mathbb{E}(f(\ip(\mathbb{X}))\vert\mathcal{F}_t^\mathbb{X})=g(\ip_{1:t}(\mathbb{X}))$.
+    Dann ist 
+    \begin{align*}
+    \mathbb{E}(f(\ip(\mathbb{X}))\vert\mathcal{F}_{t-1}^\mathbb{X}) &= \mathbb{E}\left( \mathbb{E}(f(\ip(\mathbb{X}))\vert \mathcal{F}_{t}^\mathbb{X}) \vert \mathcal{F}_{t-1}^\mathbb{X}\right) \\
+    &= \mathbb{E}(g(\ip_{1:t})\vert \mathcal{F}_{t-1}^\mathbb{X})
+    \end{align*}
+    Da wieder mit Lemma \ref{thm:determined_kernel} 
+    $$\mathcal{L}(\ip_{1:t}\vert \mathcal{F}_{t-1}^\mathbb{X})=\delta_{\ip_{1:t-1}(\mathbb{X})}\otimes \mathcal{L}(\ip_t\vert \mathcal{F}_{t-1}^\mathbb{X})=\delta_{\ip_{1:t-1}(\mathbb{X})}\otimes \ip_{t-1}^+(\mathbb{X})$$
+    folgt also
+    \begin{align*}
+    \mathbb{E}(f(\ip(\mathbb{X}))\vert \mathcal{F}_{t-1}^\mathbb{X}) &= \int g(\ip_{1:t-1}(\mathbb{X}), z_t) \ip_{t-1}^+(\mathbb{X})(dz_t) \\
+    &= \int \int f(\ip_{1:t-1}, z_{t:N}) \uf_{t+1}(z_t^+)(dz_{t+1:N})\ip_{t-1}^+(\mathbb{X})(dz_t) \\
+    &= \int f(\ip_{1:t-1}, z_{t:N}) \uf_{t}(\ip_{t-1}^+(\mathbb{X}))(dz_{t:N})
+    \end{align*}
+    und damit die Behauptung erste Behauptung.
+    Der letzte Teil der Behauptung
+    $$\mathcal{L}(\ip(\mathbb{X}))=\uf_1(\mathcal{L}(\ip_1(\mathbb{X})))$$
+    folgt mit dem gleichen Argument wie oben, wenn wir die $\sigma$-Algebren fortsetzen durch die triviale $\sigma$-Algebra $\mathcal{F}_0^\mathbb{X}=\{\emptyset, \Omega\}$ und den Informationsprozess durch $\ip_0^+(\mathbb{X})=\mathcal{L}(\ip_1(\mathbb{X})\vert \mathcal{F}_0^\mathbb{X}) \equiv \mathcal{L}(\ip_1(\mathbb{X}))$.
+\end{enumerate}
+\end{proof}
+Mit dieser Darstellung der bedingten Verteilung vom Informationsprozess können wir auch bedingte Verteilungen und Erwartungen von Funktionen in $\ip(\mathbb{X})$ konstruieren:
+% TODO: Diskussion vom Fall P statt P_p
+\begin{lemma}[Der Informationsprozess ist ''self-aware'']\label{thm:self_awareness}
+Für jede beschränkte, Borel - messbare (stetige) Funktion $f:\mathcal{Z}\rightarrow \mathbb{R}$ und $1\leq t\leq N$ gibt es eine beschränkte, Borel-messbare (stetige) Funktion $g:\mathcal{Z}_{1:t}\rightarrow \mathbb{R}$ mit 
+$$\mathbb{E}(f(\ip(\mathbb{X}))\vert \mathcal{F}_t^\mathbb{X}) = g(\ip_{1:t}(\mathbb{X}))) \quad \text{ für alle }\mathbb{X}\in\mathcal{FP}_p$$
+Allgemeiner: Für einen polnischen Raum $\mathcal{A}$ und eine Borel messbare (stetige) Funktion $f:\mathcal{Z}\rightarrow \mathcal{A}$ und $1\leq t\leq N$ gibt es eine messbare (stetige) Funktion $g:\mathcal{Z}_{1:t}\rightarrow \mathcal{P}(\mathcal{A})$ mit estf
+$$\mathcal{L}(f(\ip(\mathbb{X}))\vert \mathcal{F}_t^\mathbb{X})=g(\ip_{1:t}(\mathbb{X}))\quad\text{ für alle } \mathbb{X}\in\mathcal{FP}_p$$
+\end{lemma}
+\begin{proof}
+Sei $f:\mathcal{Z}\rightarrow \mathcal{A}$ beschränkt und messbar (bzw. stetig). Mit dem gleichen Argument wie im ersten Teil vom Beweis von \ref{thm:properties_unfold} ist die Abbildung 
+$$F:\mathcal{Z}_{1:t}\rightarrow\mathcal{P}_p(\mathcal{Z}), \quad z_{1:t}\mapsto \delta_{z_{1:t}} \otimes \uf_{t+1}(z_t^+)$$ 
+stetig: Der Kern $\uf_{t+1}(z_t^+)$ ist stetig nach Lemma \ref{thm:properties_unfold} (da auch die Projektion auf $z_t^+$ kontrahierend, also stetig ist). Wenn wir nun eine gleichmäßig stetige beschränkte Testfunktion $g:\mathcal{Z}\rightarrow\mathbb{R}$ nehmen konvergiert für eine Folge $z_{1:t}^n\rightarrow z_{1:t}\in\mathcal{Z}_{1:t}$ auch
+$$\left(\delta_{z_{1:t}^n}\otimes \uf_{t+1}(z_t^{n, +})\right)(g) = \int g(z_{1:t}^n, z_{t+1:N})\uf_{t+1}(z_t^{n, +})(dz_{t+1:N})$$
+gegen 
+$$\int g(z_{1:t}, z_{t+1:N})\uf_{t+1}(z_t^+)(dz_{t+1:N})=(\delta_{z_{1:t}} \otimes \uf_{t+1}(z_t^+))(g)$$
+(das sind genau die Terme von \ref{thm:properties_unfold}) und auch die $p$-ten Momente konvergieren, wieder mit der gleichen Argumentation wie in \ref{thm:properties_unfold}. $F$ ist also in der Tat stetig. Betrachte nun die Funktion $G(z_{1:t}) = f_*F(z_{1:t})$. Mit Lemma \ref{thm:pushforward_measurable} ist $G$ messbar (und stetig, falls $f$ stetig ist). Mit Korollar \ref{thm:pushforward_law} und dem zweiten Teil von Lemma \ref{thm:properties_unfold} gilt nun die Gleichungskette
+$$\mathcal{L}(f(\ip(\mathbb{X}))\vert \mathcal{F}_t^\mathbb{X}) = f_*\mathcal{L}(\ip(\mathbb{X}) \vert \mathcal{F}_t^\mathbb{X}) = f_*F(\ip_{1:t}(\mathbb{X}))=G(\ip_{1:t}(\mathbb{X}))$$
+
+Für die erste Gleichung betrachten wir nun den Spezialfall $\mathcal{A}=\mathbb{R}$. Konstruiere $G$ genau wie zuvor. Nun gilt mit Lemma \ref{thm:law_expectancy_connection}
+$$\mathbb{E}(f(\ip(\mathbb{X}))\vert \mathcal{F}_t^\mathbb{X}) = \int a \mathcal{L}(f(\ip(\mathbb{X}))\vert \mathcal{F}_t^\mathbb{X})(da) = \int a G(\ip_{1:t}(\mathbb{X})(da)$$
+Die Abbildung $\mathcal{P}_p(\mathbb{R}) \rightarrow \mathbb{R}, \mu \mapsto \int a \mu(da)$ ist stetig, da $\operatorname{id}$ stetig mit $p$-Wachstum (beachte $p\geq 1$). Somit ist $g(z_{1:t}) = \int a G(z_{1:t})(da)$ messbar und, falls $f$ (und somit auch $G$) stetig ist, auch stetig. Insgesamt folgt die Behauptung.
+\end{proof}
+
+%TODO: Insbesondere hier sollte geprüft werden, inwiefern der Wechsel zwischen FP und FP_p vonstatten geht (kann man jedes CFP_p durch mu in P_p(Z_1) darstellen?)
+\begin{definition}[Kanonischer filtrierter Prozess]
+    Wir nennen $\mathbb{X} \in \mathcal{FP}_p$ einen \emph{kanonischen filtrierten Prozess}, kurz $\mathbb{X} \in \CFP_p$ falls $\mathbb{X}$ der Form
+    \begin{equation}\label{eq:def_canonical_filtered_process}
+    \mathbb{X} = \left( \mathcal{Z}, \mathcal{F}^\mathcal{Z}, \uf_1(\bar{\mu}), \left(\mathcal{F}_t^\mathcal{Z}\right)_{t=1}^N, Z^-\right)
+    \end{equation}
+    ist, wobei $\bar{\mu} \in \mathcal{P}_p(\mathcal{Z}_1)$.
+\end{definition}
+\begin{definition}[Assoziierter kanonischer filtrierter Prozess]
+    Für $\mathbb{X} \in \mathcal{FP}_p$ sei $\overline{\mathbb{X}} \in \CFP_p$ gegeben durch Gleichung \ref{eq:def_canonical_filtered_process} bezüglich $\bar\mu := \mathcal{L}(\ip_1(\mathbb{X}))$, mit Lemma \ref{thm:properties_unfold} also
+    \begin{equation}\label{eq:associated_process}
+        \overline{\mathbb{X}} = \left( \mathcal{Z}, \mathcal{F}^\mathcal{Z}, \mathcal{L}(\ip(\mathbb{X})), \left(\mathcal{F}_t^\mathcal{Z}\right)_{t=1}^N, Z^-\right)
+    \end{equation}
+    Wir nennen $\overline{\mathbb{X}}$ den \emph{zu $\mathbb{X}$ assoziierten kanonischen filtrierten Prozess}.
+\end{definition}
+
+\begin{lemma}
+Seien $\mathbb{X}, \mathbb{Y} \in \mathcal{FP}_p$ und $\overline{\mathbb{X}}, \overline{\mathbb{Y}}$ die assoziierten kanonischen Prozesse. Dann gelten die folgenden Aussagen:
+\begin{enumerate}
+\item $(\id, \ip(\mathbb{X}))_*\mathbb{P}^\mathbb{X} \in \cplbc(\mathbb{X}, \overline{\mathbb{X}})$.
+\item Für $\pi \in \cplc(\mathbb{X}, \mathbb{Y})$ ist $(\ip(\mathbb{X}), \ip(\mathbb{Y}))_* \pi \in \cplc(\overline{\mathbb{X}}, \overline{\mathbb{Y}})$.
+\item Für $\pi \in \cplbc(\mathbb{X}, \mathbb{Y})$ ist $(\ip(\mathbb{X}), \ip(\mathbb{Y}))_* \pi \in \cplbc(\overline{\mathbb{X}}, \overline{\mathbb{Y}})$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}
+\item Schreibe $\gamma:=(\id, \ip(\mathbb{X}))_* \mathbb{P}^\mathbb{X}$. Wir prüfen zunächst Kausalität über den dritten Punkt der Charakterisierung von Kausalität in Lemma \ref{thm:causality_characterization}. Sei dazu $V: \mathcal{Z}\rightarrow\mathbb{R}$ beschränkt und $\mathcal{F}_t^\mathbb{Z}$ messbar. Wir bemerken, dass bezüglich $\gamma$ auf $\Omega^\mathbb{X} \times \mathcal{Z}$ gilt $z=\ip(\mathbb{X})$ fast sicher (denn $\gamma\left(z \neq \ip(\mathbb{X})\right) = \mathbb{P}^\mathbb{X}\left(\ip(\mathbb{X}) \neq \ip(\mathbb{X})\right)$). Wir haben also fast sicher $V(z) = V(\ip(\mathbb{X}))$. Da $V$ $\mathcal{F}_t^\mathcal{Z}$ ist, faktorisiert es über die Abbildung $z \mapsto z_{1:t}$. Es gilt also
+$$V(\ip(\mathbb{X})) = \tilde{V}(\ip_{1:t}(\mathbb{X}))$$
+$\ip(\mathbb{X})$ ist adaptiert an $\mathcal{F}_t^\mathbb{X}$, der Term auf der rechten Seite (und somit auch $V(\ip(\mathbb{X}))$) ist also $\mathcal{F}_t^\mathbb{X}$ messbar. Insgesamt erhalten Wir
+\begin{align*}
+    \mathbb{E}_\gamma(V \vert \mathcal{F}_{N, 0}^{\mathbb{X}, \mathcal{Z}}) &= \mathbb{E}_\gamma(V(\ip(\mathbb{X}))\vert \mathcal{F}_{N, 0}^{\mathbb{X}, \mathcal{Z}}) = V(\ip(\mathbb{X})) \\
+    &= \mathbb{E}_\gamma(V(\ip(\mathbb{X})) \vert \mathcal{F}_{t, 0}^{\mathbb{X}, \mathcal{Z}}) = \mathbb{E}_\gamma(V \vert \mathcal{F}_{t, 0}^{\mathbb{X}, \mathcal{Z}})
+\end{align*}
+Für Kausalität von $\overline{\mathbb{X}}$ zu $\mathbb{X}$ überprüfen wir den zweiten Punkt von Lemma \ref{thm:causality_characterization}: Sei $U: \mathcal{Z}\rightarrow \mathbb{R}$ beschränkt und $\mathcal{F}_N^\mathcal{Z}$ messbar. Wieder gilt $U(z) = U(\ip(\mathbb{X}))$ $\gamma$ - fast sicher. Des weiteren gilt
+\begin{equation}\label{eq:39i_1}
+\mathbb{E}_\gamma(U \vert \mathcal{F}_{t,t}^{\mathbb{X}, \mathcal{Z}}) = \mathbb{E}_\gamma(U \vert \mathcal{F}_{t, 0}^{\mathbb{X}, \mathcal{Z}})
+\end{equation}
+denn jede $\mathcal{F}_{t,t}^{\mathbb{X}, \mathcal{Z}}$ messbare Funktion $G$ ist fast sicher $\mathcal{F}_{t, 0}^{\mathbb{X}, \mathcal{Z}}$ messbar: $G$ ist messbar bezüglich der kleinsten $\sigma$-Algebra, bezüglich der 
+$$(\id, z_{1:t}): (\Omega^\mathbb{X}, \mathcal{F}^\mathbb{X})\otimes (\mathcal{Z}, \mathcal{F}^{\mathcal{Z}}) \rightarrow (\Omega^\mathbb{X}, \mathcal{F}_t^\mathbb{X}) \otimes (\mathcal{Z}_{1:t}, \mathcal{F}^{Z_{1:t}})$$
+messbar ist. Somit faktorisiert $G$ darüber: $G(\omega, z) = \tilde{G}(\omega, z_{1:t}) = \tilde{G}(\omega, \ip_{1:t}(\mathbb{X}))$ fast sicher. Die letzte Abbildung ist aber $\mathcal{F}_{t,0}^{\mathbb{X}, \mathcal{Z}}$ messbar. Mit gleicher Argumentation ist 
+\begin{equation}\label{eq:39i_2}
+\mathbb{E}_\gamma(U \vert \mathcal{F}_{0, t}^{\mathbb{X}, \mathcal{Z}}) = \mathbb{E}(U \vert \ip_{1:t}(\mathbb{X}))
+\end{equation}
+Die linke Seite ist $\mathcal{F}_{0, t}^{\mathbb{X}, \mathcal{Z}}$ messbar und faktorisiert also als $G(z_{1:t})=G(\ip_{1:t}(\mathbb{X}))$ fast sicher, und ist somit messbar bezüglich $\sigma(\ip_{1:t}(\mathbb{X}))$.
+Zuletzt gilt 
+\begin{equation}\label{eq:39i_3}
+\mathbb{E}_\gamma(U(\ip(\mathbb{X}))\vert \mathcal{F}_{t, 0}^{\mathbb{X}, \mathcal{Z}}) = \mathbb{E}_\gamma(U(\ip(\mathbb{X})) \vert \ip_{1:t}(\mathbb{X}))
+\end{equation}
+Nach Lemma \ref{thm:self_awareness} faktorisiert die linke Seite über $\ip_{1:t}(\mathbb{X})$ und ist also messbar diesbezüglich. Wir setzen nun die Gleichungen \ref{eq:39i_1}, \ref{eq:39i_2}, \ref{eq:39i_3} zusammen:
+\begin{align*}
+    \mathbb{E}_\gamma(U \vert \mathcal{F}_{t,t}^{\mathbb{X}, \mathcal{Z}}) &= \mathbb{E}_\gamma(U(\ip(\mathbb{X})) \vert \mathcal{F}_{t, 0}^{\mathbb{X}, \mathcal{Z}}) 
+    = \mathbb{E}_\gamma(U(\ip(\mathbb{X}))\vert \ip_{1:t}(\mathbb{X})) \\
+    &= \mathbb{E}_\gamma(U(\ip(\mathbb{X}))\vert \mathcal{F}_{0, t}^{\mathbb{X}, \mathcal{Z}}) = \mathbb{E}_\gamma(U \vert \mathcal{F}_{0, t}^{\mathbb{X}, \mathcal{Z}})
+\end{align*}
+\item Schreibe $\overline\pi:=(\ip(\mathbb{X}), \ip(\mathbb{Y}))_* \pi$ und sei $U:\mathcal{Z}\rightarrow \mathbb{R}$ $\mathcal{F}_{N}^{\mathcal{Z}}$-messbar und beschränkt. $U(\ip(\mathbb{X}))$ ist beschränkt und $\mathcal{F}_N^\mathbb{X}$ messbar. Mit Lemma \ref{thm:causality_characterization} gilt also
+\begin{equation}\label{eq:310_0}
+    \mathbb{E}_\pi(U(\ip(X))\vert \mathcal{F}_{t,t}^{\mathbb{X}, \mathbb{Y}}) = \mathbb{E}_\pi(U(\ip(\mathbb{X}))\vert \mathcal{F}_{t, 0}^{\mathbb{X}, \mathbb{Y}}) = \mathbb{E}_\pi(U(\ip(\mathbb{X})) \vert \ip_{1:t}(\mathbb{X}))
+\end{equation}
+wobei wir in der letzten Gleichheit wieder benutzt haben, dass auf $\mathcal{F}_t^\mathbb{X}$ bedingte Erwartungen nach Lemma \ref{thm:self_awareness} über $\ip_{1:t}(\mathbb{X})$ faktorisieren. Die kleinste $\sigma$-Algebra auf $\Omega^\mathbb{X}$, bezüglich der $\ip(\mathbb{X}): \Omega^{\mathbb{X}} \rightarrow (\mathcal{Z}, \mathcal{F}_t^\mathcal{Z})$ messbar ist, ist genau die kleinste $\sigma$-Algebra bezüglich der $\ip_{1:t}(\mathbb{X})$ messbar ist. Mit Lemma \ref{thm:pushforward_expectancy} gilt also
+\begin{equation}\label{eq:310_1}
+    \mathbb{E}_{\overline\pi}(U \vert \mathcal{F}_{t, 0}^{\mathcal{Z}, \mathcal{Z}})(\ip(\mathbb{X})) = \mathbb{E}_\pi(U(\ip(\mathbb{X})) \vert \ip_{1:t}(\mathbb{X})) = \mathbb{E}_\pi(U(\ip(\mathbb{X})) \vert \mathcal{F}_{t,t}^{\mathbb{X}, \mathbb{Y}})
+\end{equation}
+wobei die letzte Gleichheit nach Gleichung \ref{eq:310_0} gilt.
+An dem zweiten Term sieht man, dass der dritte Term bereits $\sigma(\ip_{1:t}(\mathbb{X}), \ip_{1:t}(\mathbb{Y}))$-messbar ist. Gleichzeitig ist $\sigma(\ip_{1:t}(\mathbb{X}), \ip_{1:t}(\mathbb{Y})) \subset \mathcal{F}_{t,t}^{\mathbb{X}, \mathbb{Y}}$, da der Informationsprozess adaptiert ist. Mit der Turmeigenschaft erhalten wir
+\begin{align}\label{eq:310_2}
+    \begin{split}
+\mathbb{E}_\pi(U(\ip(\mathbb{X})) \vert \mathcal{F}_{t,t}^{\mathbb{X}, \mathbb{Y}}) &= \mathbb{E}_\pi\left[\mathbb{E}_\pi(U(\ip(\mathbb{X}))\vert \mathcal{F}_{t,t}^{\mathbb{X}, \mathbb{Y}}) \vert \ip_{1:t}(\mathbb{X}), \ip_{1:t}(\mathbb{Y})\right] \\ 
+&= \mathbb{E}_\pi\left(U(\ip(\mathbb{X})) \vert \ip_{1:t}(\mathbb{X}), \ip_{1:t}(\mathbb{Y})\right)
+    \end{split}
+\end{align}
+Nun ist $\sigma(\ip_{1:t}(\mathbb{X}), \ip_{1:t}(\mathbb{Y}))$ die kleinste $\sigma$-Algebra, bezüglich derer 
+$$\ip(\mathbb{X}), \ip(\mathbb{Y}): \Omega^\mathbb{X} \times \Omega^\mathbb{Y} \rightarrow (\mathcal{Z}\times \mathcal{Z}, \mathcal{F}_{t,t}^{\mathcal{Z}, \mathcal{Z}})$$
+messbar ist, und somit gilt wieder mit Lemma \ref{thm:pushforward_expectancy}
+\begin{equation}\label{eq:310_3}
+    \mathbb{E}_\pi(U(\ip(\mathbb{X})) \vert \ip_{1:t}(\mathbb{X}), \ip_{1:t}(\mathbb{Y})) = \mathbb{E}_{\overline\pi}(U \vert \mathcal{F}_{t,t}^{\mathbb{Z}, \mathcal{Z}})(\ip(\mathbb{X}, \ip(\mathbb{Y})))
+\end{equation}
+Wir setzen die Gleichungen \ref{eq:310_1}, \ref{eq:310_2} und \ref{eq:310_3} zusammen und erhalten
+$$\mathbb{E}_{\overline\pi}(U \vert \mathcal{F}_{t, 0}^{\mathcal{Z}, \mathcal{Z}})(\ip(\mathbb{X}), \ip(\mathbb{Y})) = \mathbb{E}_{\overline\pi}(U\vert \mathcal{F}_{t,t}^{\mathbb{X}, \mathbb{Y}})(\ip(\mathbb{X}, \ip(\mathbb{Y})))$$
+$\pi$-fast sicher, und somit
+$$\mathbb{E}_{\overline\pi}(U \vert \mathcal{F}_{t, 0}^{\mathcal{Z}, \mathcal{Z}}) = \mathbb{E}_{\overline\pi}(U\vert \mathcal{F}_{t,t}^{\mathbb{X}, \mathbb{Y}})$$
+$\overline\pi$-fast sicher. Mit Lemma \ref{thm:causality_characterization} ist $\overline\pi$ kausal.
+\item Antikausalität ist genau Kausalität mit vertauschten Rollen. Mit dem zweiten Schritt ist somit, falls $\pi$ bikausal ist, $(\ip(\mathbb{X}), \ip(\mathbb{Y}))_*\pi$ sowohl kausal als auch - durch Vertauschen der Rollen - antikausal. Somit ist es bikausal.
+\end{enumerate}
+\end{proof}
+\begin{theorem}
+    Seien $\mathbb{X}, \mathbb{Y} \in \mathcal{FP}_p$ und $\overline{\mathbb{X}}, \overline{\mathbb{Y}} \in \CFP_p$ die assoziierten kanonischen Prozesse. Dann gilt
+    $$\mathcal{AW}_p(\mathbb{X}, \mathbb{Y}) = \mathcal{AW}_p(\overline{\mathbb{X}}, \overline{\mathbb{Y}}) = \mathcal{W}_p(\ip_1(\mathbb{X}), \ip_1(\mathbb{Y}))$$
+\end{theorem}
+\begin{proof}
+\begin{enumerate}
+\item Betrachte zunächst die erste Gleichheit. Beachte, dass für eine bikausale Kopplung $\pi \in \cplbc(\mathbb{X}, \mathbb{Y})$ nach dem letzten Lemma 
+$$\overline{\pi}:=(\ip(\mathbb{X}), \ip(\mathbb{Y}))_*\pi \in \cplbc(\overline{\mathbb{X}}, \overline{\mathbb{Y}})$$
+Weiterhin gilt für diese Kopplungen
+\begin{align*}
+    \mathbb{E}_{\overline{\pi}}(d^p(\overline{X}, \overline{Y}))&=\mathbb{E}_{\overline{\pi}}(d^p(Z^-(z), Z^-(\widetilde{z}))) \\
+    &= \mathbb{E}_\pi(d^p(Z^-(\ip(\mathbb{X})), Z^-(\ip(\mathbb{Y})))) \\
+    &= \mathbb{E}_\pi(d^p(X, Y))
+\end{align*}
+Da wir also jede bikausale Kopplung von $\mathbb{X}$ und $\mathbb{Y}$ zu einer von $\overline{\mathbb{X}}$ und $\overline{\mathbb{Y}}$ übertragen können, die die gleichen Kosten erzeugt, gilt auf jeden Fall $\mathcal{AW}_p(\mathbb{X}, \mathbb{Y}) \geq \mathcal{AW}_p(\overline{\mathbb{X}}, \overline{\mathbb{Y}})$. Für die andere Ungleichung benötigen wir eine Approximation von $\overline{\pi} \in \cplbc(\overline{\mathbb{X}}, \overline{\mathbb{Y}})$ durch Verteilungen der Form $(\ip(\mathbb{X}), \ip(\mathbb{Y}))_*\pi, \pi \in \cplbc(\mathbb{X}, \mathbb{Y})$. In dem dieser Arbeit zu Grunde liegenden Paper zeigen die Autoren, das Verteilungen dieser Form tatsächlich dicht in $\cplbc(\overline{\mathbb{X}}, \overline{\mathbb{Y}})$ liegen. Da die Kostenfunktion stetig bezüglich der Wassersteinmetrik ist ($d^p$ hat $p$-Wachstum und die Evaluationen $Z^-$ sind kontraktiv), wäre damit die erste Gleichheit gezeigt. Der Beweis ist aber hoch technisch, wir betrachten hier daher nur den einfachereren Fall, dass $\Omega^\mathbb{X}$ und $\Omega^\mathbb{Y}$ polnisch sind und somit Disintegration erlauben. 
+
+Sei $\overline{\pi} \in \cplbc(\overline{\mathbb{X}}, \overline{\mathbb{Y}})$. Wir schreiben
+$$\gamma := (\id, \ip(\mathbb{X}))_*\mathbb{P}^\mathbb{X} \text{ und } \hat{\gamma}:=(\id, \ip(\mathbb{Y}))_*\mathbb{P}^\mathbb{Y}$$
+Da die zugrundeliegenden Räume polnisch sind, können wir die Verteilungen disintegrieren. Wir schreiben $(\gamma_z)_{z \in \mathcal{Z}}:=\mathcal{L}(\id_{\Omega^\mathbb{X}} \vert \ip(\mathbb{X}))$ und $(\hat{\gamma}_{\hat{z}})_{\hat{z} \in \mathcal{Z}}:=\mathcal{L}(\id_{\Omega^\mathbb{Y}} \vert \ip(\mathbb{Y}))$.
+Betrachte die Verteilung 
+$$\pi(A\times B) := \int \gamma_z(A) \gamma_{\hat{z}}(B)\overline{\pi}(dz, d\hat{z})$$
+Mit Korollar \ref{thm:pushforward_law} ist $\ip(\mathbb{X})_*\mathcal{L}(\id \vert \ip(\mathbb{X}))= \mathcal{L}(\ip(\mathbb{X}) \vert \ip(\mathbb{X}))= \delta_{z}$ und genauso $\ip(\mathbb{Y})_*\mathcal{L}(\id \vert \ip(\mathbb{Y})) = \delta_{\hat{z}}$. Aus diesem Grund ist
+\begin{align*}
+(\ip(\mathbb{X}), \ip(\mathbb{Y}))_*\pi(A \times B) &= \int \gamma_z(\ip(\mathbb{X})^{-1}(A)) \gamma_{\hat{z}}(\ip(\mathbb{Y})^{-1}(B))\overline{\pi}(dz, d\hat{z}) \\
+&= \int \ip(\mathbb{X})_*\gamma_z(A) \ip(\mathbb{Y})_*\gamma_{\hat{z}}(B) \overline{\pi}(dz, d\hat{z}) \\
+&= \int \delta_z(A) \delta_{\hat{z}}(B)\overline{\pi}(dz, d\hat{z}) \\
+&= \overline{\pi}(A \times B)
+\end{align*}
+Wenn wir nun also beweisen, dass $\pi \in \cplbc(\mathbb{X}, \mathbb{Y})$, so haben wir die erste Gleichheit gezeigt. Zunächst ist $\pi$ überhaupt eine Kopplung,  da 
+$$\pi(A\times \Omega^{\mathbb{Y}}) = \int \gamma_z(A) \overline{\pi(dz, d\hat{z})} = \int \gamma_z(A) \mathbb{P}^{\ip(\mathbb{X})}(dz) = \mathbb{P}^\mathbb{X}(A)$$
+und das gleiche für die zweite Komponente.
+
+Aufgrund der Symmetrie zeigen wir nur die Kausalität von $\pi$ über Lemma \ref{thm:causality_characterization}. Sei dazu $V$ beschränkt und $\mathcal{F}_{t}^{\mathbb{Y}}$ messbar. Wir müssen zeigen, dass 
+$$\mathbb{E}_\pi(V \vert \mathcal{F}_{N, 0}^{\mathbb{X}, \mathbb{Y}}) = \mathbb{E}_\pi(V \vert \mathcal{F}_{t, 0}^{\mathbb{X}, \mathbb{Y}})$$
+Wir bemerken zunächst, dass wir $(\hat{\gamma})_{z\in\mathcal{Z}}$ auch hätten schreiben können als $\mathcal{L}(\id_{\Omega^\mathbb{Y}} \vert \id_{\mathcal{Z}})$, da Disintegration nur eine Frage der Verteilungen im Wertebereich ist, und bezüglich $\gamma$ die Variablen $(\id_\Omega^\mathbb{Y}, \id_{\mathcal{Z}})$ genauso verteilt sind wie $(\id_{\Omega^\mathbb{Y}}, \ip(\mathbb{Y}))$ bezüglich $\mathbb{P}^\mathbb{Y}$. Somit ist nach Lemma \ref{thm:law_expectancy_connection}
+$$\mathbb{E}_{\hat{\gamma}}(V \vert \mathcal{F}_{0,N}^{\mathbb{Y}, \overline{\mathbb{Y}}}) = \int V(\hat{\omega})\hat{\gamma}_{\hat{z}}(d\hat{\omega}) \quad \text{fast sicher}$$
+Da $\hat{\gamma}$ bikausal ist, ist mit Lemma \ref{thm:causality_characterization} die linke Seite $\mathcal{F}_{0,t}^{\mathbb{Y}, \overline{\mathbb{Y}}}$ messbar, somit kann die rechte Seite auf einer $\mathbb{P}^\mathbb{Y}$-Nullmenge abgeändert werden um $\mathcal{F}_t^{\overline{\mathbb{Y}}}$ messbar zu werden. Mit der gleichen Argumentation ist, weil $\overline{\pi}$ bikausal ist, auch
+$$\mathbb{E}_{\overline{\pi}}\left(\int V(\hat{\omega})\hat{\gamma}_{\hat{z}}(d\hat{\omega}) \left\vert \mathcal{F}_{N,0}^{\overline{\mathbb{X}}, \overline{\mathbb{Y}}}\right.\right)=\int\left(\int V(\hat{\omega})\hat{\gamma}_{\hat{z}}(d\hat{\omega})\right)\overline{\pi}_z(d\hat{z})$$
+$\mathcal{F}_t^{\overline{\mathbb{X}}}$-messbar, da der Integrand wie vorher festgestellt $\mathcal{F}_t^{\overline{\mathbb{Y}}}$-messbar ist (mit $\overline{\pi}_z$ ist hier die Disintegration von $\overline{\pi}$ bezüglich der ersten Marginalie gemeint). Und wieder mit der gleichen Argumentation ist nun für $\gamma_\omega(dz):=\mathcal{L}(\ip(\mathbb{X}) \vert \mathcal{F}_N^{\mathbb{X}})(\omega)$ auch
+$$\mathbb{E}_{\gamma}\left( \int \int V(\hat{\omega}) \hat{\gamma}_{\hat{z}}(d\hat{\omega}) \overline{\pi}_z(d\hat{z}) \left\vert \mathcal{F}_{N,0}^{\mathbb{X}, \overline{\mathbb{X}}} \right. \right) = \int\int\int V(\hat{\omega}) \hat{\gamma}_{\hat{z}}(d\hat{\omega}) \overline{\pi}_z(d\hat{z})\gamma_\omega(dz)$$
+$\mathcal{F}_t^{\mathbb{X}}$-messbar. Der Term auf der rechten Seite ist aber gerade $\mathbb{E}_\pi(V \vert \mathcal{F}_{N,0}^{\mathbb{X}, \mathbb{Y}})$, weil für jedes $\mathcal{F}_{N}^{\mathbb{X}}$-messbare $U$ gilt
+\begin{align*}
+    \mathbb{E}_{\pi}\biggl(U(\omega) \int\int\int &V(\hat{\omega}) \hat{\gamma}_{\hat{z}}(d\hat{\omega}) \overline{\pi}_z(d\hat{z})\gamma_\omega(dz) \biggr) \\
+    &= \mathbb{E}_{\mathbb{P}^{\mathbb{X}}}\left(U(\omega) \int\int\int V(\hat{\omega}) \hat{\gamma}_{\hat{z}}(d\hat{\omega}) \overline{\pi}_z(d\hat{z})\gamma_\omega(dz) \right) \\
+    &= \int\int\int\int V(\hat{\omega}) \hat{\gamma}_{\hat{z}}(d\hat{\omega}) \overline{\pi}_z(d\hat{z})U(\omega)\gamma_\omega(dz) \mathbb{P}^{\mathbb{X}}(d\omega) \\
+    &= \int\int\int V(\hat{\omega}) \hat{\gamma}_{\hat{z}}(d\hat{\omega}) \overline{\pi}_z(d\hat{z})U(\omega)\gamma(d\omega, dz) \\
+    &= \int\int\int\int V(\hat{\omega}) \hat{\gamma}_{\hat{z}}(d\hat{\omega}) \overline{\pi}_z(d\hat{z})U(\omega)\gamma_z(d\omega)\mathbb{P}^{\ip(\mathbb{X})}(dz)\\
+    &= \int\int\int\int V(\hat{\omega}) \hat{\gamma}_{\hat{z}}(d\hat{\omega}) \overline{\pi}_z(d\hat{z})U(\omega)\gamma_z(d\omega)\mathbb{P}^{\ip(\mathbb{X})}(dz) \\
+    &= \int\int\left(\int U(\omega)\gamma_z(d\omega) \int V(\hat{\omega}) \hat{\gamma}_{\hat{z}}(d\hat{\omega}) \right)\overline{\pi}_z(d\hat{z})\mathbb{P}^{\ip(\mathbb{X})}(dz) \\
+    &= \int\left(\int U(\omega)\gamma_z(d\omega) \int V(\hat{\omega}) \hat{\gamma}_{\hat{z}}(d\hat{\omega}) \right)\overline{\pi}(dz, d\hat{z}) \\
+    &= \int U(\omega)V(\hat{\omega})\pi(d\omega, d\hat{\omega})
+\end{align*}
+Insgesamt ist also $\mathbb{E}_\pi(V\vert \mathcal{F}_{N,0}^{\mathbb{X}, \mathbb{Y}})$ schon $\mathcal{F}_{t,0}^{\mathbb{X}, \mathbb{Y}}$ messbar, also
+$$\mathbb{E}_\pi(V \vert \mathcal{F}_{N,0}^{\mathbb{X}, \mathbb{Y}}) = \mathbb{E}_\pi(V \vert \mathcal{F}_{t,0}^{\mathbb{X}, \mathbb{Y}})$$
+und somit $\pi\in \cplc(\mathbb{X}, \mathbb{Y})$. Wegen der Symmetrie gilt $\pi \in \cplbc(\mathbb{X}, \mathbb{Y})$ und wie oben besprochen folgt $\mathcal{AW}_p(\mathbb{X}, \mathbb{Y}) = \mathcal{AW}_p(\overline{\mathbb{X}}, \overline{\mathbb{Y}})$.
+\item
+Wir beweisen nun die zweite Gleichheit. Schreibe $\mu := \mathcal{L}(\ip_1(\mathbb{X}))$ und $\nu := \mathcal{L}(\ip_1(\mathbb{Y}))$. Mit Lemma \ref{thm:causality_kernel_characterization} gilt
+$$\mathcal{AW}_p^p(\overline{\mathbb{X}}, \overline{\mathbb{Y}}) = \inf_{\pi \in \cpl(\mu, \nu)} \inf_{(k_{t=1}^{N-1})} \int \sum_{t=1}^{N}d^p(z_t^-, \hat{z}_t^-) (\pi_1 \otimes k_1 \otimes ... \otimes k_{N-1})(dz, d\hat{z})$$
+wobei das zweite Infimum über Kerne der Form
+\begin{equation}\label{eq:311_0}
+k_t: \mathcal{Z}_{1:t}\times \mathcal{Z}_{1:t} \rightarrow \mathcal{P}_p(\mathcal{Z}_{t+1}\times \mathcal{Z}_{t+1}) \text{ mit } k_t^{z_{1:t}, \hat{z}_{1:t}} \in \cpl(z_t^+, \hat{z}_t^+)
+\end{equation}
+läuft. Nach Lemma \ref{thm:optimal_coupling} können wir für jedes $1 \leq t \leq N-1$ $k_t^*$ als einen solchen messbaren Kern wählen, dass $k_t^{*, z_{1:t}, \hat{z}_{1:t}}$ eine optimale Kopplung von $z_t^+$ und $\hat{z}_t^-$ ist. Für jedes $1\leq t\leq N-1$, $z_{1:t}, \hat{z}_{1:t} \in \mathcal{Z}_{1:t}$ und Kerne wie in \ref{eq:311_0}:
+\begin{align}\label{eq:311_1}
+    \begin{split}
+    d^p(z_t, \hat{z}_t) &= d^p(z_t^-, \hat{z}_t^-) + \mathcal{W}_p^p(z_t^+, \hat{z}_t^+) \\
+    &\leq d^p(z_t^-, \hat{z}_t^-) + \int d^p(z_{t+1}, \hat{z}_{t+1}) k_t^{z_{1:t}, \hat{z}_{1:t}}(dz_{t+1}, d\hat{z}_{t+1})
+    \end{split}
+\end{align}
+und es gilt Gleichheit für die Kerne $k_t^*$. Induktiv gilt nun für $1 \leq M \leq N$, dass
+$$\int d^p(z_1, \hat{z}_1)\pi_1(dz, d\hat{z}) \leq \int \sum_{t=1}^{M-1} d^p(z_t^-, \hat{z}_t^-) +d^p(z_M, \hat{z}_M)(\pi_1 \otimes k_1 \otimes ... \otimes k_{N-1})(dz, d\hat{z})$$
+mit Gleichheit für $k_t^*$: Für $M=1$ ist sind beide Seiten der Gleichung identisch. Nehme nun an, die Aussage gelte für ein fixes $M$. Dann folgt die Gültigkeit für $M+1$ durch
+\begin{alignat*}{2}
+\int &d^p(z_1, \hat{z}_1)\pi_1(dz_1, d\hat{z}_1) \\
+&\leq \int \sum_{t=1}^{M-1} d^p(z_t^-, \hat{z}_t^-) +d^p(z_M, \hat{z}_M)(\pi_1 \otimes k_1 \otimes ... \otimes k_{M-1})(dz_{1:M}, d\hat{z}_{1:M}) \\
+&\leq\int \sum_{t=1}^{M}d^p(z_t^-, \hat{z}_t^-) + \\
+    &\quad\int d^p(z_{M+1}, \hat{z}_{M+1}) k_M^{z_{1:M}, \hat{z}_{1:M}}(dz_{M+1}, \hat{z}_{M+1}) (\pi_1 \otimes k_1 \otimes ... \otimes k_{M-1})(dz_{1:M}, d\hat{z}_{1:M})\\
+&= \int \sum_{t=1}^{M}d^p(z_t^-, \hat{z}_t^-) + d^p(z_{M+1}, \hat{z}_{M+1})(\pi_1 \otimes ...\otimes k_M)(dz_{1:M+1}, d\hat{z}_{1:M+1})
+\end{alignat*}
+Die erste Ungleichung gilt nach Induktionsvoraussetzung und auch mit Gleichheit für $k_t^*$. Die zweite Ungleichung (und Gleichheit für $k_t^*$) ist genau Gleichung \ref{eq:311_1}.
+Für $M=N-1$ erhalten Wir
+$$\int d^p(z_1, \hat{z}_1)\pi_1(dz_1, d\hat{z}_1) = \inf_{(k_t^{N-1})} \sum_{t=1}^Nd^p(z_t^-, \hat{z}_t^-)(\pi_1 \otimes ... \otimes k_{N-1})(dz, d\hat{z})$$
+Indem wir das Infimum über $\pi_1 \in \cpl(\mu, \nu)$ auf beiden Seiten nehmen, erhalten wir
+$$\mathcal{AW}_p(\overline{\mathbb{X}}, \overline{\mathbb{Y}}) = \mathcal{W}_p(\mu, \nu) = \mathcal{W}_p(\ip_1(\mathbb{X}), \ip_1(\mathbb{Y}))$$
+\end{enumerate}
+\end{proof}

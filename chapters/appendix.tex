@@ -1,0 +1,34 @@
+\begin{lemma} \label{thm:causality_kernel_characterization}
+Seien $\mathbb{X}, \mathbb{Y} \in \CFP_p$, $\pi \in \mathcal{P}_p(\mathcal{Z}\times\mathcal{Z})$ und setze $\pi_1 := \operatorname{pj}_{\mathcal{Z}_1\times \mathcal{Z}_1}\pi$. Dann ist $\pi \in \cplbc(\mathbb{X}, \mathbb{Y})$ genau dann, wenn
+$$\pi_1 \in \cpl(\mathcal{L}(\ip_1(\mathbb{X})), \mathcal{L}(\ip_1(\mathbb{Y})))$$
+und für $1\leq t \leq N-1$ Kerne
+$$k_t:\mathcal{Z}_{1:t} \times \mathcal{Z}_{1:t} \rightarrow \mathcal{P}_p(\mathcal{Z}_{t+1} \times \mathcal{Z}_{t+1}) \text{ mit } k_t^{z_{1:t}, \hat{z}_{1:t}} \in \cpl(z_t^+, \hat{z}_t^+)$$
+existieren, sodass
+$$\pi = \pi_1 \otimes k_1 \otimes ... \otimes k_{N-1}$$
+\end{lemma}
+\begin{proof}
+Da $\mathbb{X}, \mathbb{Y} \in \CFP_p$ können wir die Verteilungen schreiben als $\mathbb{P}^{\mathbb{X}} = \uf_1(\mu)$, $\mathbb{P}^{\mathbb{Y}}=\uf_1(\nu)$.
+\begin{enumerate}
+\item
+Nehmen wir zunächst an, dass $\pi \in \cplbc(\mathbb{X}, \mathbb{Y})$. Dann können wir die Kerne wählen als 
+$$k_t = \mathcal{L}_\pi(z_{t+1}, \hat{z}_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z}, \mathcal{Z}})$$
+Für diese Wahl gilt $\pi = \pi_1 \otimes k_1 \otimes ... \otimes k_{N-1}$ und mit Lemma \ref{thm:pushforward_law} sind die Marginalien gegeben durch 
+$${\operatorname{pj}_1}_*\mathcal{L}_\pi(z_{t+1}, \hat{z}_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z}, \mathcal{Z}}) = \mathcal{L}_\pi(\operatorname{pj}_1(z_{t+1}, \hat{z}_{t+1}) \vert \mathcal{F}_{t,t}^{\mathcal{Z}, \mathcal{Z}}) = \mathcal{L}_\pi(z_{t+1},  \vert \mathcal{F}_{t,t}^{\mathcal{Z}, \mathcal{Z}})$$
+und $\mathcal{L}_\pi(\hat{z}_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z},\mathcal{Z}})$. Da $\pi$ bikausal ist, gilt nach Lemma \ref{thm:causality_characterization} 
+$$\mathcal{L}_\pi(z_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}}) = \mathcal{L}_\pi(z_{t+1} \vert \mathcal{F}_{t,0}^{\mathcal{Z,Z}})=\mathcal{L}_{\mathbb{P}^{\mathbb{X}}}(z_{t+1} \vert \mathcal{F}_t^\mathcal{Z})$$
+wobei wir für die letzte Gleichheit Lemma \ref{thm:pushforward_expectancy} auf die Projektion auf die erste Koordinate angewendet haben. Aufgrund der Form $\mathbb{P}^{\mathbb{X}} = \uf_1(\mu)$ gilt aber $\mathcal{L}_{\mathbb{P}^{\mathbb{X}}}(z_{t+1} \vert \mathcal{F}_t^{\mathcal{Z}}) = z_t^+$: Dieser Kern ist $\mathcal{F}_t^{\mathcal{Z}}$ messbar, und die gemeinsame Verteilung ist 
+$$\mathcal{L}_{\mathbb{P}^{\mathbb{X}}}(z_{1:t}) \otimes z_t^+ = \mu \otimes z_1^+ \otimes ... \otimes z_{t-1}^+  \otimes z_t^+ = \operatorname{pj}_{1:t+1}(\uf_1(\mu)) = \mathcal{L}_{\mathbb{P}^{\mathbb{X}}}(z_1,...,z_{t+1})$$
+Es gilt also $\mathcal{L}_\pi(z_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}}) = z_t^+$ und analog $\mathcal{L}_\pi(\hat{z}_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}}) = \hat{z}_t^+$ und somit $k_t^{z_{1:t}, \hat{z}_{1:t}} \in \cpl(z_t^+, \hat{z}_t^+)$.
+\item
+Nehme nun umgekehrt an, dass es solche Kerne $k_t$ gibt. Dann ist 
+$$\operatorname{pj}_1(\pi) = \operatorname{pj}_1(\pi_1 \otimes k_1 \otimes ... \otimes k_{N-1}) = \mu \otimes z_1^+ \otimes ... \otimes z_{N-1}^+ = \uf_1(\mu) = \mathbb{P}^\mathbb{X}$$
+und $\operatorname{pj}_2(\pi) = \mathbb{P}^\mathbb{Y}$ und somit $\pi \in \cpl(\mathbb{X}, \mathbb{Y})$. 
+
+Weiterhin gilt $k_t = \mathcal{L}_\pi(z_{t+1}, \hat{z}_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}})$ da $\mathcal{L}(z_{1:t}, \hat{z}_{1:t}) \otimes k_t = \mathcal{L}(z_{1:t+1}, \hat{z}_{1:t+1})$. Für ein $\mathcal{F}_{t+1}^\mathcal{Z}$-messbares $U$ gilt dann
+\begin{align*}
+    \mathbb{E}_\pi(U(z_{1:t+1}) \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}}) &= \int U(z_{1:t}, z_{t+1}) k_t^{z_{1:t}, \hat{z}_{1:t}}(dz_{t+1}, d\hat{z}_{t+1}) \\
+    &= \int U(z_{1:t}, z_{t+1}) z_t^+(dz_{t+1})
+\end{align*}
+und der letzte Term ist $\mathcal{F}_{t}^{\mathcal{Z}}$ messbar. Mit der Turmeigenschaft folgt also für ein $\mathcal{F}_N^\mathcal{Z}$-messbares $U$, dass $\mathbb{E}_\pi\left(U \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}}\right)$ $\mathcal{F}_{t,0}^{\mathcal{Z,Z}}$ messbar ist und damit Kausalität von $\pi$. Aus Symmetriegründen ist $\pi$ bikausal, also $\pi \in \cplbc(\mathbb{X}, \mathbb{Y})$.
+\end{enumerate}
+\end{proof}

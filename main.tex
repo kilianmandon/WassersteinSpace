@@ -1,0 +1,60 @@
+\documentclass[12pt]{article}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage[a4paper, lmargin={4cm}, rmargin={2cm}, tmargin={2.5cm}, bmargin={2.5cm}]{geometry}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{dsfont}
+\graphicspath{ {images/} }
+
+\usepackage{csquotes}
+\usepackage{biblatex}
+\addbibresource{chapters/bachelor_sources.bib}
+
+\newtheorem{theorem}{Satz}[section]
+\newtheorem{corollary}{Korollar}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Bemerkung}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+
+\DeclareMathOperator{\ip}{ip}
+\DeclareMathOperator{\cpl}{Cpl}
+\newcommand{\cplc}{\cpl_{\operatorname{c}}}
+\newcommand{\cplbc}{\cpl_{\operatorname{bc}}}
+\DeclareMathOperator{\uf}{uf}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\CFP}{CFP}
+
+\begin{document}
+
+\title{
+    {Adaptierte Wasserstein Metrik} \\
+    {Westfälische Wilhelms-Universität}
+}
+
+\author{Kilian Mandon}
+\date{\today}
+
+\maketitle
+
+\section*{Abstract}
+Abstract goes here
+
+\section{Einleitung}
+\input{chapters/einleitung}
+
+\section{Grundlagen}
+\input{chapters/grundlagen}
+
+\section{Der Wasserstein-Raum stochastischer Prozesse}
+\input{chapters/wasserstein_space}
+
+\section{Appendix}
+\input{chapters/appendix.tex}
+
+\end{document}
