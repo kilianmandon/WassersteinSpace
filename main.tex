@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{amsmath}
+\usepackage{faktor}
 \usepackage{dsfont}
 \graphicspath{ {images/} }
 
@@ -18,6 +19,7 @@
 \newtheorem{corollary}{Korollar}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{remark}[theorem]{Bemerkung}
+\newtheorem{example}[theorem]{Beispiel}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 
@@ -29,6 +31,9 @@
 \DeclareMathOperator{\uf}{uf}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\CFP}{CFP}
+\DeclareMathOperator{\FP}{FP}
+\DeclareMathOperator{\AF}{AF}
+\DeclareMathOperator{\depth}{depth}
 
 \begin{document}
 
@@ -53,6 +58,9 @@ Abstract goes here
 
 \section{Der Wasserstein-Raum stochastischer Prozesse}
 \input{chapters/wasserstein_space}
+
+\section{Adaptierte Funktionen}
+\input{chapters/adapted_functions}
 
 \section{Appendix}
 \input{chapters/appendix.tex}

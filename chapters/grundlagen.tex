@@ -56,7 +56,7 @@ Eine Menge $M \subset \mathcal{P}(A)$ ist straff, genau dann wenn sie relativ ko
 Mit der Dreiecksungleichung gelten beide Eigenschaften wenn sie für ein $a_0 \in A$ gelten schon für alle $a_0 \in A$.
 Für Konvergenz in $\mathcal{P}_p(A)$ gilt folgender Zusammenhang:
 \begin{lemma}\label{thm:conv_char}
-Sei $A$ ein polnischer Raum mit fixierter Metrik $d_A$.Sei $(\mu_n) \subset \mathcal{P}_p, \mu \in \mathcal{P}_p$. Dann sind die folgenden äquivalent:
+Sei $A$ ein polnischer Raum mit fixierter Metrik $d_A$.Sei $(\mu_n) \subset \mathcal{P}_p(A), \mu \in \mathcal{P}_p(A)$. Dann sind die folgenden äquivalent:
 \begin{enumerate}
     \item $\mu_n \rightarrow \mu$ bezüglich $\mathcal{W}_p$
     \item $\mu_n \rightarrow \mu$ schwach und $(\mu_n)$ sind $p$-uniform integrierbar.
@@ -105,6 +105,17 @@ und nun folgt
 $$\int d^p_A(a_0, x) = \lim\limits_{n\rightarrow\infty} \int d^p_A(a_0, x)\chi_n\mu(dx) \leq \int d^p_A(a_0, x)\mu(dx) - \varepsilon$$
 was ein Widerspruch ist.
 \end{proof}
+\begin{lemma} \label{thm:weak_topology_metric}
+Sei $A$ ein polnischer Raum mit fixierter Metrik $d_A$. Betrachte weiterhin die beschränkte Metrik $\widehat{d}:=d_A \wedge 1$. Für Verteilungen $\mu_n \subset \mathcal{P}(A)$, $\mu \in \mathcal{P}(A)$ konvergieren $\mu_n \rightarrow \mu$ schwach genau dann, wenn $\mu_n \rightarrow \mu$ bezüglich $\mathcal{W}_p$ auf $(A, \widehat{d})$. Die beschränkte Wassersteinmetrik metrisiert also die schwache Topologie.
+\end{lemma}
+\begin{proof}
+    Gelte zunächst $\mu_n \rightarrow \mu$ schwach und fixiere ein $a_0 \in A$. Die Funktion $\widehat{d}^p(\cdot, a_0)$ ist stetig und beschränkt, also gilt $\mu_n(\widehat{d}^p(\cdot, a_0)) \rightarrow \mu(\widehat{d}^p(\cdot, a_0))$ und mit Lemma \ref{thm:conv_char} folgt $\mu_n \rightarrow \mu$ bezüglich $\mathcal{W}_p$ auf $(A, \widehat{d})$.
+
+    Umgekehrt, gelte $\mu_n \rightarrow \mu$ bezüglich $\mathcal{W}_p$ auf $(A, \widehat{d})$. Die Frage von schwacher Konvergenz ist nur eine Frage der Topologie und nicht der konkreten Metrik, und die Topologien auf $(A, d_A)$ und $(A, \widehat{d})$ sind identisch. Somit folgt auch wieder aus Lemma \ref{thm:conv_char}, dass $\mu_n \rightarrow \mu$ schwach.
+\end{proof}
+\begin{remark}
+    Die Wahl von $\widehat{d}$ als $d_A \wedge 1$ ist nicht zentral für den Beweis, wichtig ist lediglich dass die Metrik beschränkt ist und bei kleinen Abständen identisch, damit die gleiche Topologie erzeugt wird. Wir werden dieses Lemma später auch auf Produkträumen $X \times Y$ benutzen, in denen wir in den einzelnen Räumen die Metrik beschränken und dann die Produktmetrik dieser neuen Metriken verwenden. Das ist kein Problem, da die Metrik trotzdem beschränkt und bei kleinen Abständen identisch ist.
+\end{remark}
 \subsection{Bedingte Erwartungen und Bedingte Verteilungen}
 \begin{definition}
 Seien $(\Omega, \mathcal{F}), (S, \mathcal{S})$ messbare Räume. Mit einem stochastischen Kern $\mu:\Omega \rightarrow S$ bezeichnen eine Abbildung $\Omega \rightarrow \mathcal{P}(S), x\mapsto \mu_x$ sodass für jede Menge $A \in \mathcal{S}$ die Evaluations-Abbildung $x \mapsto \mu_x(A)$ messbar bezüglich der Borel $\sigma$-Algebra auf $[0,1]$ ist.

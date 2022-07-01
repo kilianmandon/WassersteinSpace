@@ -1,0 +1,52 @@
+
+\begin{definition}
+Eine Formation $f$ wird \emph{adaptierte Funktion} genannt - kurz $f \in \AF$ - falls sie mit den folgenden drei Operationen konstruiert werden kann:
+\begin{enumerate}
+    \item[(AF1)] Für $\Phi: \mathcal{X} \rightarrow \mathbb{R}$ stetig und beschränkt gilt $\Phi \in \AF$.
+    \item[(AF2)] Für $m \in \mathbb{N}, f_1,...,f_m \in \AF$ und $\varphi \in C_b(\mathbb{R}^m)$ ist $(\varphi, f_1, ..., f_m) \in \AF$.
+    \item[(AF3)] Für $1\leq t \leq N$ und $g \in \AF$ ist $(g \vert t) \in \AF$.
+\end{enumerate}
+Weiterhin definieren wir den \emph{Rang} und \emph{Wert} (an einer Stelle $\mathbb{X} \in \mathcal{FP}_p$) induktiv durch 
+\begin{enumerate}
+    \item[(AF1)] Der Rang von $\Phi$ ist $0$ und der Wert ist die Zufallsvariable $\Phi(\mathbb{X}):=\Phi(X)$.
+    \item[(AF2)] Der Rang von $(\varphi, f_1,...,f_m)$ ist der maximale Rang aller $f_1,...,f_m$, und der Wert ist $(\varphi, f_1,...,f_m)(\mathbb{X}):=\varphi(f_1(\mathbb{X}), ..., f_m(\mathbb{X}))$.
+    \item[(AF3)] Der Rang von $(g \vert t)$ ist der Rang von $g$ plus eins und der Wert ist die bedingte Erwartung $(g\vert t)(\mathbb{X}) := \mathbb{E}(g(\mathbb{X}) \vert \mathcal{F}_t^\mathbb{X})$.
+\end{enumerate}
+\end{definition}
+Wir schreiben für die die adaptierten Funktionen mit einem Rang von höchstens $n \in \mathbb{N}_0$ $\AF[n]$. Wir können $\AF[n]$ auf natürliche Weise einbetten in $\AF[n+1]$ indem wir $f \in \AF[n]$ mit $(f \vert N) \in \AF[n+1]$ identifizieren, denn für $\mathbb{X} \in \mathcal{FP}_p$ gilt $(f \vert N)(\mathbb{X}) = \mathbb{E}(f(X) \vert \mathcal{F}_N^\mathbb{X}) = f(\mathbb{X})$. In dem hier betrachteten Fall von diskreter Zeit können wir die adaptierten Funktionen sogar in noch einfacherer Form charakterisieren.
+\begin{lemma}
+Sei $f \in \AF$ und $n \in \mathbb{N}$. 
+\begin{enumerate}
+    \item Es gilt $f \in \AF[0]$ genau dann wenn ein $F \in C_b(\mathcal{X})$ existiert mit 
+    $$f(\mathbb{X}) = F(X)\; \text{ für alle } \mathbb{X} \in \mathcal{FP}_p$$ 
+    \item Es gilt $f \in \AF[n]$ genau dann wenn Vektoren $\vec{g}_1,...,\vec{g}_n$ mit Elementen aus $\AF[n-1]$ und ein $F \in C_b(\mathbb{R}^m)$ existieren mit 
+    $$f(\mathbb{X}) = F(\mathbb{E}[\vec{g}_1(\mathbb{X}) \vert \mathcal{F}_1^\mathbb{X}], ..., \mathbb{E}[\vec{g}_n(\mathbb{X}) \vert \mathcal{F}_N^{\mathbb{X}}])$$
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Der erste Punkt folgt direkt aus der Definition der adaptierten Funktionen: Eine Funktion von Rang 0 kann nur aus durch Anwendung von (AF1) und (AF2) entstanden sein, sie hat also den Wert einer Komposition von stetigen beschränkten Abbildungen (was wieder eine stetige beschränkte Abbildung ist). 
+
+Der zweiten Aussage liegt zugrunde, dass wir nur endliche viele Zeitschritte haben und jede bedingte Erwartung einem von diesen Zeitschritten zugeordnet ist. Wenn wir nun in einem geschachtelten Funktionsterm an verschiedenen Stellen die bedingte Erwartung ziehen, können wir auch zuerst alle Funktionen die auf die gleiche $\sigma$-Algebra bedingen bündeln und gemeinsam als Vektor durch die bedingte Erwartung schicken und dann anschließend die Ergebnisse wieder richtig zuordnen. Um diesen Gedanken formal zu notieren führen wir die \emph{Tiefe} einer adaptierten Funktion ein, die Anzahl der Durchführungen von (AF2) nach einer Durchführung von (AF3). Für eine Funktion $f \in \AF[n]$ setzen wir also $\depth(f)=0$ falls $f$ der Form $(g \vert t), g \in \AF[n-1]$ ist, und induktiv falls $f$ der Form $f=(\phi, f_1,...,f_m)$ ist
+$$\depth(f) = \max_{1\leq i \leq m} \depth(f_i) + 1$$
+Sei nun $f \in \AF[n]$. Wir beweisen die Behauptung durch Induktion über $\depth(f)$. Falls $\depth(f)=0$ ist, so ist $f = (g \vert t)$, also $f(\mathbb{X}) = \mathbb{E}(g(\mathbb{X})\vert \mathcal{F}_t^\mathbb{X})$ bereits in der gewünschten Form. Gelte die Aussage nun für $g \in \AF[n]$ mit $\depth(g) < k$ und sei $f\in\AF[n]$ mit $\depth(f)=k$. Dann ist $f$ der Form $f=(\phi, f_1,...,f_m)$ für Funktionen $f_i$ (mit der Vorbemerkung ohne Einschränkung $f \in \AF[n]$) mit $\depth(f_i)<k$. Nach Induktionsvoraussetzung sind also die $f_i$ der Form
+$$f_i(\mathbb{X}) = F^i(\mathbb{E}[\vec{g}_1^i(\mathbb{X}) \vert \mathcal{F}_1^\mathbb{X}],...,\mathbb{E}[\vec{g}_N^i(\mathbb{X}) \vert \mathcal{F}_n^\mathbb{X}])$$
+Für $1\leq t \leq N$ sammeln wir die Vektoren $\vec{g}_t^i$, $1 \leq i \leq m$ zusammen als
+$$\vec{g}_t:=(\vec{g}_t^1,...,\vec{g}_t^m)$$
+und schreiben $\sigma$ für die Umordnung, die diese Zusammenfassung wieder aufhebt, also
+$$\sigma(\vec{g}_N,...,\vec{g}_N) = (\vec{g}^1,...,\vec{g}^m)$$
+Dann erfüllt die Funktion $F := \varphi \circ (F^1,...,F^k) \circ \sigma$ zusammen mit den Vektoren $(\vec{g}_1,...,\vec{g}_N)$ die Form der Behauptung.
+\end{proof}
+
+\begin{definition}
+Für zwei filtrierte Prozesse $\mathbb{X,Y} \in \mathcal{FP}_p$ sagen wir sie haben die gleiche \emph{adaptierte Verteilung} (von Rang $n\geq 0$), falls $\mathbb{E}[f(\mathbb{X})] = \mathbb{E}[f(\mathbb{Y})]$ für alle $f \in \AF$ (bzw. $f \in \AF[n]$) und schreiben dafür $\mathbb{X} \sim_\infty \mathbb{Y}$ (bzw. $\mathbb{X} \sim_n \mathbb{Y}$).
+\end{definition}
+% TODO: Work through Remark 4.4
+\begin{example}
+    Seien $\mathbb{X,Y} \in\mathcal{FP}_p$.
+    \begin{enumerate}
+        \item Falls $\mathbb{X}$ ein Martingal ist und $\mathbb{X}\sim_1 \mathbb{Y}$, so ist auch $\mathbb{Y}$ ein Martingal. In der Tat: Für $m \in \mathbb{N}$ ist $f(x)= |x| \wedge m \in \AF[0]$ und somit für $1\leq t \leq N$
+        $$\mathbb{E}[|Y_t|] = \lim_{m\rightarrow\infty}\mathbb{E}[f_m(Y_t)]=\lim_{m\rightarrow\infty}\mathbb{E}[f_m(X_t)] = \mathbb{E}[|X_t|] < \infty$$
+        also erbt $Y$ die Integrierbarkeit von $X$. Weiterhin sind auch für $m \in \mathbb{N}$ die Funktionen $g_m = (|\cdot - \cdot |\wedge m, \pj_t\wedge m, (\pj_{t+1}\wedge m\vert t))$ enthalten in $\AF[1]$, also gilt
+        $$\mathbb{E}(|Y_t|)
+    \end{enumerate}
+\end{example}

@@ -228,7 +228,7 @@ $\overline\pi$-fast sicher. Mit Lemma \ref{thm:causality_characterization} ist $
 \item Antikausalität ist genau Kausalität mit vertauschten Rollen. Mit dem zweiten Schritt ist somit, falls $\pi$ bikausal ist, $(\ip(\mathbb{X}), \ip(\mathbb{Y}))_*\pi$ sowohl kausal als auch - durch Vertauschen der Rollen - antikausal. Somit ist es bikausal.
 \end{enumerate}
 \end{proof}
-\begin{theorem}
+\begin{theorem}\label{thm:adapted_wasserstein_equalities}
     Seien $\mathbb{X}, \mathbb{Y} \in \mathcal{FP}_p$ und $\overline{\mathbb{X}}, \overline{\mathbb{Y}} \in \CFP_p$ die assoziierten kanonischen Prozesse. Dann gilt
     $$\mathcal{AW}_p(\mathbb{X}, \mathbb{Y}) = \mathcal{AW}_p(\overline{\mathbb{X}}, \overline{\mathbb{Y}}) = \mathcal{W}_p(\ip_1(\mathbb{X}), \ip_1(\mathbb{Y}))$$
 \end{theorem}
@@ -313,4 +313,45 @@ $$\int d^p(z_1, \hat{z}_1)\pi_1(dz_1, d\hat{z}_1) = \inf_{(k_t^{N-1})} \sum_{t=1
 Indem wir das Infimum über $\pi_1 \in \cpl(\mu, \nu)$ auf beiden Seiten nehmen, erhalten wir
 $$\mathcal{AW}_p(\overline{\mathbb{X}}, \overline{\mathbb{Y}}) = \mathcal{W}_p(\mu, \nu) = \mathcal{W}_p(\ip_1(\mathbb{X}), \ip_1(\mathbb{Y}))$$
 \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Den Raum
+    $$\operatorname{FP}_p := \faktor{\mathcal{FP}_p}{\mathcal{AW}_p}$$
+
+    mit der Metrik $\mathcal{AW}_p$ bezeichnen wir als den \emph{Wassersteinraum stochastischer Prozesse}.
+\end{definition}
+\begin{remark}
+    Auf dem Faktorraum $\operatorname{FP}_p$, indem wir $\mathbb{X} \sim \mathbb{Y}$ setzen falls \\
+     $\mathcal{AW}_p(\mathbb{X}, \mathbb{Y})=0$, ist $\mathcal{AW}_p$ tatsächlich eine Metrik: Durch Satz \ref{thm:adapted_wasserstein_equalities} erbt $\mathcal{AW}_p$ die Dreiecksungleichung von der Metrik $\mathcal{W}_p$, da für $\mathbb{X,Y,W} \in \mathcal{FP}_p$ gilt 
+    \begin{align*}
+        \mathcal{AW}_p(\mathbb{X,W}) &= \mathcal{W}_p(\ip_1(\mathbb{X}), \ip_1(\mathbb{W})) \\
+        &\leq \mathcal{W}_p(\ip_1(\mathbb{X}), \ip_1(\mathbb{Y})) + \mathcal{W}_p(\ip_1(\mathbb{Y}), \ip_1(\mathbb{W})) \\
+        &= \mathcal{AW}_p(\mathbb{X,Y}) + \mathcal{AW}_p(\mathbb{Y, W})
+    \end{align*}
+    Hieraus folgt auch die Wohldefiniertheit von $\mathcal{AW}_p$ auf $\operatorname{FP}_p$, da für $\hat{\mathbb{X}}, \mathbb{X,Y} \in \mathcal{FP}_p$ mit $\mathbb{X}\sim\hat{\mathbb{X}}$ gilt
+    \begin{align*}
+        \mathcal{AW}_p(\mathbb{X,Y}) &= \mathcal{AW}_p(\mathbb{X}, \mathbb{Y}) - \mathcal{AW}_p(\mathbb{X}, \hat{\mathbb{X}}) \\
+        &\leq \mathcal{AW}_p(\hat{\mathbb{X}}, \mathbb{Y}) \\
+        &\leq \mathcal{AW}_p(\hat{\mathbb{X}}, \mathbb{X}) + \mathcal{AW}_p(\mathbb{X,Y}) \\
+        &= \mathcal{AW}_p(\mathbb{X,Y})
+    \end{align*}
+    Die Symmetrie und die Dreiecksungleichung auf $\operatorname{FP}_p$ werden von den Eigenschaften auf $\mathcal{FP}_p$ geerbt.
+\end{remark}
+Wir betrachten nun auf $\operatorname{FP}_p$ zusätzlich die \emph{schwache adaptierte Topologie}. Damit ist die Topologie gemeint, die wir durch $\mathcal{AW}_p$ erhalten, wenn wir auf den polnischen Räumen $(X_t, d_t)$ die Metrik $d_t$ durch $\widehat{d}_t := d_t \wedge 1$ ersetzen. Das hat keine Auswirkungen auf die Äquivalenzklassen von $\mathcal{FP}_p$, da die Paare $\mathbb{X,Y}$ mit $\mathcal{AW}_p(\mathbb{X,Y})$ bezüglich beiden Metriken identisch sind. Dann gilt
+\begin{corollary}
+    Die Abbildung $(\mathbb{X,Y}) \mapsto \mathcal{AW}_p(\mathbb{X,Y})$ ist halbstetig von unten bezüglich der schwachen adaptierten Topologie auf $\operatorname{FP}_p\times \operatorname{FP}_p$.
+\end{corollary}
+\begin{proof}
+    Seien $(\mathbb{X}_n, \mathbb{Y}_n) \rightarrow (\mathbb{X,Y})$ in der schwachen adaptierten Topologie. Dann gilt nach Übergang zu den Räumen $(X_t, \widehat{d}_t)$ $\mathbb{X}_n \rightarrow \mathbb{Y}$ bezüglich $\mathcal{AW}_p$, und mit Satz \ref{thm:adapted_wasserstein_equalities} folgt auf diesen Räumen $\ip_1(\mathbb{X}_n) \rightarrow \ip_1(\mathbb{X})$ bezüglich $\mathcal{W}_p$. Mit Lemma \ref{thm:weak_topology_metric} gilt also $\ip_1(\mathbb{X}_n) \rightarrow \ip_1(\mathbb{Y})$ schwach (und alle Überlegungen genauso für $\mathbb{Y}$). Es reicht also zu zeigen, dass die Wassersteindistanz halbstetig von unten ist bezüglich schwacher Konvergenz, dann würde folgen dass
+    \begin{align*}
+        \liminf_{n\rightarrow\infty} \mathcal{AW}_p(\mathbb{X}_n,\mathbb{Y}_n) &= \liminf_{n\rightarrow\infty} \mathcal{W}_p(\ip_1(\mathbb{X}_n), \ip_1(\mathbb{Y}_n)) \\
+        &\geq \mathcal{W}_p(\ip_1(\mathbb{X}), \ip_1(\mathbb{Y})) \\
+        &= \mathcal{AW}_p(\mathbb{X}, \mathbb{Y})
+    \end{align*}
+    Die Halbstetigkeit von unten der Wassersteinmetrik beweisen wir nun wie folgend: Seien $(\mu_n), \mu \in \mathcal{P}_p(A\times A)$ für einen polnischen Raum $(A, d)$. Für $m \in \mathbb{N}$ betrachte die beschränkte Metrik $d_m := d \wedge m$. Diese Abbildung ist stetig und beschränkt auf $A \times A$, es folgt mit monotoner Konvergenz
+    $$\int d \;d\mu = \lim_{m\rightarrow \infty} \int d_m \;d\mu = \lim_{m\rightarrow\infty}\lim_{n\rightarrow\infty}\int d_m \;d\mu_n \leq \liminf_{n\rightarrow\infty} \int d \;d\mu_n$$
+    Die letzte Ungleichung gilt, da für alle fixierten $m$ gilt $d_m\leq d$, also auch 
+    $$\lim_{n\rightarrow\infty} \int d_m \; d\mu_n \leq \liminf_{n\rightarrow\infty} \int d \; d\mu_n$$
+    und damit gilt auch die Ungleichung für den Grenzwert $m\rightarrow \infty$. Insgesamt ist die Wassersteinmetrik also tatsächlich halbstetig von unten bezüglich schwacher Konvergenz und es folgt die Behauptung.
 \end{proof}
