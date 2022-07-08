@@ -14,7 +14,7 @@ Weiterhin definieren wir den \emph{Rang} und \emph{Wert} (an einer Stelle $\math
 \end{enumerate}
 \end{definition}
 Wir schreiben für die die adaptierten Funktionen mit einem Rang von höchstens $n \in \mathbb{N}_0$ $\AF[n]$. Wir können $\AF[n]$ auf natürliche Weise einbetten in $\AF[n+1]$ indem wir $f \in \AF[n]$ mit $(f \vert N) \in \AF[n+1]$ identifizieren, denn für $\mathbb{X} \in \mathcal{FP}_p$ gilt $(f \vert N)(\mathbb{X}) = \mathbb{E}(f(X) \vert \mathcal{F}_N^\mathbb{X}) = f(\mathbb{X})$. In dem hier betrachteten Fall von diskreter Zeit können wir die adaptierten Funktionen sogar in noch einfacherer Form charakterisieren.
-\begin{lemma}
+\begin{lemma}\label{thm:adapted_functions_char}
 Sei $f \in \AF$ und $n \in \mathbb{N}$. 
 \begin{enumerate}
     \item Es gilt $f \in \AF[0]$ genau dann wenn ein $F \in C_b(\mathcal{X})$ existiert mit 
@@ -46,7 +46,177 @@ Für zwei filtrierte Prozesse $\mathbb{X,Y} \in \mathcal{FP}_p$ sagen wir sie ha
     \begin{enumerate}
         \item Falls $\mathbb{X}$ ein Martingal ist und $\mathbb{X}\sim_1 \mathbb{Y}$, so ist auch $\mathbb{Y}$ ein Martingal. In der Tat: Für $m \in \mathbb{N}$ ist $f(x)= |x| \wedge m \in \AF[0]$ und somit für $1\leq t \leq N$
         $$\mathbb{E}[|Y_t|] = \lim_{m\rightarrow\infty}\mathbb{E}[f_m(Y_t)]=\lim_{m\rightarrow\infty}\mathbb{E}[f_m(X_t)] = \mathbb{E}[|X_t|] < \infty$$
-        also erbt $Y$ die Integrierbarkeit von $X$. Weiterhin sind auch für $m \in \mathbb{N}$ die Funktionen $g_m = (|\cdot - \cdot |\wedge m, \pj_t\wedge m, (\pj_{t+1}\wedge m\vert t))$ enthalten in $\AF[1]$, also gilt
-        $$\mathbb{E}(|Y_t|)
+        also erbt $Y$ die Integrierbarkeit von $X$. Wir schreiben für $m \in \mathbb{N}$ 
+        $$\pj_t^m:=m \wedge (-m \vee \pj_t)$$
+         für die geklippte Projektion. Die Funktionen 
+         $$g_m = (|\cdot - \cdot |\wedge m, \pj^m_t, (\pj^m_{t+1}\vert t))$$
+         sind enthalten in $\AF[1]$, also gilt
+         \begin{align*}
+            0 &= \mathbb{E}\left[ |X_t - \mathbb{E}[X_{t+1} \vert \mathcal{F}_t]| \right] \\
+            &= \lim_{m\rightarrow \infty} \mathbb{E}[|g_m(\mathbb{X})|] \\
+            &= \lim_{m\rightarrow\infty} \mathbb{E}[|g_m(\mathbb{Y})|] \\
+            &= \mathbb{E}\left[|Y_t - \mathbb{E}[Y_{t+1} \vert \mathcal{F}] |\right]
+         \end{align*}
+         mit dominierter Konvergenz (die Folgenglieder $g_m(\mathbb{X})$ sind zum Beispiel beschränkt durch das integrierbare $|X_t| + \mathbb{E}[|X_{t+1}| \,\vert \mathcal{F}_t]$).
+         % TODO Markoveigenschaft übertragbar durch \sim_1
+         % TODO: Snell envelope
     \end{enumerate}
+
 \end{example}
+    \begin{definition}[Prediction-Prozess]
+        Sei $\mathbb{X} \in \mathcal{FP}_p$. Der \emph{Prediction-Prozess 1. Ordnung} ist definiert als
+        \begin{align*}
+            \pp^1(\mathbb{X}): \Omega^\mathbb{X} &\rightarrow \mathcal{M}_1 := \mathcal{P}_p(\mathbb{X})^N, \\
+            \omega &\mapsto \left(\mathcal{L}(X \vert \mathcal{F}_t^\mathbb{X})(\omega)\right)_{t=1}^{N}
+        \end{align*}
+        Iterativ definieren wir den \emph{Prediction-Prozess $n$-ter Ordnung} durch
+        \begin{align*}
+            \pp^n(\mathbb{X}): \Omega^\mathbb{X} &\rightarrow \mathcal{M}_n := \mathcal{P}_p(\mathcal{M}_{n-1})^N, \\
+            \omega &\mapsto \left(\mathcal{L}(\pp^{n-1}(\mathbb{X}) \vert \mathcal{F}_t^\mathbb{X})(\omega)\right)_{t=1}^{N}
+        \end{align*}
+        Der \emph{Prediction-Prozess} ist nun die Zufallsvariable $\pp(\mathbb{X}) := \left(\pp_n(\mathbb{X})\right)_{n\in\mathbb{N}}$ mit Werten in $\prod_{n\in\mathbb{N}} \mathcal{M}_n$.
+    \end{definition}
+    %TODO: Besprechung M_n polnisch, Verträglichkeit polnisch mit Produkt und P_p
+    Wir setzen weiterhin $\pp^0(\mathbb{X}):=X$ mit Werten in $\mathcal{M}_0:=\mathcal{X}$, verträglich mit der iterativen Definition. Für jedes $n \in \mathbb{N}_0$ ist $\pp^n_t(\mathbb{X})$ $\mathcal{F}_t^\mathbb{X}$-messbar und $\pp^n(\mathbb{X})$ ist $\mathcal{F}_N^\mathbb{X}$-messbar.
+    \begin{lemma}\label{thm:pp_from_ip}
+        Für $n \in \mathbb{N}$ existiert eine stetige Funktion $F^n: \mathcal{Z} \rightarrow \mathcal{M}_n$ mit 
+        $$\pp^n(\mathbb{X}) = F^{n}(\ip(\mathbb{X})) \quad \text{ für alle } \mathbb{X} \in \mathcal{FP}_p$$
+    \end{lemma}
+    \begin{proof}
+        Für $n=0$ können wir $F^0(z) := z^-_{1:N}$ wählen und erhalten $\pp^0(\mathbb{X}) = X = F^0(\ip(\mathbb{X}))$. Nehmen wir nun an die Aussage gilt für $0\leq n-1 < N$. Wähle ein entsprechendes $F^{n-1}$, sodass 
+        $$\pp^{n-1}(\mathbb{X}) = F^{n-1}(\ip(\mathbb{X}))$$
+        Dann gilt 
+        $$\pp^n(\mathbb{X}) = \left( \mathcal{L}(F^{n-1}(\ip(\mathbb{X})) \vert \mathcal{F}_t) \right)_{t=1}^{N}$$
+        
+        Die Räume $\mathcal{M}_n$ sind polnisch, also existiert mit der self-awareness Eigenschaft des Informationsprozess aus Lemma \ref{thm:self_awareness} für jedes $1\leq t \leq N$ ein stetiges $G_t^n:\mathcal{Z}_{1:t} \rightarrow \mathcal{P}_p(\mathcal{M}_{n-1})$ mit 
+        $$\mathcal{L}(F^{n-1}(\ip(\mathbb{X})) \vert \mathcal{F}_t) = G_t^n(\ip_{1:t}(\mathbb{X}))$$
+        Wählen wir nun also $F^n=(G_t^n\circ \pj_{1:t})_{t=1}^N$ so erhalten wir eine stetige Funktion mit der gewünschten Eigenschaft.
+    \end{proof}
+
+    \begin{lemma}\label{thm:stepback_pp} %TODO: Geht auch Lipschitzstetigkeit?
+        Sei $1\leq k\leq n$. Dann existiert eine Borel-messbare Funktion $F:\mathcal{M}_n\rightarrow \mathcal{M}_k$ mit 
+        $$F(\pp^n(\mathbb{X})) = \pp^k(\mathbb{X}) \quad \forall \mathbb{X} \in \mathcal{FP}_p$$
+    \end{lemma}
+    \begin{proof}
+        Wir zeigen zunächst die folgende Aussage:
+
+        \emph{Behauptung:} Auf einem polnischen Raum $(A, d)$ sind die Dirac-Maße $\{\delta_x \vert x\in A\} \subset \mathcal{P}_p(A)$ abgeschlossen.
+
+        Sei dazu $\left(\delta_{x_n}\right)$ eine Folge und konvergent gegen $\mu \in \mathcal{P}_p(A)$. Falls $x_n$ eine konvergente Teilfolge $x_{n_k} \rightarrow x$ hat, so gilt für alle $f \in C(A)$ mit $p$-Wachstum $\delta_{x_{n_k}}(f)=f(x_{n_k})\rightarrow f(x)=\delta_x(f)$, also $\delta_{x_{n_k}}\rightarrow \delta_x$ und somit ist $\mu = \delta_x$ ein Dirac-Maß. Nehmen wir nun an, $x_n$ hätte keine konvergente Teilfolge. Dann hat die Menge $F:=\{x_n \vert n \in \mathbb{N}\}$ also konvergente Folgen nur solche, die in fast allen Folgengliedern konstant sind. $F$ enthält also alle seine Häufungspunkte und ist abgeschlossen. Gleichzeitig existiert für jedes $x_N \in F$ eine offene Umgebung $U_N$, sodass $U\cap F$ endlich ist. Für diese Mengen gilt nach Portmonteau
+        $$0 = \liminf_{n\rightarrow \infty} \delta_{x_n}(U_N) \geq \mu(U_N)$$
+        und somit gilt auch für die offene Menge $U:=\cup_{N\in\mathbb{N}} U_N$ $\mu(U)=0$. Gleichzeitig gilt
+        $$\mu(F) \geq \limsup_{n\rightarrow \infty} \delta_{x_n}(F)=1$$
+        im Widerspruch zu $F \subset U$. Insgesamt sind die Dirac-Maße also tatsächlich abgeschlossen.
+
+        Iterativ reicht es die Behauptung für $k=n-1$ zu zeigen. Bezeichne mit $M\subset \mathcal{P}_p(\mathcal{M}_{n-1})$ die Menge der Dirac-Maße auf $\mathcal{M}_{n-1}$. $\mathcal{M}_{n-1}$ ist polnisch, $M$ ist also abgeschlossen. Die Abbildung $F: M \rightarrow \mathcal{M}_{n-1}, \delta_x \mapsto x$ ist eine Isometrie, insbesondere also stetig. Es ist $\pp^n_N(\mathbb{X}) = \mathcal{L}(\pp^{n-1}(\mathbb{X})\vert \mathcal{F}_N^\mathbb{X}) = \delta_{\pp^{n-1}(\mathbb{X})}$ fast sicher, da $\pp^{n-1}(\mathbb{X})$ messbar bezüglich $\mathcal{F}_N^{\mathbb{X}}$ ist. Somit gilt 
+        $$\pp^{n-1}(\mathbb{X}) = (F\circ \pj_N)(\pp^n(\mathbb{X}))$$
+        Die Abbildung $F$ ist messbar, und da $M$ abgeschlossen ist, können wir sie messbar auf $\mathcal{P}_p(\mathcal{M}_{n-1})$ durch 0 fortsetzen. Auch $\pj_N:(\mathcal{P}_p(\mathcal{M}_{n-1}))^N \rightarrow \mathcal{P}_p(\mathcal{M}_{n-1})$ ist messbar und somit folgt die Behauptung.
+    \end{proof}
+    \begin{lemma}\label{thm:equivalence_adapted_pp}
+        Seien $\mathbb{X,Y} \in \mathcal{FP}_p$ und sei $n \in \mathbb{N}$. Dann sind die folgenden Äquivalent:
+        \begin{enumerate}
+            \item[(i)] $\mathbb{X} \sim_n \mathbb{Y}$
+            \item[(ii)] $\pp^n(\mathbb{X})$ und $\pp^n(\mathbb{Y})$ haben die selbe Verteilung.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        Wir zeigen zunächst die Richtung (ii) $\Rightarrow$ (i). Dafür reicht es folgende Aussage zu zeigen:
+
+        Für $f \in \AF[n]$ existiert ein $F \in C_b(\mathcal{M}_n)$ mit 
+        \begin{equation}\label{eq:481}
+            f(\mathbb{X}) = F(\pp^n(\mathbb{X})) \quad \text{ für alle } \mathbb{X} \in \mathcal{FP}_p
+        \end{equation}
+        Wir zeigen die Aussage durch Induktion über $n$. Für $n=0$ und $f \in \AF[0]$ existiert nach Lemma \ref{thm:adapted_functions_char} ein $F \in C_b(\mathcal{X})$ mit $f(\mathbb{X})=F(X)=F(\pp^0(\mathbb{X}))$ und die Aussage gilt. Gelte die Aussage nun für ein $n\geq 0$. Wir leiten die Gültigkeit für $n+1$ ab. Mit dem zweiten Punkt von Lemma \ref{thm:adapted_functions_char} reicht es die Gleichung \ref{eq:481} für ein $f$ der Form $f=(g\vert t), g\in \AF[n]$ zu zeigen, und wir können daraus Gleichung \ref{eq:481} und damit die Behauptung für beliebige $f \in \AF[n+1]$ ableiten. Nach Induktionsvoraussetzung gilt $g(\mathbb{X}) = G(\pp^n(\mathbb{X}))$ für ein $G \in C_b(\mathcal{M}_n)$ für alle $\mathbb{X}\in\mathcal{FP}_p$. Betrachte die Abbildung $\phi: \mathcal{P}_p(\mathbb{R}) \mapsto \mathbb{R}, \mu \mapsto \int x\mu(dx)$. $\phi$ ist stetig nach Lemma \ref{thm:conv_char}, da $\id$ stetig mit $p$-Wachstum ist. Weiter ist 
+        \begin{align*}
+            (g\vert t)(\mathbb{X}) &= \mathbb{E}(g(\mathbb{X}) \vert \mathcal{F}_t^\mathbb{X}) \\
+            &= \mathbb{E}(G(\pp^n(\mathbb{X})) \vert \mathcal{F}_t^\mathbb{X}) \\
+            &= \phi(\mathcal{L}(G(\pp^n(\mathbb{X})) \vert \mathcal{F}_t^\mathbb{X})) \\
+            &= \phi(G_*\mathcal{L}(\pp^n(\mathbb{X}) \vert \mathcal{F}_t^\mathbb{X})) \\
+            &= \phi(G_*(\pp^{n+1}_t(\mathbb{X})))
+        \end{align*}
+        wobei wir für die dritte Gleichung Lemma \ref{thm:law_expectancy_connection} und für die vierte Gleichung Korollar \ref{thm:pushforward_law} verwendet haben. Nach Lemma \ref{thm:pushforward_measurable} ist $G_*$ stetig, somit erfüllt $\phi\circ G_*\circ \pj_t$ die gewünschten Eigenschaften. Dies zeigt die Implikation (ii) $\Rightarrow$ (i).
+
+        Für die Implikation (i) $\Rightarrow$ (ii) beweisen wir zunächst zwei Hilfsaussagen: Betrachte die Menge $\mathcal{S}_0= C_b(\mathcal{M}_0) = C_b(\mathcal{X})$ und die iterativ konstruierten Mengen $\mathcal{S}_n \subset C_b(\mathcal{M}_n)$ von Funktionen der Form
+        \begin{equation}\label{eq:480}
+            p \mapsto \psi\left( \int \vec{G}_1dp_1, ..., \int \vec{G}_N dp_N\right)
+        \end{equation}
+        wobei $\vec{G}_t$ Vektoren von Funktionen aus $\mathcal{S}_{n-1}$ sind und $\psi \in C_b(\mathbb{R}^m)$ für das passende $m$. Dann gilt: 
+
+        \emph{Behauptung: $\mathcal{S}_n$ ist eine punktetrennende Algebra.}
+
+        Das $\mathcal{S}_n$ eine Algebra ist, ist ersichtlich: Eine Skalierung können wir einfach direkt im $\psi$ durchführen, und für Addition und Multiplikation hängen wir die Vektoren $\vec{G}_t, \vec{G'}_t$ für jedes $t$ aneinander, sortieren die Ergebnisse wieder $\psi$ und $\psi'$ zu und multiplizieren bzw. addieren die Funktionen. Da die Permutation der Koordinaten stetig ist, erhalten wir so wieder eine stetige Funktion. Zur punktetrennenden Eigenschaft verfahren wir induktiv. Für $n=0$ ist $\mathcal{C}_b(\mathcal{X})$ punktetrennend, da $\mathcal{X}$ ein metrischer Raum ist. Gelte die Aussage nun für ein beliebiges, festes $n \in \mathbb{N}_0$. Gegeben seien zwei verschiedene Maße $p,q \in \mathcal{M}_{n+1}$, das heißt $p_t\neq q_t$ für mindestens ein $1\leq t\leq N$. $\mathcal{S}_{n-1}$ ist eine punktetrennende Algebra nach Induktionsvoraussetzung. Mit Satz \ref{thm:separating_measures} existiert ein $f \in \mathcal{S}_{n-1}$ mit $p_t(f) \neq q_t(f)$. Wir können nun also in Gleichung \ref{eq:480} alle anderen $G_s$ als leere Vektoren wählen, $\vec{G}_t = f$ und $\psi$ als Identität. Diese Funktion trennt $p$ und $q$. Induktiv sind also alle $\mathcal{S}_n$ punktetrennende Algebren.
+
+        \emph{Behauptung: Für $F\in \mathcal{S}_n$ existiert $f \in \AF[n]$ mit 
+        $$F(\pp^n(\mathbb{X})) = f(\mathbb{X}) \quad \forall \mathbb{X} \in \mathcal{FP}_p$$}
+
+        Für $n=0$ gilt die Aussage, da $\pp^0(\mathbb{X})=X$ und $\AF[0]$ genauso wie $\mathcal{S}_0$ gerade $C_b(\mathcal{X})$ entspricht. Gelte die Aussage nun für ein beliebiges aber festes $n$. Sei $F \in \mathcal{S}_{n+1}$ der Form von Gleichung \ref{eq:480} mit $\vec{G}_t \in \mathcal{S}_n$. Nun gilt nach der Definition des Prediction-Prozesses und mit Lemma \ref{thm:law_expectancy_connection}
+        \begin{align*}
+        F(\pp^{n+1}(\mathbb{X})) &= \psi\left( \int \vec{G}_1d\mathcal{L}(\pp^n(\mathbb{X}) \vert \mathcal{F}_1^\mathbb{X}), ..., \int \vec{G}_N d\mathcal{L}(\pp^n(\mathbb{X}) \vert \mathcal{F}_N^\mathbb{X})\right) \\
+        &= \psi\left( \mathbb{E}(\vec{G}_1(\pp^n(\mathbb{X})) \vert \mathcal{F}_1^\mathbb{X}), ..., \mathbb{E}(\vec{G}_N(\pp^n(\mathbb{X})) \vert \mathcal{F}_N^\mathbb{X})\right) 
+        \end{align*}
+        Nach Induktionsvoraussetzung existieren Vektoren $\vec{f}_t \in \AF[n]$ mit 
+        $$\vec{G}_t(\pp^n(\mathbb{X})) = \vec{f}_t(\mathbb{X}) \quad \forall \mathbb{X} \in \mathcal{FP}_p$$
+        Insgesamt also
+        $$F(\pp^{n+1})(\mathbb{X}) = \psi\left(\mathbb{E}(\vec{f}_1(\mathbb{X}) \vert \mathcal{F}_1^\mathbb{X}), ..., \mathbb{E}(\vec{f}_N(\mathbb{X}) \vert \mathcal{F}_N^\mathbb{X})\right)$$
+        Die rechte Seite ist genau der Form aus Lemma \ref{thm:adapted_functions_char} und entspricht einer adaptierten Funktion $f\in\AF[n+1]$. Somit folgt die zweite Zwischenbehauptung.
+
+        Mit den beiden Hilfsaussagen können wir nun die Implikation (i) $\Rightarrow$ (ii) zeigen. Es gelte $\mathbb{X} \sim_n \mathbb{Y}$. Nach der zweiten Hilfsaussage existiert für jedes $F \in \mathcal{S}_n$ ein $f \in \AF[n]$ mit 
+        $$F(\pp^n(\mathbb{X})) = f(\mathbb{X}), F(\pp^n(\mathbb{Y})) = f(\mathbb{Y})$$
+        Somit gilt 
+        \begin{equation}\label{eq:483}
+            \mathbb{E}(F(\pp^n(\mathbb{X}))) = \mathbb{E}(f(\mathbb{X})) = \mathbb{E}(f(\mathbb{Y})) = \mathbb{E}(F(\pp^n(\mathbb{Y})))
+        \end{equation}
+        Nach der ersten Hilfsaussage ist $\mathcal{S}_n$ eine punktetrennende Algebra, mit Satz \ref{thm:separating_measures} folgt also aus Gleichung \ref{eq:483} bereits, dass $\pp^n(\mathbb{X})$ und $\pp^n(\mathbb{Y})$ die gleiche Verteilung haben.
+    \end{proof}
+
+    \begin{lemma}\label{thm:ip_from_pp}
+        Es existiert eine messbare Abbildung $F:\mathcal{M}_{N-1}\rightarrow \mathcal{Z}$ mit 
+        $$F(\pp^{N-1}(\mathbb{X})) = \ip(\mathbb{X}) \quad \forall \mathbb{X} \in \mathcal{FP}_p$$
+    \end{lemma}
+    \begin{proof}
+        Wir zeigen zunächst:
+
+        \emph{Behauptung: Für $1\leq t \leq N$ existiert eine Borel-messbare Abbildung $F^t: \mathcal{M}_{N-t}\rightarrow \mathcal{Z}_t$ mit
+        $$F^t(\pp^{N-t}(\mathbb{X})) = \ip_t(\mathbb{X}) \quad \forall \mathbb{X} \in \mathcal{FP}_p$$}
+
+        Für $t=N$ ist $\ip_N(\mathbb{X}) = X_N = \pp_N^0(\mathbb{X})$, wir können also $F^N=\pj_N$ wählen. Wir gehen induktiv vor: Falls die Aussage für ein $2\leq t \leq N$ gilt, so gilt für $\mathbb{X} \in \mathcal{FP}_p$
+        \begin{align*}
+            \ip_{t-1}(\mathbb{X}) &= (X_{t-1}, \mathcal{L}(\ip_t(\mathbb{X} \vert \mathcal{F}_{t-1}^{\mathbb{X}}))) \\
+            &= (\pp_{t-1}^0(\mathbb{X}), \mathcal{L}(F^t(\pp^{N-t}(\mathbb{X} \vert \mathcal{F}_{t-1}^\mathbb{X})))) \\
+            &= (\pp_{t-1}^0(\mathbb{X}), F^t_*(\pp_{t-1}^{N-t+1}(\mathbb{X})))
+        \end{align*}
+
+        Mit Lemma \ref{thm:stepback_pp} gibt es eine messbare Abbildung $G: \mathcal{M}_{N-t+1}\rightarrow \mathcal{M}_0$ mit $G(\pp^{N-t+1}(\mathbb{X})) = \pp^{0}(\mathbb{X})$, somit ist also die erste Koordinate von $\ip_{t-1}(\mathbb{X})$ messbar aus $\pp^{N-t+1}$ zu gewinnen. Mit Lemma \ref{thm:pushforward_measurable} ist $F_*^t$ messbar und somit erhalten wir auch die zweite Koordinate von $\ip_{t-1}(\mathbb{X})$ messbar aus $\pp^{N-t+1}(\mathbb{X})$. Insgesamt folgt die Zwischenbehauptung. 
+
+        Genauso liefert Lemma \ref{thm:stepback_pp} für $1\leq t \leq N$ eine messbare Abbildung $H$ die $\pp^N-1$ auf $\pp^{N-t}$ zurückführt. Insgesamt ist 
+        $$\ip_t(\mathbb{X}) = F^t(H(\pp^{N-1}(\mathbb{X})))$$
+        Wir führen diese Konstruktion für alle Koordinaten $1\leq t\leq N$ durch und erhalten eine messbare Funktion $F: \mathcal{M}_{N-1}\rightarrow \mathcal{Z}$ mit 
+        $$F(\pp^{N-1}(\mathbb{X})) = \ip(\mathbb{X}) \quad \forall \mathbb{X} \in \mathcal{FP}_p$$
+    \end{proof}
+    \begin{theorem}
+        Seien $\mathbb{X,Y} \in \mathcal{FP}_p$. Dann sind die folgenden äquivalent:
+
+        \begin{enumerate}
+            \item[(i)] $\mathbb{X} \sim_\infty \mathbb{Y}$.
+            \item[(ii)] $\mathbb{X} \sim_{N-1} \mathbb{Y}$.
+            \item[(iii)] $\pp(\mathbb{X})$ und $\pp(\mathbb{Y})$ haben die selbe Verteilung.
+            \item[(iv)] $\pp^{N-1}(\mathbb{X})$ und $\pp^{N-1}(\mathbb{Y})$ haben dieselbe Verteilung.
+            \item[(v)] $\ip(\mathbb{X})$ und $\ip(\mathbb{Y})$ haben dieselbe Verteilung.
+            \item[(vi)] $\mathcal{AW}_p(\mathbb{X}, \mathbb{Y})=0$.
+        \end{enumerate}
+        Im dritten Punkt meinen wir auf $\prod_{n \in \mathbb{N}} \mathcal{M}_n$ die kleinste $\sigma$-Algebra, die die endlichen Zylindermengen
+        $$\left\{ \prod_{n\in\mathbb{N}} A_n \vert A_n \in \mathcal{B}(\mathcal{M}_n), A_n = \mathcal{M}_n \text{ für fast alle } n \in \mathbb{N}\right\}$$
+        enthält.
+    \end{theorem}
+    \begin{proof}
+        Es gilt (i) $\Rightarrow$ (ii) und (iii) $\Rightarrow$ (iv). Nach Lemma \ref{thm:equivalence_adapted_pp} sind (ii) und (iv) äquivalent, und auch (i) und (iii): Wenn $\pp(\mathbb{X})$ und $\pp(\mathbb{Y})$ die gleiche Verteilung haben, so haben insbesondere alle Marginalien $\pp^n(\mathbb{X})$ die gleiche Verteilung und somit $\mathbb{X}\sim_n \mathbb{Y}$ für alle $n\in\mathbb{N}$, also $\mathbb{X} \sim_{\infty} \mathbb{Y}$. Umgekehrt, nehmen wir an dass $\mathbb{X}\sim_{\infty}\mathbb{Y}$. Die Verteilung $\pp(\mathbb{X})$ ist eindeutig festgelegt durch die Verteilungen der Randverteilungen $\pp^{1:n}(\mathbb{X}), n\in\mathbb{N}$. Wegen Lemma \ref{thm:stepback_pp} ist die gemeinsame Verteilung $\pp^{1:n}(\mathbb{X})$ bereits durch die Verteilung von $\pp^n(\mathbb{X})$ festgelegt. Mit Lemma \ref{thm:equivalence_adapted_pp} folgt nun aus $\mathbb{X} \sim_\infty\mathbb{Y}$ dass die gemeinsamen Randverteilungen $\pp^{1:n}(\mathbb{X})$ und $\pp^{1:n}(\mathbb{Y})$ übereinstimmen und somit auch die Verteilungen von $\pp(\mathbb{X})$ und $\pp(\mathbb{Y})$.
+
+        Satz \ref{thm:adapted_wasserstein_equalities} zeigt die Äquivalenz von (v) und (vi): Wenn $\ip(\mathbb{X})$ und $\ip(\mathbb{Y})$ die gleiche Verteilung haben, so sind auch die Verteilungen von $\ip_1(\mathbb{X})$ und $\ip_1(\mathbb{Y})$ identisch, also
+        $$\mathcal{AW}_p(\mathbb{X,Y}) = \mathcal{W}_p(\ip_1(\mathbb{X}), \ip_1(\mathbb{Y})) = 0$$
+        Umgekehrt folgt aus $\mathcal{AW}_p(\mathbb{X}, \mathbb{Y})=0$ auch dass die Verteilungen von $\ip_1(\mathbb{X})$ und $\ip_1(\mathbb{Y})$ identisch sind. Nach Lemma \ref{thm:properties_unfold} ist dann auch
+        $$\mathcal{L}(\ip(\mathbb{X})) = \uf_1(\mathcal{L}(\ip_1(\mathbb{X}))) = \uf_1(\mathcal{L}(\ip_1(\mathbb{Y}))) = \mathcal{L}(\ip(\mathbb{Y}))$$
+
+        Mit Lemma \ref{thm:pp_from_ip} folgt aus (v), dass für alle $n\in\mathbb{N}$ die Prozesse $\pp^n(\mathbb{X})$ und $\pp^n(\mathbb{Y})$ die gleiche Verteilung haben, und daraus folgt mit der gleichen Argumentation wie zuvor (iii).
+
+        Zuletzt liefert Lemma \ref{thm:ip_from_pp} die Implikation (iv) $\Rightarrow$ (v). Somit folgt die Behauptung.
+    \end{proof}
