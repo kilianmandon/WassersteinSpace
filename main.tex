@@ -17,11 +17,12 @@
 
 \newtheorem{theorem}{Satz}[section]
 \newtheorem{corollary}{Korollar}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{remark}[theorem]{Bemerkung}
 \newtheorem{example}[theorem]{Beispiel}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Bemerkung}
 
 
 \DeclareMathOperator{\ip}{ip}
@@ -36,7 +37,7 @@
 \DeclareMathOperator{\depth}{depth}
 \DeclareMathOperator{\pj}{pj}
 \DeclareMathOperator{\pp}{pp}
-
+\DeclareMathOperator{\ST}{ST}
 \begin{document}
 
 \title{
@@ -63,6 +64,12 @@ Abstract goes here
 
 \section{Adaptierte Funktionen}
 \input{chapters/adapted_functions}
+
+\section{Topologische und geometrische Eigenschaften von $\FP_p$}
+\input{chapters/topological_and_geometric_properties}
+
+\section{Numerische Implementierung}
+\input{chapters/numerical_implementation}
 
 \section{Appendix}
 \input{chapters/appendix.tex}

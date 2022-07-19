@@ -15,13 +15,34 @@ für ein fixes (und damit für alle) $a_0 \in A$. Für zwei Wahrscheinlichkeitsm
 Wir versehen $\mathcal{P}(A)$ mit der Topologie von schwacher Konvergenz, das heißt eine Basis der Topologie sind Mengen $\{U_{f, x, r} \vert f \in C_b(A), x\in \mathbb{R}, r>0\}$ der Form 
 $$U_{f, x, r} = \left\{ \mu \in \mathcal{P}(A) \vert \left| \int f d\mu - x\right| < r\right\}$$
 Bezüglich dieser Topologie betrachten wir auf $\mathcal{P}(A)$ die Borel $\sigma$"=Algebra. Auf $\mathcal{P}_p(A)$ ist die Topologie induziert durch $\mathcal{W}_p$, und auch hier betrachten wir die assoziierte Borel $\sigma$-Algebra.
+\begin{lemma}\label{thm:closed_couplings}
+Seien $\mathcal{A,B}$ polnische Räume. Dann gilt: 
+\begin{enumerate}
+    \item Für $(\mu_n)_{n\in \mathbb{N}} \subset\mathcal{P}(A), \mu_n \rightarrow \mu \in \mathcal{P}(A)$ ist der Grenzwert eindeutig.
+    \item Für $(\pi_n) \subset \mathcal{P}(\mathcal{A} \times \mathcal{B}), \pi_n \rightarrow \pi$ schwach konvergieren auch die Marginalien von $\pi_n$ schwach gegen die von $\pi$. 
+    \item Für $\mu \in \mathcal{P}(\mathcal{A}), \nu \in \mathcal{P}(\mathcal{B})$ ist $\cpl(\mu, \nu)$ abgeschlossen.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+    Seien $\mu, \tilde{\mu}$ zwei Grenzwerte von $(\mu_n)$ in schwacher Konvergenz. Sei $E \subseteq \mathcal{A}$ abgeschlossen. Für $m \in \mathbb{N}$ betrachte die stetige Funktion 
+    $$f_m: x \mapsto (1-m\cdot d(x,E)) \vee 0$$
+    $f_m$ ist stetig und beschränkt, also gilt 
+    $$\lim_{n \rightarrow \infty} \mu_n(f_m) = \mu(f_m) = \tilde{\mu}(f_m)$$
+    Es konvergiert $f_m \rightarrow \mathds{1}_E$ fast sicher dominiert durch $1$, somit gilt also auch $\mu(E) =\tilde{\mu}(E)$. Da abgeschlossene Mengen ein $\cap$-stabiler Erzeuger sind, folgt $\mu=\tilde{\mu}$ und damit die erste Behauptung.
+
+    Sei $(\pi_n)_{n\in\mathbb{N}} \subset \mathcal{P}(\mathcal{A}\times\mathcal{B})$ eine Folge und konvergent gegen $\pi$. Wir schreiben $\mu_n, \nu_n$ bzw. $\mu, \nu$ für die Marginalien von $\pi_n$ bzw. $\pi$. Sei $f\in C_b(\mathcal{A})$. Wir können $f \in C_b(\mathcal{A}\times\mathcal{B})$ auffassen als $x,y\mapsto f(x)$. Da $f$ stetig und beschränkt ist, gilt 
+    $$\mu(f) = \pi(f) = \lim_{n\rightarrow \infty} \pi_n(f) = \lim_{n\rightarrow\infty} \mu_n(f)$$ 
+    Daraus folgt die zweite Behauptung.
+
+    Für eine Folge von Kopplungen $(\pi_n)_{n\in\mathbb{N}} \subset \cpl(\mu,\nu)$ konvergent gegen $\pi$ müssen also auch die Marginalien von $pi_n$ gegen die von $\pi$ konvergieren. Die Marginalien sind aber konstant $\mu$ und $\nu$, und wegen der Eindeutigkeit des Grenzwertes nach dem ersten Punkt gilt $\pi \in \cpl(\mu,\nu)$.
+\end{proof}
 \begin{lemma}\label{thm:optimal_coupling}
 In \ref{def:wasserstein_distance} wird dass Infimum tatsächlich angenommen, das heißt es existiert ein $\pi \in \cpl(\mu, \nu)$, sodass
 $$\mathcal{W}_p(\mu, \nu) = \left( \int d^p_A(x, y) \pi(dx, dy) \right)^{\frac{1}{p}}$$
 Tatsächlich kann eine Borel-messbare Abbildung $k: \mathcal{P}_p(A) \times \mathcal{P}_p(A) \rightarrow \mathcal{P}_p(A\times A)$ gewählt werden, sodass für $\mu,\nu \in \mathcal{P}_p(A)$ $k(\mu, \nu)$ eine optimale Kopplung ist.
 \end{lemma}
 Für den Beweis benötigen wir den Satz von Prokhorov. Auf einem topologischen Raum $X$ mit Borel Algebra nennen wir eine Menge $M \subset \mathcal{P}(X)$ straff, falls für jedes $\varepsilon >0$ eine kompakte Menge $K\subset X$ existiert, sodass für jedes $\mu \in M$ gilt $\mu(X\setminus K) < \varepsilon$. Auf polnischen Räumen gibt der Satz von Prokhorov eine nützliche Charakterisierung von Straffheit:
-\begin{theorem}[Satz von Prokhorov]
+\begin{theorem}[Satz von Prokhorov]\label{thm:prokhorov}
 Sei $(A, d)$ ein polnischer Raum. Dann ist die Topologie schwacher Konvergenz auf $\mathcal{P}(A)$ vollständig metrisierbar und es gilt folgende Äquivalenz:
 
 Eine Menge $M \subset \mathcal{P}(A)$ ist straff, genau dann wenn sie relativ kompakt ist.
@@ -31,9 +52,7 @@ Eine Menge $M \subset \mathcal{P}(A)$ ist straff, genau dann wenn sie relativ ko
         \item
     Zuerst zeigen wir die Existenz einer optimalen Kopplung. Seien $\mu, \nu \in \mathcal{P}_p(A)$. Die Mengen $\{\mu\}$ und $\{\nu\}$ sind straff nach dem Satz von Prokhorov, da sie bezüglich schwacher Konvergenz abgeschlossen und folgenkompakt sind. Wir können also für ein $\varepsilon > 0$ kompakte Mengen $K_1$ und $K_2$ wählen, sodass $\mu(A\setminus K_1) < \varepsilon$ und $\nu(A\setminus K_2) < \varepsilon$. Die Menge $K_1 \times K_2$ ist immer noch kompakt, und für $\pi \in \cpl(\mu, \nu)$ gilt 
     $$\pi(A\times A \setminus K_1 \times K_2) \leq \pi(A\times A \setminus K_1 \times A) + \pi(A\times A \setminus A \times K_2) \leq 2\varepsilon$$
-    Also ist $\cpl(\mu, \nu)$ straff und mit dem Satz von Prokhorov ist der Abschluss folgenkompakt. Die Menge der Kopplungen ist abgeschlossen: Betrachte eine Folge $\pi_n$ von Kopplungen mit $\pi_n \rightarrow \pi$ in schwacher Konvergenz. Für $E \subset A$ abgeschlossen betrachte die Funktion $f:x\mapsto \max(1-md(x, E), 0)$ für $m \in \mathbb{N}$. Wir können die Funktion auch als Funktion auf $A \times A$ und konstant in der zweiten Variable auffassen. In beiden Fällen ist $f$ stetig und beschränkt und es gilt
-    $$\mu(f) = \pi_n(f) = \lim_{n\rightarrow \infty}\pi_n(f) = \pi(f)$$
-    Für $m \rightarrow \infty$ geht $f\rightarrow \mathds{1}_E$ (bzw. $f\rightarrow \mathds{1}_{E\times A}$) und mit dominierter Konvergenz gilt $\mu(E) = \pi(E\times A)$. Da die abgeschlossenen Mengen ein $\cap$-stabiler Erzeuger der Borel Algebra sind gilt $\mu = \pi(\cdot \times A)$ und analog für $\nu$, es gilt also in der Tat $\pi \in \cpl(\mu, \nu)$. Wähle also eine Folge $\pi_n\in \cpl(\mu, \nu)$ mit 
+    Also ist $\cpl(\mu, \nu)$ straff und mit dem Satz von Prokhorov relativ kompakt. Nach Lemma \ref{thm:closed_couplings} ist sind die Kopplungen auch abgeschlossen, also sogar kompakt. Wähle eine Folge $\pi_n\in \cpl(\mu, \nu)$ mit 
     $$\left(\mathbb{E}_{\pi_n}(d^p(x,y))\right)^{\frac{1}{p}} \rightarrow \mathcal{W}_p(\mu, \nu)$$
     Nach Übergang zu einer Teilfolge können wir annehmen, dass $\pi_n \rightarrow \pi \in \cpl(\mu, \nu)$. Für jedes $m \in \mathbb{N}$ ist $x,y\mapsto d^p(x,y)\wedge m$ stetig und beschränkt, also 
     $$\mathbb{E}_\pi(d^p(x,y)\wedge m) = \lim_{n\rightarrow \infty} \mathbb{E}_{\pi_n}(d^p(x,y) \wedge m) \leq \mathcal{W}_p^p(\mu, \nu)$$
