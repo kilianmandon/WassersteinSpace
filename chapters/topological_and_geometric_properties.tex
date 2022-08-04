@@ -1,4 +1,4 @@
-\subsection{Kompaktheit in $\FP_p$}
+\subsection{Kompaktheit in \texorpdfstring{$\FP_p$}{FPp}}
 
 \begin{theorem}[Satz von Prokhorov für $\mathcal{P}_p$]\label{thm:prokhorov_in_pp}
     Sei $(A, d)$ ein polnischer Raum, $\Pi\subseteq\mathcal{P}_p(A)$. Dann sind die Folgenden äquivalent:
@@ -294,4 +294,68 @@ Da $A_0=0$ sind also die $A_t$ schon fast sicher durch die $X_t$ bestimmt. Wegen
     $$\mathbb{E}_\pi\left[\left|(M^\mathbb{X}-M^\mathbb{Y}, A^\mathbb{X}-A^\mathbb{Y}) \right|^p \right]  \leq c\cdot \mathbb{E}_\pi \left[ \left| X-Y\right|^p\right]$$
     für ein $c=c(N,p)$ und da die bikausalen Kopplungen übereinstimmen
     $$\mathcal{AW}_p(\mathbb{D}^\mathbb{X}, \mathbb{D}^\mathbb{Y}) \leq c^\frac{1}{p} \mathcal{AW}_p(\mathbb{X,Y})$$
+\end{proof}
+
+\subsection{Geodätischer Raum}
+In diesem Abschnitt wollen wir zeigen, dass $(\FP_p, \mathcal{AW}_p)$ ein geodätischer Raum ist. Wir gehen in diesem Kapitel davon aus, dass $\mathcal{X}_t$ ein geodätischer Raum ist, der eine messbare Auswahl von Geodäten erlaubt, das heißt eine Abbildung $\mathcal{X}\times\mathcal{X} \rightarrow \mathcal{X}, x,y \mapsto \gamma_{x,y}$, sodass $\gamma_{x,y}$ eine Geodäte ist und für jedes $t\in[0,1]$ die Abbildung $x,y\mapsto \gamma_{x,y}(t)$ messbar ist.
+
+\begin{definition}[Geodäte]
+    Sei $(\mathcal{X},d)$ ein polnischer Raum und seien $x,y\in \mathcal{X}$. Eine Abbildung $\gamma:[0,1]\rightarrow \mathcal{X}$ mit $\gamma(0)=x$ und $\gamma(1)=y$ heißt eine \emph{Geodäte} zwischen $x$ und $y$, falls für alle $s,t \in [0,1]$
+    $$d(\gamma(s), \gamma(t)) = |t-s| d(x,y)$$
+    Falls für alle Paare $x,y \in \mathcal{X}$ eine Geodäte zwischen $x$ und $y$ existiert, nennt man $\mathcal{X}$ einen \emph{geodätischen Raum}.
+\end{definition}
+\begin{example}
+$\mathbb{R}^d$ mit einer Norm ist ein geodätischer Raum: Für $x,y \in \mathbb{R}^d$ ist $\gamma_{x,y}: t \mapsto (1-t)x + ty$ eine Geodäte zwischen $x$ und $y$, da für $s,t \in [0,1]$
+$$\|(1-t)x + ty - (1-s)x - sy \| = \|(s-t)x + (t-s)y\| = |s-t|\|x-y\|$$
+Für diese Wahl von Geodäten sind die Abbildungen $x,y \mapsto \gamma_{x,y}(t)=(1-t)x+ty$ für jedes $t$ messbar. $\mathbb{R}^d$ erlaubt also eine messbare Auswahl von Geodäten.
+\end{example}
+\begin{lemma}
+    Seien $(\mathcal{X}, d_{\mathcal{X}}), (\mathcal{Y}, d_{\mathcal{Y}})$ geodätische, polnische Räume, die eine messbare Auswahl erlauben. Sei weiterhin $(\mathcal{Z}, d_{\mathcal{Z}})$ isometrisch zu $(\mathcal{X}, d_{\mathcal{X}})$. Dann sind auch $\mathcal{P}_p(\mathcal{X})$, $\mathcal{X}\times \mathcal{Y}$ (bezüglich einer Produktmetrik $d = \left(d_\mathcal{X}^q+d_\mathcal{Y}^q\right)^\frac{1}{q}, q\geq 1$) und $\mathcal{Z}$ geodätische Räume, die eine messbare Auswahl erlauben.
+
+    Genauer: Falls $\Phi$ ein isometrischer Isomorphismus zwischen $\mathcal{X}$ und $\mathcal{Z}$ ist, so ist $\gamma_t$ genau dann eine Geodäte zwischen $x,y \in \mathcal{X}$, falls $\Phi \circ \gamma_t$ eine Geodäte zwischen $\Phi(x)$ und $\Phi(y)$ ist.
+\end{lemma}
+\begin{proof}
+    Für $mu, \nu \in \mathcal{P}_p(\mathcal{X})$ sei $\pi$ eine optimale Kopplung nach Lemma \ref{thm:optimal_coupling}. Sei $\gamma_t: \mathcal{X}\times \mathcal{X} \rightarrow \mathcal{X}, x,y \mapsto \gamma_t(x,y)$ eine messbare Abbildung, die jedem Paar $x,y$ eine messbare Geodäte $\gamma_t(x,y)$ zuweist. Wir betrachten nun die Abbildung $t \mapsto \gamma_{t,*}(\pi)=:\tilde{\gamma}_t$ und zeigen, dass sie eine Geodäte ist. Da die optimale Kopplung $\pi$ nach Lemma \ref{thm:optimal_coupling} messbar gewählt werden kann, folgt hieraus zusammen mit Lemma \ref{thm:pushforward_measurable} die Behauptung. 
+
+    Da $\gamma_t(x,y)$ eine Geodäte ist, sind $\gamma_0(x,y)$ und $\gamma_1(x,y)$ die Projektionen auf $x$ bzw. $y$, also gilt $\tilde{\gamma}_0=\mu$ und $\tilde{\gamma}_1=\nu$. Es reicht zu zeigen, dass für $0\leq s\leq t\leq 1$ gilt
+    $$\mathcal{W}_p(\tilde{\gamma}_s, \tilde{\gamma}_t) \leq |t-s|\mathcal{W}_p(\mu, \nu)$$
+    da dann schon mit der Dreiecksungleichung folgt
+    $$\mathcal{W}_p(\mu, \nu) \leq \mathcal{W}_p(\tilde{\gamma}_0, \tilde{\gamma}_s) + \mathcal{W}_p(\tilde{\gamma}_s, \tilde{\gamma}_t) + \mathcal{W}_p(\tilde{\gamma}_t, \tilde{\gamma}_1) \leq (s + (1-t))\mathcal{W}_p(\mu, \nu) + \mathcal{W}_p(\tilde{\gamma}_s, \tilde{\gamma}_t)$$
+    und damit folgt schon Gleichheit. Es ist $(\gamma_s(x,y), \gamma_t(x,y))_*\pi$ eine Kopplung von $\tilde{\gamma}_s$ und $\tilde{\gamma}_t$, also ist 
+    \begin{align*}
+        \mathcal{W}_p^p(\tilde{\gamma}_s, \tilde{\gamma}_t) &\leq \int d^p(\gamma_s(x,y), \gamma_t(x,y)) \pi(dx,dy) \\
+        &= \int |t-s|^pd^p(x,y)\pi(dx,dy) = |t-s|^p\cdot\mathcal{W}_p^p(\mu, \nu)
+    \end{align*}
+
+    Zur zweiten Behauptung, seien $\gamma^X_{x_0,x_1}(t)$ und $\gamma^Y_{y_0, y_1}(t)$ messbare Geodäten für $\mathcal{X}$ bzw. $\mathcal{Y}$. Dann ist $\gamma(t): (x_0, y_0), (x_1, y_1) \mapsto \left(\gamma^X_{x_0,x_1}(t), \gamma^Y_{y_0,y_1}(t)\right)$ eine messbare Abbildung mit $\gamma(0)=(x_0, y_0)$ und $\gamma(1) = (x_1, y_1)$, und weiterhin gilt für $s,t\in [0,1]$:
+    \begin{align*}
+        d(\gamma(s), \gamma(t)) &= \left(d^q(\gamma^X(s), \gamma^X(t)) + d^q(\gamma^Y(s), \gamma^Y(t))\right)^\frac{1}{q} \\
+        &= \left(|t-s|^q d^q(x_0, x_1) + |t-s|^q d^q(y_0, y_1)\right)^\frac{1}{q} \\
+        &= |t-s| d((x_0, x_1), (y_0, y_1))
+    \end{align*}
+
+    Für den dritten Punkt, sei $\Phi$ eine Isometrie von $\mathcal{X}$ nach $\mathcal{Z}$. Sei $\gamma_{x,y}(t)$ eine messbare Geodäte bezüglich $\mathcal{X}$. Dann ist die Abbildung $\tilde{\gamma}(t): z_0, z_1 \mapsto \Phi(\gamma_{\Phi^{-1}(z_0), \Phi^{-1}(z_1)}(t))$ messbar (da $\Phi$ und $\Phi^{-1}$ isometrisch, also messbar sind) mit $\tilde{\gamma}(0) = \Phi(\Phi^{-1})(z_0)=z_0$ und $\tilde{\gamma}(1) = z_1$. Weiterhin gilt für $s,t\in[0,1]$
+    $$d(\tilde{\gamma}(s), \tilde{\gamma}(t)) = |s-t|\cdot d\left(\Phi^{-1}(z_0), \Phi^{-1}(z_1)\right) = |s-t|d(z_0, z_1)$$
+    $\tilde{\gamma}$ ist also tatsächlich eine Geodäte von $z_0$ zu $z_1$.
+
+    Wir haben hierdurch auch gezeigt, dass für eine Geodäte $\gamma_t$ zwischen $x,y\in \mathcal{X}$, $\Phi \circ \gamma_t$ eine Geodäte zwischen $\Phi(x)$ und $\Phi(y)$ ist. Da auch $\Phi^{-1}$ ein Isometrischer Isomorphismus ist folgt, dass $\gamma_t$ eine Geodäte zwischen $x,y\in\mathcal{X}$ ist genau wenn $\Phi\circ \gamma_t$ eine Geodäte zwischen $\Phi(x)$ und $\Phi(y)$ ist.
+\end{proof}
+\begin{definition}[Interpolationsprozess]
+    Seien $\mathbb{X,Y} \in \mathcal{FP}_p$ und sei $\pi \in \cplbc(\mathbb{X,Y})$. Wir nennen die Familie $(\mathbb{Z}^{\pi, u})$ gegeben durch
+    $$\mathbb{Z}^{\pi, u} := \left(\mathcal{Z}\times \mathcal{Z}, \mathcal{F}^\mathcal{Z}\otimes \mathcal{F}^\mathcal{Z}, \left(\mathcal{F}_{t,t}^{\mathcal{Z},\mathcal{Z}}, \pi, \left((1-u)X_t + uY_t\right)_{t=1}^N \right) \right) $$
+    den \emph{Interpolationsprozess} zwischen $\mathbb{X}$ und $\mathbb{Y}$ (bezüglich $\pi$).
+\end{definition}
+
+\begin{theorem}
+    Sei $p \in (1, \infty)$.
+\begin{enumerate}
+    \item[(i)] Der Raum $(\FP_p, \mathcal{AW}_p)$ ist ein geodätischer Raum.
+    \item[(ii)] Eine Familie $(\mathbb{Z}^u)_{u \in [0,1]}$ ist eine Geodäte zwischen $\mathbb{X}$ und $\mathbb{Y}$ genau dann, wenn die Familie 
+    $$\left( \gamma^u \right)_{u \in [0,1]} := \left( \mathcal{L}(\ip_1(\mathbb{Z}^u)) \right)_{u \in [0,1]}$$
+    eine Geodäte zwischen $\mathcal{L}(\ip_1(\mathbb{X}))$ und $\mathcal{L}(\ip_1(\mathbb{Y}))$ ist.
+    \item[(iii)] Falls $\pi$ eine optimale, bikausale Kopplung bezüglich $\mathcal{AW}_p(\mathbb{X,Y})$ ist, os ist der Interpolationsprozess $\left(\mathbb{Z}^{\pi, u}\right)_{u \in [0,1]}$ eine Geodäte zwischen $\mathbb{X}$ und $\mathbb{Y}$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+    Der Raum $\mathcal{P}_p(\mathcal{Z}_1)$ ist nach dem vorherigen Lemma als iterative Konstruktion aus geodetischen, polnischen Räumen (die eine messbare Auswahl zulassen) ein geodetischer polnischer Raum. Die Abbildung $\mathbb{X} \mapsto \mathcal{L}(\ip_1(\mathbb{X}))$ ist nach Satz \ref{thm:adapted_wasserstein_equalities} ein isometrischer Isomorphismus zwischen $\FP_p$ und $\mathcal{P}_p(\mathcal{Z}_1)$. Hiermit folgen die Punkte (i) und (ii).
 \end{proof}
