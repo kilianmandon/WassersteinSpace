@@ -1,6 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage[hidelinks]{hyperref}
 \usepackage[a4paper, lmargin={4cm}, rmargin={2cm}, tmargin={2.5cm}, bmargin={2.5cm}]{geometry}
@@ -10,6 +11,8 @@
 \usepackage{amsmath}
 \usepackage{faktor}
 \usepackage{dsfont}
+\usepackage{pdfpages}
+
 \graphicspath{ {images/} }
 
 \usepackage{csquotes}
@@ -41,36 +44,66 @@
 \DeclareMathOperator{\ST}{ST}
 \DeclareMathOperator{\clip}{clip}
 \begin{document}
+\includepdf{plagiatserklarung_margin.pdf}
+%\begin{titlepage}
+%\title{
+    %{Adaptierte Wasserstein Metrik} \\
+    %{Westfälische Wilhelms-Universität}
+%}
 
-\title{
-    {Adaptierte Wasserstein Metrik} \\
-    {Westfälische Wilhelms-Universität}
-}
+%\author{Kilian Mandon}
+%\date{\today}
 
-\author{Kilian Mandon}
-\date{\today}
+%\end{titlepage}
 
-\maketitle
+\begin{titlepage}
+    \begin{figure}[t]
+        \includegraphics[width=0.3\textwidth]{images/Logo_WWU_Münster.png}
+    \end{figure}
+   \begin{center}
+        \vspace*{1cm}
+       \textbf{\huge Der Raum der adaptierten stochastischen Prozesse}
+       \paragraph{}$~~$\\
+       \paragraph{}$~~$\\
+       \paragraph{}$~~$\\
+       \textbf{neunwöchige Abschlussarbeit im Rahmen der Prüfung} \\ \textbf{im Studiengang der Mathematik (B.Sc.)} \\ \textbf{an der Universität Münster}
+       \paragraph{}$~~$\\
+       \paragraph{}$~~$\\
+       \paragraph{}$~~$\\
+       \text{vorgelegt am: \today} \\
+       \text{von: Kilian Mandon} \\
+       \text{1. Gutachter: Prof. Dr. Martin Huesmann} \\
+       \paragraph{}$~~$\\
+       \text{Universität Münster}
+            
+   \end{center}
+\end{titlepage}
 
-\section{Einleitung}
+\tableofcontents
+\clearpage
+
+\section{Einleitung}\label{ch:introduction}
 \input{chapters/einleitung}
 
-\section{Grundlagen}
+\section{Grundlagen}\label{ch:basics}
 \input{chapters/grundlagen}
 
-\section{Der Wasserstein-Raum stochastischer Prozesse}
+\section{Der Wasserstein-Raum stochastischer Prozesse}\label{ch:wasserstein_space}
 \input{chapters/wasserstein_space}
 
-\section{Adaptierte Funktionen}
+\section{Adaptierte Funktionen}\label{ch:adapted_functions}
 \input{chapters/adapted_functions}
 
-\section{Topologische und geometrische Eigenschaften von \texorpdfstring{$\FP_p$}{FPp}}
+\section{Topologische und geometrische Eigenschaften von \texorpdfstring{$\FP_p$}{FPp}}\label{ch:topological_properties}
 \input{chapters/topological_and_geometric_properties}
 
-\section{Numerische Implementierung}
+\section{Numerische Implementierung}\label{ch:implementation}
 \input{chapters/numerical_implementation}
 
 \section{Appendix}
 \input{chapters/appendix.tex}
+
+\clearpage
+\printbibliography
 
 \end{document}

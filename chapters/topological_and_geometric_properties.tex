@@ -1,45 +1,44 @@
 \subsection{Kompaktheit in \texorpdfstring{$\FP_p$}{FPp}}
-
+Um Kompaktheit in $\FP_p$ zu charakterisieren ist es wichtig, zunächst Kompaktheit bezüglich der klassischen Wasserstein-Metrik zu verstehen. Ähnlich zu dem klassischen Satz von Prokhorov gilt folgende Charakterisierung:
 \begin{theorem}[Satz von Prokhorov für $\mathcal{P}_p$]\label{thm:prokhorov_in_pp}
-    Sei $(A, d)$ ein polnischer Raum, $\Pi\subseteq\mathcal{P}_p(A)$. Dann sind die Folgenden äquivalent:
-    \begin{enumerate}
-        \item[(i)] $\Pi$ ist relativ kompakt, das heißt der Abschluss von $\Pi$ ist kompakt in $\mathcal{P}_p(A)$.
-        \item[(ii)] $\Pi$ ist straff und für ein fixiertes $a_0 \in A$ und $\varepsilon>0$ existiert eine kompakte Menge $K\subset A$ sodass
-        $$\sup_{\pi \in \Pi} \int d^p(a_0, a)\mathds{1}_{a \notin K} \pi(da) \leq \varepsilon$$
-        \item[(iii)] $\Pi$ ist straff und für ein fixiertes $a_0 \in A$ und $\varepsilon>0$ existiert ein Ball $B_R(x_0)$ sodass
-        $$\sup_{\pi \in \Pi} \int d^p(a_0, a)\mathds{1}_{a \notin B_R(x_0)} \pi(da) \leq \varepsilon$$
+    Sei $(A, d)$ ein polnischer Raum, $\Pi\subseteq\mathcal{P}_p(A)$. Dann sind die folgenden Aussagen äquivalent:
+    \begin{enumerate}[(i)]
+        \item $\Pi$ ist relativ kompakt, das heißt der Abschluss von $\Pi$ ist kompakt in $\mathcal{P}_p(A)$.
+        \item $\Pi$ ist straff und uniform $p$-integrierbar, das heißt für ein fixiertes $a_0 \in A$ und $\varepsilon>0$ existiert ein Ball $B_R(a_0)$, sodass
+        $$\sup_{\pi \in \Pi} \int d^p(a_0, a)\mathds{1}_{a \notin B_R(a_0)} \pi(da) \leq \varepsilon$$
     \end{enumerate}
 \end{theorem}
 \begin{proof}
-    Es gilt (ii) $\Rightarrow$ (iii) da jede kompakte Menge beschränkt ist, also in einem Ball liegt. Weiterhin gilt (i) $\Rightarrow$ (ii): Falls $\Pi$ relativ kompakt ist, so ist es auch relativ kompakt aufgefasst in $\mathcal{P}(A)$. Mit dem Satz von Prokhorov in $\mathcal{P}(A)$ (Satz \ref{thm:prokhorov}) ist $\Pi$ straff. Fixiere $a_0 \in A$. Wegen der Straffheit von $\Pi$ existiert für jedes $n \in \mathbb{N}$ eine kompakte Menge $K_n$ mit 
-    $$\mu(K_n^c) < \frac{1}{n} \forall \mu \in \Pi$$
-    Wir ersetzen $K_n$ durch $\cup_{i=1}^n K_i$ und erhalten, dass die $K_i$ monoton steigen. Angenommen (ii) gilt nicht, dann existiert ein $\varepsilon > 0$ und eine Folge $(\mu_n) \subseteq \Pi$ mit $\int d^p(a_0, a) \mathds{1}_{a \in K_n^c} \mu_n(da) \geq \varepsilon$. Nach Übergang zu einer Teilfolge erhalten wir $\mu_n \rightarrow \mu$ für ein $\mu \in \mathcal{FP}_p$, da $\Pi$ relativ kompakt ist. Es gilt $\mathbb{E}_\mu(d^p(a_0, a)) < \infty$ und somit $\mathbb{E}_\mu(d^p(a_0, a) \mathds{1}_{a \in K_n^c}) \rightarrow 0$ mit dominierter Konvergenz, da $\mu(K_n^c) = \lim_{m\rightarrow \infty} \mu_m(K_n^c) \leq \frac{1}{n}\rightarrow 0$ für $n\rightarrow \infty$. Aber gleichzeitig gilt für $N \in \mathbb{N}$
-    $$\mathbb{E}_\mu(d^p(a_0, a) \mathds{1}_{a \in K_N^c}) = \lim_{n\rightarrow\infty} \mathbb{E}_{\mu_n}(d^p(a_0, a) \mathds{1}_{a \in K_N^c}) \geq \limsup_{n\rightarrow \infty} \mathbb{E}_{\mu_n}(d^p(a_0, a) \mathds{1}_{a \in K_n^C}) \geq \varepsilon$$
-    weil $\mathds{1}_{K_n^c} \leq \mathds{1}_{K_N^c}$ für fast alle $n$ aufgrund der Monotonie der $K_n$. Insgesamt haben wir einen Widerspruch und erhalten (i) $\Rightarrow$ (ii).
+     Zunächst zeigen wir (i)$\Rightarrow$ (ii): Falls $\Pi$ relativ kompakt ist, so ist es auch relativ kompakt aufgefasst in $\mathcal{P}(A)$. Mit dem Satz von Prokhorov in $\mathcal{P}(A)$ (Satz \ref{thm:prokhorov}) ist $\Pi$ straff. Nehme nun an, $\Pi$ wäre nicht uniform $p$-integrierbar. Dann gibt es eine Folge $(\pi_n)_{n\in\mathbb{N}} \subset \Pi$ mit $\mathbb{E}_{\pi_n}(d^p(a_0, a)\mathds{1}_{\left\{d^p(a_0, a)>n\right\}}) \geq \varepsilon$ für ein $\varepsilon>0$. Wir können eine konvergente Teilfolge $\pi_{n_k}$ wählen. Nach Lemma \ref{thm:conv_char} ist diese Teilfolge uniform $p$-integrierbar, was ein Widerspruch ist.
 
-    Als letztes bleibt die Implikation (iii) $\Rightarrow$ (i) zu zeigen. Erfülle also $\Pi$ die Eigenschaft (iii). Sei $(\mu_n)\subset \Pi$. Da $\Pi$ aufgefasst in $\mathcal{P}(A)$ straff, also relativ kompakt ist, erhalten wir nach Übergang zu einer Teilfolge $\mu_n \rightarrow \mu$ schwach für ein $\mu \in \mathcal{P}(A)$. Für $\varepsilon > 0$ wähle einen Ball $B_R(a_0)$, sodass 
-    $$\sup_{\pi \in \Pi} \int d^p(a_0, a) \mathds{1}_{a \notin B_R(a_0)} \pi(da) < \varepsilon$$
-    Es gilt auch $\mu_n \rightarrow \mu$ auf den Teilmengen $B_R(x_0)$ und $B_R(x_0)^c$ bezüglich der endlichen (nicht unbedingt Wahrscheinlichkeits-) Maße $\mu(\cdot \cap B_R(x_0))$ und $\mu(\cdot \cap B_R(x_0)^c)$ ($B_R(x_0)$ ist offen und $B_R(x_0)^c$ ist abgeschlossen, wir können also das Portmonteau-Theorem für offene bzw. abgeschlossene Mengen auf die Unterräume anwenden). 
-
-    Auf $B_R(a_0)$ ist $d^p(a_0, \cdot)$ stetig und beschränkt und auf $B_R(a_0)^c$ können wir $d^p(a_0, \cdot)$ zu diesem Zweck abschneiden. Insgesamt erhalten wir
+    Wir zeigen nun die Implikation (ii) $\Rightarrow$ (i). Erfülle also $\Pi$ die Eigenschaft (ii). Sei $(\mu_n)\subset \Pi$. Da $\Pi$ aufgefasst in $\mathcal{P}(A)$ straff, also relativ kompakt ist, erhalten wir nach Übergang zu einer Teilfolge $\mu_n \rightarrow \mu$ schwach für ein $\mu \in \mathcal{P}(A)$. 
+    Wähle $R$ so groß, dass $\sup_{n\in\mathbb{N}}\mu(d^p(a_0, a)\mathds{1}_{\left\{d^p(a_0, a)>R\right\}})<1$
     \begin{align*}
-        \mathbb{E}_\mu(d^p(a_0, a)) &= \mathbb{E}_\mu(d^p(a_0, a)\mathds{1}_{B_R(a_0)}) + \mathbb{E}_\mu(d^p(a_0, a) \mathds{1}_{B_R(a_0)^c}) \\
-        &= \lim_{n\rightarrow \infty} \mathbb{E}_{\mu_n}(d^p(a_0, a) \mathds{1}_{B_R(a_0)}) + \lim_{m\rightarrow\infty}\mathbb{E}_{\mu}(m\wedge d^p(a_0, a) \mathds{1}_{B_R(a_0)^c}) \\
-        &= \lim_{n\rightarrow\infty} \mathbb{E}_{\mu_n}(d^p(a_0, a) \mathds{1}_{B_R(a_0)}) + \lim_{m\rightarrow \infty}\lim_{n\rightarrow\infty} \mathbb{E}_{\mu_n}(m\wedge d^p(a_0, a) \mathds{1}_{B_R(a_0)^c}) \\
-        &\leq \lim_{n\rightarrow\infty}\mathbb{E}_{\mu_n}(d^p(a_0, a)\mathds{1}_{B_R(a_0)}) + \varepsilon \\
-        &\leq \liminf_{n\rightarrow\infty} \mathbb{E}_{\mu_n}(d^p(a_0, a)) + \varepsilon
+        \mu(d^p(a_0, a)) &= \lim_{m\rightarrow\infty}\mu(d^p(a_0, a) \wedge m) = \lim_{m\rightarrow\infty}\lim_{n\rightarrow\infty} \mu_n(d^p(a_0, a)\wedge m) \\
+        &\leq \limsup_{n\rightarrow\infty} \mu_n(d^p(a_0, a)) \leq \limsup_{n\rightarrow\infty} \mu_n(d^p(a_0, a) \mathds{1}_{\left\{d^p(a_0, a)>R\right\}}) + R \leq R+1
     \end{align*}
-    Aus der vorletzten Ungleichung erhalten wir insbesondere $\mathbb{E}_{\mu}(d^p(a_0, a)) < \infty$, also $\mu \in \mathcal{P}_p(A)$. Umgekehrt ist 
-    \begin{align*}
-        \limsup_{n\rightarrow\infty}\mathbb{E}_{\mu_n}(d^p(a_0, a)) &\leq \lim_{n\rightarrow\infty} \mathbb{E}_{\mu_n}(d^p(a_0, a) \mathds{1}_{B_R(a_0)}) + \varepsilon \\
-        &= \mathbb{E}_{\mu}(d^p(a_0, a)\mathds{1}_{B_R(a_0)}) + \varepsilon \\
-        &\leq \mathbb{E}_{\mu}(d^p(a_0, a)) + \varepsilon
-    \end{align*}
-    Da $\varepsilon$ beliebig gewählt war, folgt $\mu_n \rightarrow \mu$ in $\mathcal{P}_p(A)$.
+    Somit gilt $\mu \in \mathcal{P}_p(\mathcal{A})$ und mit Lemma \ref{thm:conv_char} folgt die Behauptung.
 \end{proof}
+\begin{corollary}\label{thm:relatively_compact_marginales}
+Seien $(\mathcal{A}, d_\mathcal{A})$, $(\mathcal{B}, d_{\mathcal{B}})$ polnische Räume und $\Pi \subseteq \mathcal{P}_p(\mathcal{A} \times \mathcal{B})$. $\Pi$ ist relativ kompakt genau dann, wenn die Marginalien relativ kompakt sind.
+\end{corollary}
+\begin{proof}
+Sei $\Pi$ relativ kompakt, $(\pi_n)_{n\in\mathbb{N}} \subset \Pi$ mit erster Marginalie $(\mu_n)_{n\in\mathbb{N}}$. Für eine Testfunktion $f \in C(\mathcal{A})$ mit $p$-Wachstum gilt für die Abbildung $g: a,b \mapsto f(a)$ $g(a,b) \leq C\cdot (1+d^p(a_0, a)) \leq C\cdot (1+ d^p((a_0, b_0), (a, b)))$, also hat sie auch $p$-Wachstum aufgefasst in $C(\mathcal{A}\times \mathcal{B})$. Aus diesem Grund korrespondieren konvergente Teilfolgen von $(\pi_n)$ zu solchen von $(\mu_n)$ (und analog zu solchen von $(\nu_n)$).
+
+Nehme nun umgekehrt an, dass die ersten und zweiten Marginalien relativ kompakt sind. Dann sind sie straff, und nach Lemma \ref{thm:closed_couplings} ist auch die Menge aller Kopplungen straff, von der $\Pi$ eine Teilmenge ist. Sei nun $\varepsilon>0$ und wähle $\sqrt[p]{\frac{R}{2}}$ so groß, dass für $\varepsilon$ die uniforme Integrierbarkeit aus \ref{thm:prokhorov_in_pp} für die beiden Marginalien erfüllt wird. Sei $\pi \in \Pi$ mit Marginalien $(\mu,\nu)$. 
+Damit $d^p(a_0, a) + d^p(b_0, b)>R$ muss einer der Terme größer als $\frac{R}{2}$ sein, also
+\begin{align*}
+    &\int d^p(a_0, a) \mathds{1}_{\left\{d^p((a_0, b_0), (a,b))>R\right\}}\pi(da, db) \\
+    &\leq \int d^p(a_0, a) \left(\mathds{1}_{\left\{d^p(a_0,a)>\frac{R}{2}\right\}} + \mathds{1}_{\left\{d^p(a_0,a)\leq\frac{R}{2} \text{ und } d^p(b_0, b)>\frac{R}{2}\right\}}\right)\pi(da,db) \\
+    &\leq \int d^p(a_0, a) \mathds{1}_{\left\{d^p(a_0, a)>\frac{R}{2}\right\}} \mu(da) + \int d^p(b_0, b) \mathds{1}_{\left\{d^p(b_0, b)>\frac{R}{2}\right\}} \nu(db) < 2\varepsilon
+\end{align*}
+Mit den gleichen Überlegungen ist auch $\int d^p(b_0, b) \mathds{1}_{\left\{d^p((a_0, b_0), (a,b))\right\}}\pi(da,db) \leq 2\varepsilon$. Insgesamt erfüllt $\sqrt[p]{R}$ also die Bedingung für $4\varepsilon$ und da $\varepsilon>0$ beliebig war, ist $\Pi$ uniform $p$-integrierbar und damit relativ kompakt.
+
+\end{proof}
+Wir wollen Kompaktheit in $\FP_p$ über die Isometrie aus Lemma \ref{thm:isometric_fp_pz} von kompakten Mengen in $\mathcal{P}_p(\mathcal{Z}_1)$ erben. Um kompakte Mengen in diesen geschachtelten Räumen zu charakterisieren, ist das folgende Lemma (mit einem recht technischen Beweis) zentral. Der Beweis stammt aus \cite[Lemma 2.6]{Backhoff-Veraguas2019} und \cite[S. 178, Proposition 2.2]{SznitmanAlain-Sol2006Tipo}.
 \begin{lemma}\label{thm:intensity_compactness}
     Seien $\mathcal{A,B}$ polnische Räume. Wir betrachten die \emph{Intensitätsabbildung} 
-    $$\hat{I}: \mathcal{P}_p(\mathcal{A} \times \mathcal{P}_p(B)), \pi \mapsto \int \int \cdot \,\nu(db) \pi(da, d\nu)$$
+    $$\hat{I}: \mathcal{P}_p(\mathcal{A} \times \mathcal{P}_p(B))\rightarrow \mathcal{P}_p(\mathcal{A}\times\mathcal{B}), \pi \mapsto \int \int \cdot \,\nu(db) \pi(da, d\nu)$$
     Es sind äquivalent:
     \begin{enumerate}
         \item[(i)] $\Pi \subseteq \mathcal{P}_p(\mathcal{A}\times \mathcal{P}_p(\mathcal{B}))$ ist relativ kompakt.
@@ -47,7 +46,7 @@
     \end{enumerate}
 \end{lemma}
 \begin{proof}
-    Für die Richtung (i) $\Rightarrow$ (i) reicht es zu zeigen, dass $\hat{I}$ stetig ist. Für eine Folge $\pi_n \rightarrow \pi$ in $\mathcal{P}_p(\mathcal{A} \times \mathcal{P}_p(\mathcal{B}))$ müssen wir also zeigen, dass $\hat{I}(\pi_n) \rightarrow \hat{I}(\pi)$ schwach und ausgewertet an $d^p((a_0, \nu_0), \cdot)$. Schwache Konvergenz können wir nach dem Portmonteau-Theorem an gleichmäßig stetigen $f \in C_b(\mathcal{A} \times \mathcal{B})$ überprüfen. Für solche Funktionen ist das innere Integral
+    Für die Richtung (i) $\Rightarrow$ (ii) reicht es zu zeigen, dass $\hat{I}$ stetig ist. Für eine Folge $\pi_n \rightarrow \pi$ in $\mathcal{P}_p(\mathcal{A} \times \mathcal{P}_p(\mathcal{B}))$ müssen wir also zeigen, dass $\hat{I}(\pi_n) \rightarrow \hat{I}(\pi)$ schwach und ausgewertet an $d^p((a_0, b_0), \cdot)$. Schwache Konvergenz können wir nach dem Portmonteau-Theorem an gleichmäßig stetigen $f \in C_b(\mathcal{A} \times \mathcal{B})$ überprüfen. Für solche Funktionen ist das innere Integral
     $$(a, \nu) \mapsto \int f(a, b) \nu(db)$$
     beschränkt und stetig, da für $(a_n, \nu_n) \rightarrow (a, \nu)$ gilt
     \begin{align*}
@@ -55,15 +54,15 @@
         &\left|\int  f(a,b) \nu(db) - \int f(a,b) \nu_n(db) \right| \\
         &+\int \left|f(a, b) - f(a_n, b) \right|\nu_n(db)  
     \end{align*}
-    Der erste Term auf der rechten Seite konvergiert gegen 0 da $\nu_n \rightarrow \nu$ und der zweite da $f$ gleichmäßig stetig ist. Für einen fixierten Punkt $(a_0, b_0) \in \mathcal{A} \times \mathcal{B}$ ist das innere Integral
+    Der erste Term auf der rechten Seite konvergiert gegen 0, da $\nu_n \rightarrow \nu$ und der zweite, da $f$ gleichmäßig stetig ist. Für einen fixierten Punkt $(a_0, b_0) \in \mathcal{A} \times \mathcal{B}$ ist auch das innere Integral
     $$ (a, \nu) \mapsto \int d^p(a_0, a) +d^p(b_0, b) \nu(db)$$
     wieder mit der gleichen Argumentation stetig, da $d^p(b_0, b)$ stetig mit $p$-Wachstum ist (für den ersten Term) und gleichmäßig stetig (für den zweiten Term). Weiterhin ist $\int d^p(b_0, b)\nu(db) = \mathcal{W}_p^p(\nu, \delta_{b_0})$, die Funktion hat also $p$-Wachstum.
 
-    In beiden Fällen ist das innere Integral stetig und beschränkt bzw. mit $p$ Wachstum. Da $\pi_n \rightarrow \pi$ in $\mathcal{W}_p$ konvergiert also auch das gesamte Integral und $\hat{I}$ ist stetig.
+    In beiden Fällen ist das innere Integral stetig und beschränkt bzw. mit $p$ Wachstum. Falls $\pi_n \rightarrow \pi$ in $\mathcal{W}_p$ konvergiert, konvergiert also auch das gesamte Integral und insgesamt ist $\hat{I}$ stetig.
 
-    Für die Rückrichtung sei $\hat{I}(\Pi) \subset \mathcal{P}_p(\mathcal{A}\times \mathcal{B})$ relativ kompakt. An der zweiten Charakterisierung vom Satz von Prokhorov für $\mathcal{P}_p$, Satz \ref{thm:prokhorov_in_pp}, sieht man dass relative Kompaktheit auf einem Produktraum äquivalent zu relativer Kompaktheit der Marginalien ist. Die Marginalie in $\mathcal{A}$ stimmt bei beiden überein, hier ist also nichts zu zeigen. Wir betrachten also nun die zweite Marginalie von $\Pi$ und wollen das dritte Kriterium aus Satz \ref{thm:prokhorov_in_pp} überprüfen. Zunächst zeigen wir den zweiten Teil:
+    Für die Rückrichtung sei $\hat{I}(\Pi) \subset \mathcal{P}_p(\mathcal{A}\times \mathcal{B})$ relativ kompakt. Nach Korollar \ref{thm:relatively_compact_marginales} ist relative Kompaktheit äquivalent zu relativer Kompaktheit der Marginalien. Die Marginalie in $\mathcal{A}$ stimmt bei beiden überein, hier ist also nichts zu zeigen. Wir betrachten nun die zweite Marginalie von $\Pi$ und wollen das Kriterium aus Satz \ref{thm:prokhorov_in_pp} überprüfen. Zunächst zeigen wir den zweiten Teil:
     \begin{equation}\label{eq:52_0}
-        \forall \varepsilon > 0 \exists R>0: \sup_{\pi \in \Pi} \int \mathcal{W}_p(\nu, \delta_{b_0}) \mathds{1}_{\nu \notin B_R(\delta_{b_0})} < \varepsilon
+        \forall \varepsilon > 0 \exists R>0: \sup_{\pi \in \Pi} \int \mathcal{W}_p^p(\nu, \delta_{b_0}) \mathds{1}_{\left\{\nu \notin B_R(\delta_{b_0})\right\}} \pi(d\nu)< \varepsilon
     \end{equation}
     für ein fixes $b_0 \in \mathcal{B}$. Sei $\varepsilon > 0$. $\hat{I}(\Pi)$ ist relativ kompakt, insbesondere ist 
     $$K:=\sup_{\pi \in \Pi} \int d^p(b_0, b) \hat{I}(\pi)(db) = \sup_{\pi \in \Pi} \int \mathcal{W}_p^p(\delta_{b_0}, \nu) \pi(d\nu) < \infty$$
@@ -71,19 +70,19 @@
     \begin{equation}\label{eq:52_1}
         \sup_{\pi \in \Pi} \int_{B_r(b_0)^c} d^p(b_0, b) \hat{I}(\pi)(db) = \sup_{\pi \in \Pi} \int \int_{B_r(b_0)^c}d^p(b_0, b) \nu(db) \pi(d\nu) < \frac{\varepsilon}{2}
     \end{equation}
-    Für die Wahl $R:=\frac{2r^pK}{\varepsilon}$ erhalten wir 
-    $$\sup_{\pi \in \Pi} \pi(\nu \notin B_R(\delta_{b_0})) \leq \sup_{\pi \in \Pi} \frac{1}{R} \int_{B_R(\delta_{b_0})^c} \mathcal{W}_p^p(\nu, \delta_{b_0})\pi(d\nu) \leq \frac{K}{R}$$
-    und 
+    Für die Wahl $R:=\frac{2r^pK}{\varepsilon}$ (und mindestens 1) erhalten wir 
+    $$\sup_{\pi \in \Pi} \pi(B_R(\delta_{b_0})^c) \leq \sup_{\pi \in \Pi} \frac{1}{R} \int_{B_R(\delta_{b_0})^c} \mathcal{W}_p^p(\nu, \delta_{b_0})\pi(d\nu) \leq \frac{K}{R}$$
+    und damit
     \begin{equation}\label{eq:52_2}
         \sup_{\pi \in \Pi} \int_{B_R(\delta_{b_0})^c} \int_{B_r(b_0)} d^p(b, b_0)\nu(db)\pi(d\nu) \leq \sup_{\pi\in\Pi} \pi(B_R(\delta_{b_0})^c) r^p \leq \frac{\varepsilon}{2}
     \end{equation}
-    Indem wir die Gleichungen \ref{eq:52_1} und \ref{eq:52_2} addieren erhalten wir Gleichung \ref{eq:52_0}. Zu zeigen bleibt, dass $\Pi$ straff ist.
+    Indem wir die Gleichungen \ref{eq:52_1} und \ref{eq:52_2} addieren erhalten wir Gleichung \ref{eq:52_0}. Zu zeigen bleibt, dass $\Pi$ straff ist (bzw. die zweiten Marginalien von $\Pi$).
 
-    Wir gehen dafür in zwei Schritten vor: Zuerst finden wir eine straffe Teilmenge von $\mathcal{P}_p(\mathcal{B})$ die beliebig groß wird, und anschließend finden wir daraus eine Teilmenge die auch gleichmäßig die $p$-ten Momente integriert, also kompakt ist.
+    Wir gehen dafür in zwei Schritten vor: Zuerst finden wir eine straffe Teilmenge von $\mathcal{P}_p(\mathcal{B})$, die beliebig groß wird, und anschließend finden wir daraus eine Teilmenge, die auch gleichmäßig die $p$-ten Momente integriert, also kompakt ist.
 
     Zunächst zum ersten Schritt: $\hat{I}(\Pi)$ ist straff, schreibe $K_\varepsilon$ für eine kompakte Menge $K_\varepsilon \subseteq \mathcal{B}$ mit $\sup_{\pi \in \Pi} \hat{I}(\pi)(K_\varepsilon^c) < \varepsilon$. Für $\varepsilon, \eta>0$ und $\pi \in \Pi$ gilt
     \begin{align*}
-        \pi\left( \nu \in \mathcal{P}_p(\mathcal{B})\vert \nu(K_{\varepsilon\eta}^c) \geq \eta\right) &\leq \frac{1}{\eta} \int \nu(K_{\varepsilon\eta}^c) \pi(d\nu) \\
+        \pi\left( \nu \in \mathcal{P}_p(\mathcal{B}), \nu(K_{\varepsilon\eta}^c) \geq \eta\right) &\leq \frac{1}{\eta} \int \nu(K_{\varepsilon\eta}^c) \pi(d\nu) \\
         &= \frac{1}{\eta} \hat{I}(\pi)(K_{\varepsilon\eta}^c) \\
         &\leq \varepsilon
     \end{align*}
@@ -91,24 +90,24 @@
     $$\tilde{K}_\varepsilon := \bigcap_{k\geq 1} \left\{ \nu \in \mathcal{P}_p(\mathcal{B}): \nu(K_{\varepsilon 2^{-k} \frac{1}{k}}^c) < \frac{1}{k}\right\}$$
     für alle $\pi \in \Pi$:
     \begin{align*}
-        \pi(\tilde{K}_\varepsilon^c) &= \pi\left(\bigcup_{k\geq 1}\left\{\nu \in \mathcal{P}_p(\mathcal{B}) \vert \nu(K_{\varepsilon\frac{2^-k}{k}}^c) \geq \frac{1}{k}\right\} \right) \\
+        \pi(\tilde{K}_\varepsilon^c) &= \pi\left(\bigcup_{k\geq 1}\left\{\nu \in \mathcal{P}_p(\mathcal{B}): \nu(K_{\varepsilon\frac{2^{-k}}{k}}^c) \geq \frac{1}{k}\right\} \right) \\
         &\leq \sum_{k\geq 1} \frac{\varepsilon}{2^k} \\
         &= \varepsilon
     \end{align*}
     und die Menge $\tilde{K}_\varepsilon$ ist straff. 
 
-    Nun zum zweiten Schritt. Für $\varepsilon>0$ können wir also $K_\varepsilon \subset \mathcal{P}_p(\mathcal{B})$ straff wählen mit $\pi(K_\varepsilon^c)<\varepsilon$ für alle $\pi \in \Pi$.
+    Nun zum zweiten Schritt. Für $\varepsilon>0$ können wir nach dem ersten Schritt $K_\varepsilon \subset \mathcal{P}_p(\mathcal{B})$ straff wählen mit $\pi(K_\varepsilon^c)<\varepsilon$ für alle $\pi \in \Pi$.
     Es gilt für alle $\pi \in \Pi$ für $n\in\mathbb{N}$ und $R_n>0$
     $$\pi\left(\left\{ \nu: \int_{\{b: d^p(b,b_0)>R_n\}} d^p(b_0, b) \nu(db) \geq \frac{1}{n}\right\}\right) \leq n \int_{\{b:d^p(b,b_0)>R_n\}} d^p(b, b_0) \hat{I}(\pi)(db)$$
-    Die rechte Seite wird beliebig klein für große $R_n$, wir können also für $n\in \mathbb{N}$ $R_n$ so groß wählen dass
-    $$\sup_{\pi \in \Pi} \pi\left(\left\{ \nu: \int_{b:\{d^p(b,b_0)>R_n\}} d^p(b_0, b) \nu(db) \geq \frac{1}{n}\right\}\right) \leq \frac{\varepsilon}{2^n}$$
+    Die rechte Seite wird beliebig klein für große $R_n$, wir können also für $n\in \mathbb{N}$ $R_n$ so groß wählen, dass
+    $$\sup_{\pi \in \Pi} \pi\left(\left\{ \nu: \int_{\{b:d^p(b,b_0)>R_n\}} d^p(b_0, b) \nu(db) \geq \frac{1}{n}\right\}\right) \leq \frac{\varepsilon}{2^n}$$
     Die Menge
     $$\tilde{K}_\varepsilon := \left\{ \nu \in K_\varepsilon: \int_{\left\{b: d^p(b, b_0)>R_n\right\}}d^p(b, b_0) \nu(db) < \frac{1}{n} \text{ für alle }n \in \mathbb{N}\right\}$$
-    erfüllt die zweite Bedingung von Punkt (iii) aus Satz \ref{thm:prokhorov_in_pp} und ist straff als Teilmenge von $K_\varepsilon$, somit ist ihr Abschluss kompakt. Weiterhin gilt für alle $\pi \in \Pi$
+    ist uniform $p$-integrierbar und straff als Teilmenge von $K_\varepsilon$, somit ist ihr Abschluss kompakt. Weiterhin gilt für alle $\pi \in \Pi$
     $$\pi(\tilde{K}_\varepsilon) \geq \pi(K_\varepsilon) - \sum_{n\in\mathbb{N}} \frac{\varepsilon}{2^n} \geq 1 - 2\varepsilon$$
     Insgesamt folgt die Behauptung.
 \end{proof}
-\begin{theorem}
+\begin{theorem}\label{thm:compactness_characterization}
     Eine Teilmenge $\Pi \subseteq \FP_p$ ist relativ kompakt genau dann, wenn $\{\mathcal{L}(X): \mathbb{X} \in \Pi\}$ relativ kompakt in $\mathcal{P}_p(\mathcal{X})$ ist.
 \end{theorem}
 \begin{proof}
@@ -116,13 +115,13 @@
     $$\hat{I}\left(\mathcal{L}(X_{1:t-1}, \ip_t(\mathbb{X}))\right) = \hat{I}\left(\mathcal{L}(X_{1:t}, \ip_t^+(\mathbb{X}))\right) = \mathcal{L}(X_{1:t}, \ip_{t+1}(\mathbb{X}))$$
     denn für $A \in \mathcal{B}(\mathcal{X}_{1:t})$ und $B \in \mathcal{B}(\mathcal{Z}_{t+1})$ gilt 
     \begin{align*}
-        \int &\mathds{1}_{x_{1:t} \in A} \mathds{1}_{z_{t+1} \in B} \hat{I}(\mathcal{L}(X_{1:t}, \ip_t^+(\mathbb{X})))(dx_{1:t}, dz_{t+1}) \\
-        &= \int \int \mathds{1}_{x_{1:t} \in A} \mathds{1}_{z_{t+1} \in B} z_t^+(dz_{t+1}) \mathcal{L}(X_{1:t}, \ip_t^+(\mathbb{X}))(dx_{1:t}, dz_t^+) \\
-        &= \int \int \mathds{1}_{X_{1:t}(\omega)\in A} \mathds{1}_{z_{t+1} \in B} \ip_t^+(\mathbb{X})(\omega)(dz_{t+1}) \mathbb{P}^\mathbb{X}(d\omega) \\
+        \int &\mathds{1}_{\{x_{1:t} \in A\}} \mathds{1}_{\{z_{t+1} \in B\}} \hat{I}(\mathcal{L}(X_{1:t}, \ip_t^+(\mathbb{X})))(dx_{1:t}, dz_{t+1}) \\
+        &= \int \int \mathds{1}_{\{x_{1:t} \in A\}} \mathds{1}_{\{z_{t+1} \in B\}} z_t^+(dz_{t+1}) \mathcal{L}(X_{1:t}, \ip_t^+(\mathbb{X}))(dx_{1:t}, dz_t^+) \\
+        &= \int \int \mathds{1}_{\{X_{1:t}(\omega)\in A\}} \mathds{1}_{\{z_{t+1} \in B\}} \ip_t^+(\mathbb{X})(\omega)(dz_{t+1}) \mathbb{P}^\mathbb{X}(d\omega) \\
         &= \left(\mathbb{P}^{\mathbb{X}} \otimes \mathcal{L}(\ip_{t+1}(\mathbb{X}) \vert \mathcal{F}_t^\mathbb{X})\right)(X_{1:t} \in A, z_{t+1} \in B) \\ 
         &= \mathbb{P}^\mathbb{X}(X_{1:t} \in A, \ip_{t+1}(\mathbb{X}) \in B)
     \end{align*}
-    wobei wir in der letzten Umformung benutzt haben, dass $\{X_{1:t} \in A\} \in \mathcal{F}_t^\mathbb{X}$ da der Prozess adaptiert ist. Mit Lemma \ref{thm:intensity_compactness} sind also für $1 \leq t < N$ äquivalent:
+    wobei wir in der letzten Umformung benutzt haben, dass $\{X_{1:t} \in A\} \in \mathcal{F}_t^\mathbb{X}$, da der Prozess adaptiert ist. Mit Lemma \ref{thm:intensity_compactness} sind also für $1 \leq t < N$ äquivalent:
     \begin{itemize}
         \item $\left\{ \mathcal{L}(X_{1:t-1}, \ip_t(\mathbb{X})) \vert \mathbb{X} \in \Pi\right\}$ ist relativ kompakt. 
         \item $\left\{ \mathcal{L}(X_{1:t}, \ip_{t+1}(\mathbb{X})) \vert \mathbb{X} \in \Pi\right\}$ ist relativ kompakt. 
@@ -132,7 +131,23 @@
         \item $\left\{\mathcal{L}(\ip_1(\mathbb{X})) \vert \mathbb{X} \in \Pi\right\}$ ist relativ kompakt.
         \item $\left\{ \mathcal{L}(X_{1:N-1}, \ip_N(\mathbb{X})) \vert \mathbb{X} \in \Pi \right\} = \left\{ \mathcal{L}(X_{1:N}) \vert \mathbb{X} \in \Pi \right\}$ ist relativ kompakt.
     \end{itemize}
-    Da $\Pi$ relativ kompakt ist genau dann wenn die erste dieser Mengen relativ kompakt ist folgt die Behauptung.
+    Da $\Pi$ relativ kompakt ist genau dann, wenn die erste dieser Mengen relativ kompakt ist, folgt die Behauptung.
+\end{proof}
+
+\begin{proposition}\label{thm:awp_convergence_char}
+Seien $(\mathbb{X}_n)_{n\in\mathbb{N}} \subset \mathcal{FP}_p$ und $\mathbb{X} \in \mathcal{FP}_p$. Dann sind äquivalent:
+\begin{enumerate}[(i)] 
+    \item $\mathbb{X}_n \rightarrow \mathbb{X}$ bezüglich $\mathcal{AW}_p$.
+    \item $\mathbb{E}(f(\mathbb{X}_n)) \rightarrow \mathbb{E}(f(\mathbb{X}))$ für alle $f \in \AF$ und $\mathcal{L}(X^n) \rightarrow \mathcal{L}(X)$ bezüglich $\mathcal{W}_p$.
+    \item $\mathbb{E}(f(\mathbb{X}_n)) \rightarrow \mathbb{E}(f(\mathbb{X}))$ für alle $f \in \AF$ und die $p$-ten Momente von $\mathcal{L}(X^n)$ konvergieren gegen die von $\mathcal{L}(X)$. 
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+$\AF[0]$ enthält bereits alle Funktionen $C_b(\mathcal{X})$. Aus Punkt (iii) folgt also die schwache Konvergenz von $\mathcal{L}(X^n)$ gegen $\mathcal{L}(X)$, und mit Lemma \ref{thm:conv_char} folgt zusammen mit der Konvergenz der $p$-ten Momente die Konvergenz bezüglich $\mathcal{W}_p$, welche umgekehrt die Konvergenz der $p$-ten Momente impliziert. Somit sind (ii) und (iii) äquivalent. 
+
+Direkt aus der Definition der (adaptierten und klassischen) Wasserstein-Metrik sieht man, dass $\mathcal{W}_p(X^n, X) \leq \mathcal{AW}_p(\mathbb{X}_n, \mathbb{X})$, daher folgt der zweite Punkt von (ii) aus (i). Weiter gilt nach Proposition \ref{thm:adapted_continuity} für $f\in\AF$ $\mathcal{L}(f(\mathbb{X}_n)) \rightarrow \mathcal{L}(f(\mathbb{X}))$. Da $\id$ stetig mit $p$-Wachstum ist folgt hieraus $\mathbb{E}(f(\mathbb{X}_n)) \rightarrow \mathbb{E}(f(\mathbb{X}))$ und insgesamt folgt (ii) aus (i).
+
+Gelte nun (ii). $\left\{ \mathcal{L}(X^n): n \in \mathbb{N}\right\}$ ist konvergent, also relativ kompakt. Nach Satz \ref{thm:compactness_characterization} ist nun $\left\{\mathbb{X}_n: n \in \mathbb{N}\right\}$ relativ kompakt. Für eine Teilfolge $\left(\mathbb{X}_{n_k}\right)_{k\in\mathbb{N}}$ konvergent gegen ein $\widetilde{\mathbb{X}} \in \mathcal{FP}_p$ gilt $\mathbb{E}(f(\mathbb{X})) = \lim_{k} \mathbb{E}(f(\mathbb{X}_{n_k})) = \mathbb{E}(f(\widetilde{\mathbb{X}}))$ für Funktionen $f \in \AF$, da (i) $\Rightarrow$ (ii). Nach Satz \ref{thm:awp_0_characterization} folgt $\mathcal{AW}_p(\mathbb{X}, \widetilde{\mathbb{X}})=0$ und damit $\mathbb{X}_{n_k} \rightarrow \mathbb{X}$. Nun hat also jede Teilfolge $\left(\mathbb{X}_{n_k}\right)_{k\in\mathbb{N}}$ eine Teilfolge $\left(\mathbb{X}_{n_{k_l}}\right)_{l\in\mathbb{N}}$ mit $\mathcal{AW}_p(\mathbb{X}, \mathbb{X}_{n_{k_l}}) \rightarrow 0$. Hieraus folgt bereits $\mathcal{AW}_p(\mathbb{X}_n, \mathbb{X}) \rightarrow 0$ und damit die Behauptung.
 \end{proof}
 
 \subsection{Optimal Stopping}
@@ -140,42 +155,42 @@ Es sei $c: \mathcal{X} \times \{1,...,N\} \rightarrow \mathbb{R}$ eine Borel-mes
 \begin{equation}
     v_c(\mathbb{X}) := \inf\limits_{\tau \in \ST(\mathbb{X})} \mathbb{E}(c_\tau(X))
 \end{equation}
-für $\mathbb{X} \in \mathcal{FP}_p$, wobei wir mit $\ST(\mathbb{X})$ die Menge aller $\left(\mathcal{F}_t^\mathbb{X}\right)_{t=1}^N$-Stoppzeiten mit Werten in $\{1,...,N\}$ bezeichnen. In Beispiel \ref{thm:adapted_examples} haben wir bereits gesehen, dass der Wert von $v_c(\mathbb{X})$ nicht von der Wahl eines Repräsentanten in $\FP_p$ abhängt.
+für $\mathbb{X} \in \mathcal{FP}_p$, wobei wir mit $\ST(\mathbb{X})$ die Menge aller $\left(\mathcal{F}_t^\mathbb{X}\right)_{t=1}^N$-Stoppzeiten mit Werten in $\{1,...,N\}$ bezeichnen. In Beispiel \ref{thm:adapted_examples} haben wir bereits gesehen, dass der Wert von $v_c(\mathbb{X})$ nicht von der Wahl eines Repräsentanten in $\FP_p$ abhängt. Tatsächlich ist $v_c(\mathbb{X})$ aber sogar stetig bezüglich $\mathcal{AW}_p$ (sofern $c$ lipschitzstetig ist):
 
-\begin{corollary}
-    Seien $\mathbb{X,Y} \in \FP_p$ sodass $c_{1:N}(X)$ und $c_{1:N}(Y)$ integrierbar sind. Dann gilt
-    $$v_c(\mathbb{X}) - v_c(\mathbb{Y}) \leq \inf_{\pi \in \cplc(\mathbb{X,Y})} \mathbb{E}_\pi \left[\max_{1\leq t\leq N} |c_t(X) - c_t(Y)\right] $$
-    Insbesondere gilt: Falls $c_t$ für jedes $1\leq t \leq N$ $L$-Lipschitzstetig ist, so gilt 
+\begin{proposition}
+    Seien $\mathbb{X,Y} \in \FP_p$, sodass $c_{1:N}(X)$ und $c_{1:N}(Y)$ integrierbar sind. Dann gilt
+    $$v_c(\mathbb{X}) - v_c(\mathbb{Y}) \leq \inf_{\pi \in \cplc(\mathbb{X,Y})} \mathbb{E}_\pi \left[\max_{1\leq t\leq N} |c_t(X) - c_t(Y)|\right] $$
+    Insbesondere gilt: Falls $c_t$ für jedes $1\leq t \leq N$ $L$-lipschitzstetig ist, so gilt 
     $$|v_c(\mathbb{X}) - v_c(\mathbb{Y})| \leq L \cdot \mathcal{AW}_1(\mathbb{X,Y}) \quad \text{ für alle } \mathbb{X,Y} \in \FP_1$$
-\end{corollary}
+\end{proposition}
 \begin{proof}
-Wir besprechen zunächst die zweite Folgerung. Falls alle $c_t$ $L$-Lipschitzstetig sind, so sind insbesondere $c_t(X)$ integrierbar für $\mathbb{X} \in \FP_1$: Fixiere $a_{1:N} \in \mathcal{X}$, dann ist 
-$$\mathbb{E}(|c_t(X)| - |c_t(a_{1:N}|)) \leq \mathbb{E}(|c_t(X) - c_t(a_{1:N})|) \leq L \mathbb{E}(d(X, a_{1:N})) < \infty$$
-da $X \in \FP_1$. Antikausalität ist Kausalität mit vertauschten Rollen. Damit folgt aus der ersten Gleichung 
+Wir besprechen zunächst die zweite Folgerung. Falls alle $c_t$ $L$-lipschitzstetig sind, so sind insbesondere $c_t(X)$ integrierbar für $\mathbb{X} \in \FP_1$: Fixiere $a_{1:N} \in \mathcal{X}$, dann ist 
+$$\mathbb{E}(|c_t(X)| - |c_t(a_{1:N})|) \leq \mathbb{E}(|c_t(X) - c_t(a_{1:N})|) \leq L \cdot\mathbb{E}(d(X, a_{1:N})) < \infty$$
+Weiter ist Antikausalität Kausalität mit vertauschten Rollen. Aus der ersten Gleichung folgt also
 \begin{align*}
-    |v_c(\mathbb{X}) - v_c(\mathbb{Y}) | &\leq \inf_{\pi \in \cplbc(\mathbb{X,Y})} \mathbb{E}_\pi(\max_{1\leq t\leq N}|c_t(X) - c_t(Y)|) \\
-    &\leq \inf_{\pi \in \cplbc(\mathbb{X,Y})} \mathbb{E}_\pi(\max_{1\leq t\leq N}L\cdot d(X,Y)) \\
-    &= L \cdot \inf_{\pi \in \cplbc(\mathbb{X,Y})} \mathbb{E}_\pi(d(X,Y)) \\
-    &= L\cdot \mathcal{AW}_1(\mathbb{X,Y})
+    &|v_c(\mathbb{X}) - v_c(\mathbb{Y}) | \leq \inf_{\pi \in \cplbc(\mathbb{X,Y})} \mathbb{E}_\pi(\max_{1\leq t\leq N}|c_t(X) - c_t(Y)|) \\
+    &\leq \inf_{\pi \in \cplbc(\mathbb{X,Y})} \mathbb{E}_\pi(\max_{1\leq t\leq N}L\cdot d(X,Y)) 
+    = L \cdot \inf_{\pi \in \cplbc(\mathbb{X,Y})} \mathbb{E}_\pi(d(X,Y)) 
+    = L\cdot \mathcal{AW}_1(\mathbb{X,Y})
 \end{align*}
  
 Nun zur ersten Aussage. Sei dazu $\varepsilon > 0$ und $\tau^*\in \ST(\mathbb{Y})$ eine Stoppzeit mit $\mathbb{E}(c_{\tau^*}(Y)) \leq v_c(\mathbb{Y}) + \varepsilon$. Sei $\pi \in \cplc(\mathbb{X,Y})$ und für $u \in [0,1]$ setze 
 $$\sigma_u := \min \left\{ t \in \{1,...,N\}: \pi\left(\tau^*\leq t \vert \mathcal{F}_{N,0}^\mathbb{X,Y}\right) \geq u\right\} $$
-$\{\tau^* \leq t\}$ ist $\mathcal{F}_t^\mathbb{Y}$-messbar, mit Lemma \ref{thm:causality_characterization} ist also $\pi\left( \tau^* \leq t \vert \mathcal{F}_{N,0}^\mathbb{X,Y}\right) = \pi\left( \tau^* \leq t \vert \mathcal{F}_{t,0}^\mathbb{X,Y} \right)$ bereits $\mathcal{F}_t^\mathbb{X}$-messbar. Damit ist $\sigma_u \in \ST(\mathbb{X})$ (da insbesondere auch $\sigma_u \leq N$ fast sicher). Daraus folgt 
+$\{\tau^* \leq t\}$ ist $\mathcal{F}_t^\mathbb{Y}$-messbar, mit Lemma \ref{thm:causality_characterization} ist also $\pi\left( \tau^* \leq t \vert \mathcal{F}_{N,0}^\mathbb{X,Y}\right) = \pi\left( \tau^* \leq t \vert \mathcal{F}_{t,0}^\mathbb{X,Y} \right)$ bereits $\mathcal{F}_t^\mathbb{X}$-messbar. Damit ist $\sigma_u \in \ST(\mathbb{X})$ (da insbesondere auch $\sigma_u \leq N$ fast sicher). Es folgt 
 \begin{align*}
-    v_c(\mathbb{X}) &\leq \inf_{u \in [0,1]} \mathbb{E}_\pi(c_{\sigma_u}(X)) \\
-    &\leq \int_0^1 \mathbb{E}_\pi(c_{\sigma_u}(X)) du \\
-    &= \sum_{t=0}^N \int_0^1 \mathbb{E}_\pi(c_t(X) \mathds{1}_{\sigma_u = t}) du\\
-    &= \sum_{t=0}^N \int_0^1 \mathbb{E}_\pi(c_t(X) \mathds{1}_{\pi(\tau^*\leq t-1 \mathcal{F}_{N,0}^\mathbb{X,Y}) < u \leq \pi(\tau^*\leq t \vert \mathcal{F}_{N,0}^\mathbb{X,Y})}) du \\
-    &= \sum_{t=0}^N \mathbb{E}_\pi\left[c_t(X) \int_0^1 \mathds{1}_{\pi(\tau^*\leq t-1 \mathcal{F}_{N,0}^\mathbb{X,Y}) < u \leq \pi(\tau^*\leq t \vert \mathcal{F}_{N,0}^\mathbb{X,Y})} du  \right] \\ 
+    v_c(\mathbb{X}) &\leq \inf_{u \in [0,1]} \mathbb{E}_\pi(c_{\sigma_u}(X)) 
+    \leq \int_0^1 \mathbb{E}_\pi(c_{\sigma_u}(X)) du 
+    = \sum_{t=0}^N \int_0^1 \mathbb{E}_\pi(c_t(X) \mathds{1}_{\{\sigma_u = t\}}) du\\ 
+    &= \sum_{t=0}^N \int_0^1 \mathbb{E}_\pi\left[c_t(X) \mathds{1}_{\{\pi(\tau^*\leq t-1 \vert \mathcal{F}_{N,0}^\mathbb{X,Y}) < u \leq \pi(\tau^*\leq t \vert \mathcal{F}_{N,0}^\mathbb{X,Y})\}}\right] du \\
+    &= \sum_{t=0}^N \mathbb{E}_\pi\left[c_t(X) \int_0^1 \mathds{1}_{\{\pi(\tau^*\leq t-1 \vert \mathcal{F}_{N,0}^\mathbb{X,Y}) < u \leq \pi(\tau^*\leq t \vert \mathcal{F}_{N,0}^\mathbb{X,Y})\}} du  \right] \\ 
     &= \sum_{t=0}^N \mathbb{E}_\pi\left[c_t(X) \pi\left(t-1 < \tau^* \leq t \vert \mathcal{F}_{N,0}^\mathbb{X,Y}\right) \right]  \\
-    &= \sum_{t=0}^N \mathbb{E}_\pi\left[ c_{t}(X) \pi(\tau^*=t \vert \mathcal{F}_{N,0}^\mathbb{X,Y})\right] \\
-    &= \sum_{t=0}^N \mathbb{E}_\pi\left[ c_t(X) \pi(\tau^*=t)\right] \\ 
-    &= \mathbb{E}_\pi(c_{\tau^*}(X))
+    &= \sum_{t=0}^N \mathbb{E}_\pi\left[ c_{t}(X) \mathbb{E}_\pi(\mathds{1}_{\tau^*=t} \vert \mathcal{F}_{N,0}^\mathbb{X,Y})\right] 
+    = \sum_{t=0}^N \mathbb{E}_\pi\left[ c_t(X) \mathds{1}_{\tau^*=t}\right] 
+    = \mathbb{E}_\pi(c_{\tau^*}(X))
 \end{align*}
-Für die vorletzte Gleichung haben wir benutzt, dass $c_t(X)$ messbar bezüglich $\mathcal{F}_{N,0}^\mathbb{X,Y}$ ist. Aus dieser Gleichung, zusammen mit der Wahl von $\tau^* \in \ST(\mathbb{Y})$ mit $\mathbb{E}_\pi(c_{\tau^*}(Y)) \leq v_c(\mathbb{Y}) + \varepsilon$, erhalten wir
+Aus dieser Ungleichung, zusammen mit der Wahl von $\tau^* \in \ST(\mathbb{Y})$ mit $\mathbb{E}_\pi(c_{\tau^*}(Y)) \leq v_c(\mathbb{Y}) + \varepsilon$, erhalten wir
 $$v_c(\mathbb{X}) - v_c(\mathbb{Y}) \leq \mathbb{E}_\pi(c_{\tau^*}(X)) - \mathbb{E}_\pi(c_{\tau^*}(Y)) + \varepsilon \leq \mathbb{E}_\pi\left[ \max_{1\leq t\leq N} |c_t(X) - c_t(Y)| \right] + \varepsilon$$
-Da $\varepsilon>0$ und $\pi \in \cplc(\mathbb{X,Y})$ beliebig gewählt wurden folgt die Behauptung.
+Da $\varepsilon>0$ und $\pi \in \cplc(\mathbb{X,Y})$ beliebig gewählt wurden, folgt die Behauptung.
 \end{proof}
 
 \subsection{Martingale}
@@ -185,12 +200,12 @@ In diesem Abschnitt sei $\mathcal{X}_t := \mathbb{R}^d, 1\leq t \leq N$ und metr
     $$\mathcal{M}_p := \{\mathbb{X} \in \FP_p: \mathbb{X} \text{ ist ein Martingal} \}$$
     ist abgeschlossen bezüglich $\mathcal{AW}_p$.
 \end{proposition}
-Wenn $\mathcal{X}_t$ stattdessen eine beschränkte Teilmenge von $\mathbb{R}^d$ wäre, folgt diese Proposition direkt aus Beispiel \ref{thm:adapted_examples} und Proposition \ref{thm:adapted_continuity}. Den allgemeinen Fall zeigen wir über direkte Kopplungen.
+Wenn $\mathcal{X}_t$ stattdessen eine beschränkte Teilmenge von $\mathbb{R}^d$ wäre, folgt diese Proposition direkt aus Beispiel \ref{thm:adapted_examples} und Proposition \ref{thm:adapted_continuity} (da wir in Beispiel \ref{thm:adapted_examples} die $g_m$ nicht abschneiden müssten). Den allgemeinen Fall zeigen wir über ein direktes Kopplungsargument.
 % TODO: Huesmann fragen ob das Argument auch allgemein funktioniert
 \begin{proof}
     Sei $(\mathbb{X}^n)_{n\in\mathbb{N}} \subset \FP_p$ eine Folge von Martingalen und konvergent gegen $\mathbb{X} \in \FP_p$. Sei $\pi \in \cplbc(\mathbb{X}^n, \mathbb{X})$ und $1\leq t\leq s \leq N$. 
     Nach Lemma \ref{thm:causality_characterization} gilt (da $X_s$ $\mathcal{F}_N^\mathbb{X}$-messbar ist)
-    $$\mathbb{E}_\pi(X_s \vert \mathcal{F}_t^\mathbb{X}) = \mathbb{E}_\pi(X_s \vert \mathcal{F}_{t,t}^{\mathbb{X}, \mathbb{X}^n}) \text{ und } \mathbb{E}_\pi(X_s^n \vert \mathcal{F}_t^{\mathbb{X}, \mathbb{X}^n}) = \mathbb{E}_\pi(X_s^n \vert \mathcal{F}_t^{\mathbb{X}^n}) = X_t^n $$
+    $$\mathbb{E}_\pi(X_s \vert \mathcal{F}_t^\mathbb{X}) = \mathbb{E}_\pi(X_s \vert \mathcal{F}_{t,t}^{\mathbb{X}, \mathbb{X}^n}) \text{ und } \mathbb{E}_\pi(X_s^n \vert \mathcal{F}_{t,t}^{\mathbb{X}, \mathbb{X}^n}) = \mathbb{E}_\pi(X_s^n \vert \mathcal{F}_t^{\mathbb{X}^n}) = X_t^n $$
     Die letzte Gleichung gilt, da $\mathbb{X}^n$ ein Martingal ist. Setze $\Delta^n := (X_t^n - X_t) + (X_s - X_s^n)$, dann gilt (da $X_t$ und $X_t^n$ messbar bezüglich $\mathcal{F}_{t,t}^{\mathbb{X}, \mathbb{X}_n}$ sind)
     \begin{align*}
         \mathbb{E}\left[ \left|X_t - \mathbb{E}[X_s \vert \mathcal{F}_t^\mathbb{X}] \right|\right] &= \mathbb{E}_\pi\left[\left|X_t^n - \mathbb{E}_\pi\left[ X_s^n+ \Delta^n \vert \mathcal{F}_{t,t}^{\mathbb{X}, \mathbb{X}^n}\right] \right| \right] \\
@@ -202,7 +217,7 @@ Wenn $\mathcal{X}_t$ stattdessen eine beschränkte Teilmenge von $\mathbb{R}^d$ 
         &\leq \mathbb{E}_\pi\left[|X_t^n - X_t|^p \right]^{\frac{1}{p}} + \mathbb{E}_\pi\left[|X_s^n - X_s|^p \right]^{\frac{1}{p}} \\
         &\leq 2\mathbb{E}_\pi \left[ d^p(X^n, X) \right]^\frac{1}{p}
     \end{align*}
-    Da $\pi \in \cplbc(\mathbb{X}, \mathbb{X}^n)$ beliebig war, wird $\mathbb{E}\left[X_t - \mathbb{E}[X_s \vert \mathcal{F}_t^\mathbb{X}] \right]$ beschränkt durch \\ $2\mathcal{AW}_p(\mathbb{X}^n, \mathbb{X})$. Da dieser Term gegen $0$ konvergiert ist $\mathbb{X}$ ein Martingal. 
+    Da $\pi \in \cplbc(\mathbb{X}, \mathbb{X}^n)$ beliebig war, wird $\mathbb{E}\left[X_t - \mathbb{E}[X_s \vert \mathcal{F}_t^\mathbb{X}] \right]$ beschränkt durch \\ $2\mathcal{AW}_p(\mathbb{X}^n, \mathbb{X})$. Da dieser Term gegen $0$ konvergiert, ist $\mathbb{X}$ ein Martingal. 
 \end{proof}
 \begin{corollary}
     Seien $\mu_1,...,\mu_N \in \mathcal{P}_p(\mathbb{R}^d)$. Die Menge von Martingalen mit festgelegten Marginalien $\mu_{1:N}$
@@ -210,26 +225,18 @@ Wenn $\mathcal{X}_t$ stattdessen eine beschränkte Teilmenge von $\mathbb{R}^d$ 
     ist kompakt bezüglich $\mathcal{AW}_p$.
 \end{corollary}
 \begin{proof}
-    Für eine Folge $(\mathbb{X}^n)_{n\in \mathbb{N}} \subset \mathcal{M}_p(\mu_{1:N})$ konvergent gegen $\mathbb{X} \in \FP_p$ gilt nach der vorherigen Proposition $\mathbb{X} \in \mathcal{M}_p$. Die adaptierte Wassersteindistanz ist äquivalent zur Wassersteindistanz von $\mathcal{L}(X_{1:N})$ bis darauf, dass sie weniger Mengen für das Infimum zulässt. Somit ist die Wassersteindistanz beschränkt durch die adaptierte Wassersteindistanz und wir erhalten $X^n_{1:N} \rightarrow X_{1:N}$ bezüglich $\mathcal{W}_p$, also insbesondere schwach. Nach Lemma \ref{thm:closed_couplings} konvergieren auch die Marginalien der Verteilung und die Grenzwerte sind eindeutig $\mu_{1:N}$. Insgesamt ist also $\mathbb{X} \in \mathcal{M}_p(\mu_{1:N})$ ud die Menge ist abgeschlossen.
+    Für eine Folge $(\mathbb{X}^n)_{n\in \mathbb{N}} \subset \mathcal{M}_p(\mu_{1:N})$ konvergent gegen $\mathbb{X} \in \FP_p$ gilt nach der vorherigen Proposition $\mathbb{X} \in \mathcal{M}_p$. Da $\mathcal{W}_p(X, X^n) \leq \mathcal{AW}_p(\mathbb{X}, \mathbb{X}^n)$ erhalten wir $X^n_{1:N} \rightarrow X_{1:N}$ bezüglich $\mathcal{W}_p$, also insbesondere schwach. Nach Lemma \ref{thm:closed_couplings} konvergieren auch die Marginalien der Verteilung und die Grenzwerte sind eindeutig $\mu_{1:N}$. Insgesamt ist also $\mathbb{X} \in \mathcal{M}_p(\mu_{1:N})$ und die Menge ist abgeschlossen.
 
-    Zu prüfen bleibt noch, dass die Menge zum Beispiel das zweite Kriterium aus Satz \ref{thm:prokhorov_in_pp} für relative Kompaktheit erfüllt. Zunächst zeigen wir Straffheit. Sei $\varepsilon>0$. Da $\mathcal{X}_{1:N}$ polnisch ist, sind die einzelnen Marginalien $\{\mu_t\}$ straff und wir können kompakte Mengen $K_t$ wählen mit $\mu_t(K_t^c) < \frac{\varepsilon}{N}$. Die Menge $K_{1:N}$ ist kompakt und es gilt für $\pi \in \cpl(\mu_{1:N})$ 
-    $$\pi(K_{1:N}^c) \leq \pi\left( \bigcup_{i=1}^N X_{1:i-1} \times K_i^c \times X_{i+1:N}\right) \leq \sum_{i=1}^N \mu(K_i^c) \leq \varepsilon$$
-    und insgesamt sind Martingale mit festen Marginalien straff (sogar die Menge aller Kopplungen der Marginalien). 
-
-    Weiterhin liegt für $1\leq t \leq N$ $\mu_t \in \mathcal{P}_p(\mathcal{X}_t)$, das heißt für fixierte $a_t \in \mathcal{X}_t$ ist $\int d^p(a_t, x_t) \mu_t(dx_t) < \infty$. Da $\{\mu_t\}$ straff ist existiert eine Folge von kompakten Menge $K_n \subset \mathcal{X}_t$ mit $\mathds{1}{K_n^c} \rightarrow 0$ fast sicher. Sei $\varepsilon>0$. Mit dominierter Konvergenz können wir ein kompaktes $K_t$ auswählen, sodass
-    $$\int d^p(a_t, x_t) \mathds{1}_{K_t^c} \mu_t(dx_t) < \varepsilon$$
-    Die Menge $K_{1:N}$ ist wieder kompakt und es gilt für beliebige Kopplungen $\pi \in \cpl(\mu_{1:N})$
-    $$\int d^p(a_{1:N}, x_{1:N}) \mathds{1}_{K_{1:N}^c} \pi(dx_{1:N}) \leq \sum_{t=1}^N \int d^p(a_t, x_t) \mathds{1}_{K_t^c} \mu_t(dx_t) \leq N\varepsilon$$
-    Insgesamt sind also die Kopplungen von $\mu_{1:N}$ relativ kompakt und die Martingale mit diesen Marginalien abgeschlossen. Damit ist $\mathcal{M}_p(\mu_{1:N})$ kompakt.
+    Wir können Korollar \ref{thm:relatively_compact_marginales} durch iteratives Anwenden auch für Produkträume aus beliebig vielen Faktoren benutzen. $\mathcal{M}_p(\mu_{1:N})$ ist also relativ kompakt genau dann, wenn die Marginalien relativ kompakt sind. Diese sind konstant, also insbesondere relativ kompakt. Insgesamt ist $\mathcal{M}_p(\mu_{1:N})$ kompakt.
 \end{proof}
 
 \subsection{Die Doob-Zerlegung}
-Für einen integrierbaren Prozess $\mathbb{X} \in \mathcal{FP}_p$ betrachten wir die Prozesse 
-$$A_1^\mathbb{X}=0, \quad A_t^\mathbb{X} = \sum_{s=2}^{t} \mathbb{E}\left[ X_{s} - X_{s-1} \vert \mathcal{F}_s^\mathbb{X}\right]$$
-und $M_t^\mathbb{X} = X_t - A_t^\mathbb{X}$ bezüglich der Filtration von $\mathbb{X}$. Bis auf Beschränktheit ist $A_t^\mathbb{X}$ der Form einer adaptierten Funktion von Grad 1. Mit dem üblichen Truncation-Argument ist diese Zerlegung also unabhängig von der Wahl eines Vertreters in $\FP_p$. $A_t^\mathbb{X}$ ist \emph{previsibel}, das heißt $A_{t+1}$ ist messbar bezüglich $\mathcal{F}_t$. 
+Für einen Prozess $\mathbb{X} \in \mathcal{FP}_p$ betrachten wir die Prozesse 
+$$A_1^\mathbb{X}=0, \quad A_t^\mathbb{X} = \sum_{s=1}^{t-1} \mathbb{E}\left[ X_{s+1} - X_{s} \vert \mathcal{F}_{s}^\mathbb{X}\right]$$
+und $M_t^\mathbb{X} = X_t - A_t^\mathbb{X}$ ausgerüstet mit der Filtration von $\mathbb{X}$. Bis auf Beschränktheit ist $A_t^\mathbb{X}$ der Form einer adaptierten Funktion von Grad 1. Mit dem üblichen Truncation-Argument ist diese Zerlegung also unabhängig von der Wahl eines Vertreters in $\FP_p$. $A_t^\mathbb{X}$ ist \emph{previsibel}, das heißt $A_{t+1}$ ist messbar bezüglich $\mathcal{F}_t$. 
 
-Weiterhin ist $M_t^\mathbb{X} = X_t - \sum_{s=2}^{t}\mathbb{E}[X_s - X_{s-1} \vert \mathcal{F}_s^\mathbb{X}]$, das heißt 
-$$\mathbb{E}\left[ M_{t+1} - M_t \vert \mathcal{F}_t\right] = \mathbb{E}\left[ X_{t+1} - X_t - \mathbb{E}[X_{t+1} - X_t \vert \mathcal{F}_t] \vert \mathcal{F}_t \right] = 0$$
+Weiterhin ist $M_t^\mathbb{X} = X_t - \sum_{s=1}^{t-1}\mathbb{E}[X_{s+1} - X_{s} \vert \mathcal{F}_{s}^\mathbb{X}]$, das heißt 
+$$\mathbb{E}\left[ M_{t+1}^\mathbb{X} - M_t^\mathbb{X} \vert \mathcal{F}_t^\mathbb{X}\right] = \mathbb{E}\left[ X_{t+1} - X_t - \mathbb{E}[X_{t+1} - X_t \vert \mathcal{F}_t^\mathbb{X}] \vert \mathcal{F}_t^\mathbb{X} \right] = 0$$
 $M_t^\mathbb{X}$ ist also ein Martingal. Den Prozess 
 $$\mathbb{D}^\mathbb{X} := \left( \Omega^\mathbb{X}, \mathcal{F}^\mathbb{X}, \left( \mathcal{F}_t^\mathbb{X}\right)_{t=1}^N, \mathbb{P}^\mathbb{X}, (M_t^\mathbb{X}, A_t^\mathbb{X})_{t=1}^N \right)$$
 nennen wir die \emph{Doob-Zerlegung} von $\mathbb{X}$. 
@@ -237,14 +244,14 @@ nennen wir die \emph{Doob-Zerlegung} von $\mathbb{X}$.
 Die drei Eigenschaften
 \begin{enumerate}
     \item $(M_t)_{t=1}^N$ ist ein Martingal.
-    \item $(A_t)_{t=1}^N$ ist previsibel mit $A_0=0$. 
+    \item $(A_t)_{t=1}^N$ ist previsibel mit $A_1=0$. 
     \item $X_t = M_t + A_t$
 \end{enumerate}
-legen die Zerlegung schon fast sicher fest: Aus diesen drei Eigenschaften folgt
+legen die Zerlegung schon fest: Aus diesen drei Eigenschaften folgt
 $$\mathbb{E}[X_{t+1} - X_t \vert \mathcal{F}_t^\mathbb{X}] = \mathbb{E}[M_{t+1} - M_t \vert \mathcal{F}_t^\mathbb{X}] + \mathbb{E}[A_{t+1} - A_t \vert \mathcal{F}_t^\mathbb{X}] = A_{t+1} - A_t$$
-Da $A_0=0$ sind also die $A_t$ schon fast sicher durch die $X_t$ bestimmt. Wegen dem dritten Punkt sind dadurch auch $M_t = X_t - A_t$ fast sicher festgelegt. 
-\begin{proposition}
-    Seien $\mathbb{X,Y}\in \FP_p$ integrierbar. Dann gilt
+Da $A_1=0$ sind die $A_t$ schon fast sicher durch die $X_t$ und $(\mathcal{F}_{t}^\mathbb{X})_{t=1}^N$ bestimmt. Wegen des dritten Punktes sind dadurch auch $M_t = X_t - A_t$ fast sicher festgelegt. 
+\begin{proposition}\label{thm:doob_continuous}
+    Seien $\mathbb{X,Y}\in \FP_p$. Dann gilt
     $$2^{\frac{1-p}{p}}\mathcal{AW}_p(\mathbb{X,Y}) \leq \mathcal{AW}_p(\mathbb{D}^\mathbb{X}, \mathbb{D}^\mathbb{Y}) \leq c\cdot \mathcal{AW}_p(\mathbb{X,Y})$$
     für eine konstante $c=c(p,N)$, wobei wir auf dem Werteraum von $\mathbb{D}^\mathbb{X}$ die $p$-Produktmetrik der Werteräume von $M^\mathbb{X}$ und $A^\mathbb{X}$ betrachten.
 \end{proposition}
@@ -256,37 +263,35 @@ Da $A_0=0$ sind also die $A_t$ schon fast sicher durch die $X_t$ bestimmt. Wegen
     \begin{align*}
         d^p(X,Y) &= \sum_{t=1}^N \left|M_t^\mathbb{X} + A_t^\mathbb{X} - M_t^\mathbb{Y} - A_t^\mathbb{Y}\right|^p \leq \sum_{t=1}^N \left(|M_t^\mathbb{X} - M_t^\mathbb{Y}| + |A_t^\mathbb{X} - A_t^\mathbb{Y}| \right)^p \\
         &\leq \sum_{t=1}^N 2^{p-1} \left( |M_t^\mathbb{X} - M_t^\mathbb{Y}|^p + |A_t^\mathbb{X} - A_t^\mathbb{Y}|^p\right) \\
-        &= 2^{p-1}(d^p(M^\mathbb{X}, M^\mathbb{Y}) + d^p(A^\mathbb{X}, A^\mathbb{Y})) = 2^{p-1}\left(d^p\left((M^\mathbb{X}, A^\mathbb{X}), (M^\mathbb{Y}, A^{\mathbb{Y}}) \right) \right)
+        &= 2^{p-1}(d^p(M^\mathbb{X}, M^\mathbb{Y}) + d^p(A^\mathbb{X}, A^\mathbb{Y})) = 2^{p-1}d^p(\mathbb{D}^\mathbb{X}, \mathbb{D}^\mathbb{Y})
     \end{align*}
-    Für die zweite Ungleichung haben wir ein Konvexitätsargument benutzt: $x\mapsto x^p, p\geq 1$ ist konvex, für $a,b\in \mathbb{R}$ gilt also
+    Für die Ungleichung in der zweiten Zeile haben wir ein Konvexitätsargument benutzt: $x\mapsto x^p, p\geq 1$ ist konvex, für $a,b\in \mathbb{R}$ gilt also
     \begin{equation}\label{eq:convexity_argument1}
         (a+b)^p= 2^p(\frac{a+b}{2})^p \leq 2^p(\frac{a^p+b^p}{2}) = 2^{p-1}(a^p+b^p)
     \end{equation}
     Wir erhalten hierdurch
-    $$2^{1-p}\mathcal{AW}_p^p(\mathbb{X,Y}) \leq \mathcal{AW}_p^p(\mathbb{D}^\mathbb{X}, \mathbb{D}^\mathbb{Y})$$
-    und damit auch
     $$2^{\frac{1-p}{p}}\mathcal{AW}_p(\mathbb{X,Y}) \leq \mathcal{AW}_p(\mathbb{D}^\mathbb{X}, \mathbb{D}^\mathbb{Y})$$
     
-    Für die zweite Ungleichung bemerken wir zunächst, dass mit dem gleichen Argument 
+    Für die zweite Ungleichung bemerken wir zunächst, dass mit dem gleichen Konvexitätsargument 
     $$|M^\mathbb{X} - M^\mathbb{Y}|^p = |(X-Y) + (A^\mathbb{Y} - A^\mathbb{X})|^p \leq 2^{p-1}(|X-Y|^p + |A^\mathbb{X} - A^\mathbb{Y}|^p)$$
     und somit 
     \begin{equation}\label{eq:doob_ineq} 
         |(M^\mathbb{X}-M^\mathbb{Y}, A^\mathbb{X} - A^\mathbb{Y})|^p \leq 2^{p-1}|X-Y|^p + (2^{p-1}+1)|A^\mathbb{X}-A^\mathbb{Y}|^p
     \end{equation}
-    Nach der Definition von $A^\mathbb{X}$ und $A^\mathbb{Y}$ gilt für $2\leq t\leq N$ mit Lemma \ref{thm:causality_characterization} für $\pi \in \cplbc(\mathbb{X,Y})$ 
-    $$\mathbb{E}_\pi\left[ X_t - X_{t-1} \vert \mathcal{F}_t^\mathbb{X}\right] = \mathbb{E}_\pi\left[X_t-X_{t-1} \vert \mathcal{F}_{t,t}^\mathbb{X,Y}\right]$$
-    und somit
-    $$A_t^\mathbb{X} - A_t^\mathbb{Y} = \sum_{s=2}^t \mathbb{E}_\pi\left[ X_s - X_{s-1} - (Y_s - Y_{s-1}) \vert \mathcal{F}_{s,s}^\mathbb{X,Y} \right]$$ 
+    Nach Lemma \ref{thm:causality_characterization} gilt für $1\leq t<N$ und $\pi \in \cplbc(\mathbb{X,Y})$ 
+    $$\mathbb{E}_\pi\left[ X_{t+1} - X_{t} \vert \mathcal{F}_t^\mathbb{X}\right] = \mathbb{E}_\pi\left[X_{t+1}-X_{t} \vert \mathcal{F}_{t,t}^\mathbb{X,Y}\right]$$
+    (analog für $\mathbb{Y}$) und somit
+    $$A_t^\mathbb{X} - A_t^\mathbb{Y} = \sum_{s=1}^{t-1} \mathbb{E}_\pi\left[ X_{s+1} - X_{s} - (Y_{s+1} - Y_{s}) \vert \mathcal{F}_{s,s}^\mathbb{X,Y} \right]$$ 
 
     Das Konvexitätsargument aus Gleichung \ref{eq:convexity_argument1} kann man auch mit $n$ Summanden durchführen: 
-    $$\left(\sum_{i=1}^N a_i\right)^p = N^{p} \left(\sum_{i=1}^N \frac{a_i}{N}\right)^p \leq N^p \sum_{i=1}^N \frac{a_i^p}{N} = N^{p-1} \sum_{i=1}^N a_i^p$$
+    $$\left(\sum_{i=1}^n a_i\right)^p = n^{p} \left(\sum_{i=1}^n \frac{a_i}{n}\right)^p \leq n^p \sum_{i=1}^n \frac{a_i^p}{n} = n^{p-1} \sum_{i=1}^n a_i^p$$
     Damit erhalten wir 
     \begin{align*}
         \mathbb{E}_\pi(|A^\mathbb{X} - A^\mathbb{Y}|^p) &= \sum_{t=2}^N\mathbb{E}_\pi(|A_t^\mathbb{X} - A_t^\mathbb{Y}|^p) \\
-        &= \sum_{t=2}^N \mathbb{E}_\pi\left(\left| \sum_{s=2}^t \mathbb{E}_\pi\left[X_s - X_{s-1} - (Y_s - Y_{s-1} \vert \mathcal{F}_{s,s}^\mathbb{X,Y}) \right]\right|^p \right) \\
-        &\leq \sum_{t=2}^N t^{p-1} \sum_{s=2}^t \mathbb{E}_\pi\left[\mathbb{E}_\pi\left[ \left|X_s - X_{s-1} - (Y_s - Y_{s-1}) \vert \mathcal{F}_{s,s}^\mathbb{X,Y} \right|\right]^p\right] \\
-        &\leq \sum_{t=2}^N t^{p-1}\sum_{s=2}^t \mathbb{E}_\pi\left[ \left|X_{s}-X_{s-1} - (Y_s - Y_{s-1}) \right|^p\right] \\
-        &\leq \sum_{t=2}^N t^{p-1}2^{p-1}\sum_{s=2}^t \mathbb{E}_\pi(|X_s - Y_{s}|^p + |X_{s-1}-Y_{s-1}|^p) \\
+        &= \sum_{t=2}^N \mathbb{E}_\pi\left(\left| \sum_{s=1}^{t-1} \mathbb{E}_\pi\left[X_{s+1} - X_{s} - (Y_{s+1} - Y_{s}) \vert \mathcal{F}_{s,s}^\mathbb{X,Y} \right]\right|^p \right) \\
+        &\leq \sum_{t=2}^N t^{p-1} \sum_{s=1}^{t-1} \mathbb{E}_\pi\left[\mathbb{E}_\pi\left[ \left|X_{s+1} - X_{s} - (Y_{s+1} - Y_{s}) \right|\vert \mathcal{F}_{s,s}^\mathbb{X,Y} \right]^p\right] \\
+        &\leq \sum_{t=2}^N t^{p-1}\sum_{s=1}^{t-1} \mathbb{E}_\pi\left[ \left|X_{s+1}-X_{s} - (Y_{s+1} - Y_{s}) \right|^p\right] \\
+        &\leq \sum_{t=2}^N t^{p-1}2^{p-1}\sum_{s=1}^{t-1} \mathbb{E}_\pi\left[|X_{s+1} - Y_{s+1}|^p + |X_{s}-Y_{s}|^p\right] \\
         &\leq \sum_{t=2}^N t^{p-1}2^{p} \sum_{s=1}^N \mathbb{E}_\pi(|X_s - Y_s|^p) \\
         &\leq N^p2^p \mathbb{E}_\pi(|X-Y|^p)
     \end{align*}
@@ -297,7 +302,7 @@ Da $A_0=0$ sind also die $A_t$ schon fast sicher durch die $X_t$ bestimmt. Wegen
 \end{proof}
 
 \subsection{Geodätischer Raum}
-In diesem Abschnitt wollen wir zeigen, dass $(\FP_p, \mathcal{AW}_p)$ ein geodätischer Raum ist. Wir gehen in diesem Kapitel davon aus, dass $\mathcal{X}_t$ ein geodätischer Raum ist, der eine messbare Auswahl von Geodäten erlaubt, das heißt eine Abbildung $\mathcal{X}\times\mathcal{X} \rightarrow \mathcal{X}, x,y \mapsto \gamma_{x,y}$, sodass $\gamma_{x,y}$ eine Geodäte ist und für jedes $t\in[0,1]$ die Abbildung $x,y\mapsto \gamma_{x,y}(t)$ messbar ist.
+In diesem Abschnitt wollen wir zeigen, dass $(\FP_p, \mathcal{AW}_p)$ ein geodätischer Raum ist. Wir gehen in diesem Kapitel davon aus, dass $\mathcal{X}_t$ geodätische Räume sind, die eine messbare Auswahl von Geodäten erlauben, das heißt eine Abbildung $x,y \mapsto (\gamma_t(x,y))_{t\in[0,1]}$, sodass $(\gamma_t(x,y))_{t\in[0,1]}$ eine Geodäte zwischen $x$ und $y$ ist und für jedes $t\in[0,1]$ die Abbildung $x,y\mapsto \gamma_t(x,y)$ messbar ist.
 
 \begin{definition}[Geodäte]
     Sei $(\mathcal{X},d)$ ein polnischer Raum und seien $x,y\in \mathcal{X}$. Eine Abbildung $\gamma:[0,1]\rightarrow \mathcal{X}$ mit $\gamma(0)=x$ und $\gamma(1)=y$ heißt eine \emph{Geodäte} zwischen $x$ und $y$, falls für alle $s,t \in [0,1]$
@@ -305,57 +310,86 @@ In diesem Abschnitt wollen wir zeigen, dass $(\FP_p, \mathcal{AW}_p)$ ein geodä
     Falls für alle Paare $x,y \in \mathcal{X}$ eine Geodäte zwischen $x$ und $y$ existiert, nennt man $\mathcal{X}$ einen \emph{geodätischen Raum}.
 \end{definition}
 \begin{example}
-$\mathbb{R}^d$ mit einer Norm ist ein geodätischer Raum: Für $x,y \in \mathbb{R}^d$ ist $\gamma_{x,y}: t \mapsto (1-t)x + ty$ eine Geodäte zwischen $x$ und $y$, da für $s,t \in [0,1]$
+$\mathbb{R}^d$ mit einer Norm ist ein geodätischer Raum: Für $x,y \in \mathbb{R}^d$ ist $\gamma: t \mapsto (1-t)x + ty$ eine Geodäte zwischen $x$ und $y$, da für $s,t \in [0,1]$
 $$\|(1-t)x + ty - (1-s)x - sy \| = \|(s-t)x + (t-s)y\| = |s-t|\|x-y\|$$
-Für diese Wahl von Geodäten sind die Abbildungen $x,y \mapsto \gamma_{x,y}(t)=(1-t)x+ty$ für jedes $t$ messbar. $\mathbb{R}^d$ erlaubt also eine messbare Auswahl von Geodäten.
+Für diese Wahl von Geodäten sind die Abbildungen $x,y \mapsto \gamma_t(x,y)=(1-t)x+ty$ für jedes $t$ messbar. $\mathbb{R}^d$ erlaubt also eine messbare Auswahl von Geodäten.
 \end{example}
 \begin{lemma}
-    Seien $(\mathcal{X}, d_{\mathcal{X}}), (\mathcal{Y}, d_{\mathcal{Y}})$ geodätische, polnische Räume, die eine messbare Auswahl erlauben. Sei weiterhin $(\mathcal{Z}, d_{\mathcal{Z}})$ isometrisch zu $(\mathcal{X}, d_{\mathcal{X}})$. Dann sind auch $\mathcal{P}_p(\mathcal{X})$, $\mathcal{X}\times \mathcal{Y}$ (bezüglich einer Produktmetrik $d = \left(d_\mathcal{X}^q+d_\mathcal{Y}^q\right)^\frac{1}{q}, q\geq 1$) und $\mathcal{Z}$ geodätische Räume, die eine messbare Auswahl erlauben.
+    Seien $(\mathcal{X}, d_{\mathcal{X}}), (\mathcal{Y}, d_{\mathcal{Y}})$ geodätische polnische Räume, die eine messbare Auswahl erlauben. Sei weiterhin $(\mathcal{Z}, d_{\mathcal{Z}})$ isometrisch isomorph zu $(\mathcal{X}, d_{\mathcal{X}})$. Dann sind auch $\mathcal{P}_p(\mathcal{X})$, $\mathcal{X}\times \mathcal{Y}$ (bezüglich einer Produktmetrik $d = \left(d_\mathcal{X}^q+d_\mathcal{Y}^q\right)^\frac{1}{q}, q\geq 1$) und $\mathcal{Z}$ geodätische Räume, die eine messbare Auswahl erlauben.
 
     Genauer: Falls $\Phi$ ein isometrischer Isomorphismus zwischen $\mathcal{X}$ und $\mathcal{Z}$ ist, so ist $\gamma_t$ genau dann eine Geodäte zwischen $x,y \in \mathcal{X}$, falls $\Phi \circ \gamma_t$ eine Geodäte zwischen $\Phi(x)$ und $\Phi(y)$ ist.
 \end{lemma}
 \begin{proof}
-    Für $mu, \nu \in \mathcal{P}_p(\mathcal{X})$ sei $\pi$ eine optimale Kopplung nach Lemma \ref{thm:optimal_coupling}. Sei $\gamma_t: \mathcal{X}\times \mathcal{X} \rightarrow \mathcal{X}, x,y \mapsto \gamma_t(x,y)$ eine messbare Abbildung, die jedem Paar $x,y$ eine messbare Geodäte $\gamma_t(x,y)$ zuweist. Wir betrachten nun die Abbildung $t \mapsto \gamma_{t,*}(\pi)=:\tilde{\gamma}_t$ und zeigen, dass sie eine Geodäte ist. Da die optimale Kopplung $\pi$ nach Lemma \ref{thm:optimal_coupling} messbar gewählt werden kann, folgt hieraus zusammen mit Lemma \ref{thm:pushforward_measurable} die Behauptung. 
+    Für $\mu, \nu \in \mathcal{P}_p(\mathcal{X})$ sei $\pi$ eine optimale Kopplung nach Lemma \ref{thm:optimal_coupling}. Sei $\gamma_t: \mathcal{X}\times \mathcal{X} \rightarrow \mathcal{X}, x,y \mapsto \gamma_t(x,y)$ eine messbare Abbildung, die jedem Paar $x,y$ eine Geodäte $\gamma_t(x,y)$ zwischen $x$ und $y$ zuweist. Wir betrachten nun die Abbildung $t \mapsto (\gamma_{t})_*(\pi)=:\tilde{\gamma}_t$ und zeigen, dass sie eine Geodäte ist. Da die optimale Kopplung $\pi$ nach Lemma \ref{thm:optimal_coupling} messbar gewählt werden kann, folgt hieraus zusammen mit Lemma \ref{thm:pushforward_measurable} die erste Behauptung. 
 
     Da $\gamma_t(x,y)$ eine Geodäte ist, sind $\gamma_0(x,y)$ und $\gamma_1(x,y)$ die Projektionen auf $x$ bzw. $y$, also gilt $\tilde{\gamma}_0=\mu$ und $\tilde{\gamma}_1=\nu$. Es reicht zu zeigen, dass für $0\leq s\leq t\leq 1$ gilt
-    $$\mathcal{W}_p(\tilde{\gamma}_s, \tilde{\gamma}_t) \leq |t-s|\mathcal{W}_p(\mu, \nu)$$
+    \begin{equation}\label{eq:eq02314}
+        \mathcal{W}_p(\tilde{\gamma}_s, \tilde{\gamma}_t) \leq |t-s|\mathcal{W}_p(\mu, \nu)
+    \end{equation}
     da dann schon mit der Dreiecksungleichung folgt
-    $$\mathcal{W}_p(\mu, \nu) \leq \mathcal{W}_p(\tilde{\gamma}_0, \tilde{\gamma}_s) + \mathcal{W}_p(\tilde{\gamma}_s, \tilde{\gamma}_t) + \mathcal{W}_p(\tilde{\gamma}_t, \tilde{\gamma}_1) \leq (s + (1-t))\mathcal{W}_p(\mu, \nu) + \mathcal{W}_p(\tilde{\gamma}_s, \tilde{\gamma}_t)$$
-    und damit folgt schon Gleichheit. Es ist $(\gamma_s(x,y), \gamma_t(x,y))_*\pi$ eine Kopplung von $\tilde{\gamma}_s$ und $\tilde{\gamma}_t$, also ist 
+    \begin{equation}\label{eq:eq_arg_geod}
+        \begin{split}
+            \mathcal{W}_p(\mu, \nu) &\leq \mathcal{W}_p(\tilde{\gamma}_0, \tilde{\gamma}_s) + \mathcal{W}_p(\tilde{\gamma}_s, \tilde{\gamma}_t) + \mathcal{W}_p(\tilde{\gamma}_t, \tilde{\gamma}_1) \\
+            &\leq (s + (1-t))\mathcal{W}_p(\mu, \nu) + \mathcal{W}_p(\tilde{\gamma}_s, \tilde{\gamma}_t)
+        \end{split}
+    \end{equation}
+    und damit folgt schon Gleichheit in \ref{eq:eq02314}. Es ist $(\gamma_s(\cdot), \gamma_t(\cdot))_*\pi$ eine Kopplung von $\tilde{\gamma}_s$ und $\tilde{\gamma}_t$, also ist 
     \begin{align*}
         \mathcal{W}_p^p(\tilde{\gamma}_s, \tilde{\gamma}_t) &\leq \int d^p(\gamma_s(x,y), \gamma_t(x,y)) \pi(dx,dy) \\
         &= \int |t-s|^pd^p(x,y)\pi(dx,dy) = |t-s|^p\cdot\mathcal{W}_p^p(\mu, \nu)
     \end{align*}
 
-    Zur zweiten Behauptung, seien $\gamma^X_{x_0,x_1}(t)$ und $\gamma^Y_{y_0, y_1}(t)$ messbare Geodäten für $\mathcal{X}$ bzw. $\mathcal{Y}$. Dann ist $\gamma(t): (x_0, y_0), (x_1, y_1) \mapsto \left(\gamma^X_{x_0,x_1}(t), \gamma^Y_{y_0,y_1}(t)\right)$ eine messbare Abbildung mit $\gamma(0)=(x_0, y_0)$ und $\gamma(1) = (x_1, y_1)$, und weiterhin gilt für $s,t\in [0,1]$:
+    Zur zweiten Behauptung, seien $\gamma^X_t(x_0,x_1)$ und $\gamma^Y_t(y_0,y_1)$ messbare Geodäten für $\mathcal{X}$ bzw. $\mathcal{Y}$. Dann ist $\gamma_t: (x_0, y_0), (x_1, y_1) \mapsto \left(\gamma^X_t(x_0, x_1), \gamma^Y_t(y_0, y_1)\right)$ eine messbare Abbildung mit $\gamma_0=(x_0, y_0)$ und $\gamma_1 = (x_1, y_1)$, und weiterhin gilt für $s,t\in [0,1]$:
     \begin{align*}
-        d(\gamma(s), \gamma(t)) &= \left(d^q(\gamma^X(s), \gamma^X(t)) + d^q(\gamma^Y(s), \gamma^Y(t))\right)^\frac{1}{q} \\
+        d(\gamma_s, \gamma_t) &= \left(d^q(\gamma^X_s, \gamma^X_t) + d^q(\gamma^Y_s, \gamma^Y_t)\right)^\frac{1}{q} \\
         &= \left(|t-s|^q d^q(x_0, x_1) + |t-s|^q d^q(y_0, y_1)\right)^\frac{1}{q} \\
-        &= |t-s| d((x_0, x_1), (y_0, y_1))
+        &= |t-s| d((x_0, y_0), (x_1, y_1))
     \end{align*}
 
-    Für den dritten Punkt, sei $\Phi$ eine Isometrie von $\mathcal{X}$ nach $\mathcal{Z}$. Sei $\gamma_{x,y}(t)$ eine messbare Geodäte bezüglich $\mathcal{X}$. Dann ist die Abbildung $\tilde{\gamma}(t): z_0, z_1 \mapsto \Phi(\gamma_{\Phi^{-1}(z_0), \Phi^{-1}(z_1)}(t))$ messbar (da $\Phi$ und $\Phi^{-1}$ isometrisch, also messbar sind) mit $\tilde{\gamma}(0) = \Phi(\Phi^{-1})(z_0)=z_0$ und $\tilde{\gamma}(1) = z_1$. Weiterhin gilt für $s,t\in[0,1]$
-    $$d(\tilde{\gamma}(s), \tilde{\gamma}(t)) = |s-t|\cdot d\left(\Phi^{-1}(z_0), \Phi^{-1}(z_1)\right) = |s-t|d(z_0, z_1)$$
+    Für den dritten Punkt sei $\Phi$ eine Isometrie von $\mathcal{X}$ nach $\mathcal{Z}$. Sei $\gamma_t(x,y)$ eine messbare Geodäte bezüglich $\mathcal{X}$. Dann ist die Abbildung 
+    $$\tilde{\gamma}_t: z_0, z_1 \mapsto \Phi(\gamma_t(\Phi^{-1}(z_0), \Phi^{-1}(z_1)))$$
+     messbar (da $\Phi$ und $\Phi^{-1}$ isometrisch, also messbar sind) mit $\tilde{\gamma}_0 = \Phi(\Phi^{-1}(z_0))=z_0$ und $\tilde{\gamma}_1 = z_1$. Weiterhin gilt für $s,t\in[0,1]$
+    $$d(\tilde{\gamma}_s, \tilde{\gamma}_t) = |s-t|\cdot d\left(\Phi^{-1}(z_0), \Phi^{-1}(z_1)\right) = |s-t|d(z_0, z_1)$$
     $\tilde{\gamma}$ ist also tatsächlich eine Geodäte von $z_0$ zu $z_1$.
 
-    Wir haben hierdurch auch gezeigt, dass für eine Geodäte $\gamma_t$ zwischen $x,y\in \mathcal{X}$, $\Phi \circ \gamma_t$ eine Geodäte zwischen $\Phi(x)$ und $\Phi(y)$ ist. Da auch $\Phi^{-1}$ ein Isometrischer Isomorphismus ist folgt, dass $\gamma_t$ eine Geodäte zwischen $x,y\in\mathcal{X}$ ist genau wenn $\Phi\circ \gamma_t$ eine Geodäte zwischen $\Phi(x)$ und $\Phi(y)$ ist.
+    Wir haben hierdurch auch gezeigt, dass für eine Geodäte $\gamma_t$ zwischen $x,y\in \mathcal{X}$ $\Phi \circ \gamma_t$ eine Geodäte zwischen $\Phi(x)$ und $\Phi(y)$ ist. Da auch $\Phi^{-1}$ ein isometrischer Isomorphismus ist folgt, dass $\gamma_t$ eine Geodäte zwischen $x,y\in\mathcal{X}$ ist genau wenn $\Phi\circ \gamma_t$ eine Geodäte zwischen $\Phi(x)$ und $\Phi(y)$ ist.
 \end{proof}
 \begin{definition}[Interpolationsprozess]
-    Seien $\mathbb{X,Y} \in \mathcal{FP}_p$ und sei $\pi \in \cplbc(\mathbb{X,Y})$. Wir nennen die Familie $(\mathbb{Z}^{\pi, u})$ gegeben durch
-    $$\mathbb{Z}^{\pi, u} := \left(\mathcal{Z}\times \mathcal{Z}, \mathcal{F}^\mathcal{Z}\otimes \mathcal{F}^\mathcal{Z}, \left(\mathcal{F}_{t,t}^{\mathcal{Z},\mathcal{Z}}, \pi, \left((1-u)X_t + uY_t\right)_{t=1}^N \right) \right) $$
-    den \emph{Interpolationsprozess} zwischen $\mathbb{X}$ und $\mathbb{Y}$ (bezüglich $\pi$).
+    Seien $\mathbb{X,Y} \in \CFP_p$ und sei $\pi \in \cplbc(\mathbb{X,Y})$. Es sei $\gamma_u(X_t, Y_t)$ jeweils eine Geodäte zwischen den Punkten $X_t$ und $Y_t$. Wir nennen die Familie $(\mathbb{Z}^{\pi, u})_{u\in[0,1]}$ gegeben durch
+    $$\mathbb{Z}^{\pi, u} := \left(\mathcal{Z}\times \mathcal{Z}, \mathcal{F}^\mathcal{Z}\otimes \mathcal{F}^\mathcal{Z}, \pi, \left(\mathcal{F}_{t,t}^{\mathcal{Z},\mathcal{Z}}\right)_{t=1}^N, \left(\gamma_u\left(X_t, Y_t\right)\right)_{t=1}^N \right) $$
+    den \emph{Interpolationsprozess} zwischen $\mathbb{X}$ und $\mathbb{Y}$ (bezüglich $\pi$). 
 \end{definition}
+Da alle Prozesse einen Vertreter in $\CFP_p$ haben, gibt es einen solchen Interpolationsprozess tatsächlich für alle Elemente in $\FP_p$.
 
 \begin{theorem}
-    Sei $p \in (1, \infty)$.
+    Sei $p \in [1, \infty)$.
 \begin{enumerate}
     \item[(i)] Der Raum $(\FP_p, \mathcal{AW}_p)$ ist ein geodätischer Raum.
     \item[(ii)] Eine Familie $(\mathbb{Z}^u)_{u \in [0,1]}$ ist eine Geodäte zwischen $\mathbb{X}$ und $\mathbb{Y}$ genau dann, wenn die Familie 
     $$\left( \gamma^u \right)_{u \in [0,1]} := \left( \mathcal{L}(\ip_1(\mathbb{Z}^u)) \right)_{u \in [0,1]}$$
     eine Geodäte zwischen $\mathcal{L}(\ip_1(\mathbb{X}))$ und $\mathcal{L}(\ip_1(\mathbb{Y}))$ ist.
-    \item[(iii)] Falls $\pi$ eine optimale, bikausale Kopplung bezüglich $\mathcal{AW}_p(\mathbb{X,Y})$ ist, os ist der Interpolationsprozess $\left(\mathbb{Z}^{\pi, u}\right)_{u \in [0,1]}$ eine Geodäte zwischen $\mathbb{X}$ und $\mathbb{Y}$.
+    \item[(iii)] Falls $\pi$ eine optimale bikausale Kopplung bezüglich $\mathcal{AW}_p(\mathbb{X,Y})$ ist, so ist der Interpolationsprozess $\left(\mathbb{Z}^{\pi, u}\right)_{u \in [0,1]}$ eine Geodäte zwischen $\mathbb{X}$ und $\mathbb{Y}$. (Da der Interpolationsprozess nur auf $\CFP_p$ definiert ist, müssen wir gegebenenfalls zu $\overline{\mathbb{X}}, \overline{\mathbb{Y}}$ und der optimalen bikausalen Kopplung $(\ip(\mathbb{X}), \ip(\mathbb{Y}))_* \pi$ übergehen).
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-    Der Raum $\mathcal{P}_p(\mathcal{Z}_1)$ ist nach dem vorherigen Lemma als iterative Konstruktion aus geodetischen, polnischen Räumen (die eine messbare Auswahl zulassen) ein geodetischer polnischer Raum. Die Abbildung $\mathbb{X} \mapsto \mathcal{L}(\ip_1(\mathbb{X}))$ ist nach Satz \ref{thm:adapted_wasserstein_equalities} ein isometrischer Isomorphismus zwischen $\FP_p$ und $\mathcal{P}_p(\mathcal{Z}_1)$. Hiermit folgen die Punkte (i) und (ii).
+    Der Raum $\mathcal{P}_p(\mathcal{Z}_1)$ ist nach dem vorherigen Lemma ein geodätischer polnischer Raum, da er durch wiederholte Bildung von $\mathcal{P}_p(\cdot)$ und $\cdot \times \cdot$ aus solchen Räumen entsteht.
+    Die Abbildung $\mathbb{X} \mapsto \mathcal{L}(\ip_1(\mathbb{X}))$ ist nach Lemma \ref{thm:isometric_fp_pz} ein isometrischer Isomorphismus zwischen $\FP_p$ und $\mathcal{P}_p(\mathcal{Z}_1)$. Hiermit folgen die Punkte (i) und (ii).
+
+    Nun zum dritten Punkt: Für $u=0$ ist induktiv $\ip_t(\mathbb{Z}^{\pi,0}) = \ip_t(\mathbb{X})(z_1)$. Für $t=N$ ist $\ip_t(\mathbb{Z}^{\pi,0}) = X_N = \ip_t(\mathbb{X})(z_1)$. Weiter ist wegen Bikausalität
+    \begin{align*}
+        \ip_t(\mathbb{Z}^{\pi,0}) &= (X_t, \mathbb{E}_\pi(\ip_{t+1}(\mathbb{Z}^{\pi,0}) \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}})) = (X_t, \mathbb{E}_\pi(\ip_{t+1}(\mathbb{Z}^{\pi,0}) \vert \mathcal{F}_{t,0}^{\mathcal{Z,Z}})) \\
+        &= (X_t, \mathbb{E}_\pi(\ip_{t+1}(\mathbb{X})(z_1) \vert \mathcal{F}_{t,0}^{\mathcal{Z,Z}}))
+    \end{align*}
+    Nach Lemma \ref{thm:pushforward_expectancy} ist der letzte Term gleich $\mathbb{E}_{\mathbb{P}^\mathbb{X}}(\ip_{t+1}(\mathbb{X}) \vert \mathcal{F}_t^\mathcal{Z})(z_1)$ und es folgt die Induktionsbehauptung. Es ist also $\mathcal{L}(\ip_1(\mathbb{Z}^{\pi,0})) = \mathcal{L}(\ip_1(\mathbb{X}))$ und somit nach Satz \ref{thm:adapted_wasserstein_equalities} $\mathbb{Z}^{\pi,0}=\mathbb{X}$ in $\FP_p$. Analog ist $\mathbb{Z}^{\pi,1} = \mathbb{Y}$. 
+
+    Sei $0\leq s\leq u\leq 1$. Die Verteilung $\chi = (\id, \id)_* \pi$ ist bikausal zwischen $\mathbb{Z}^{\pi,u}$ und $\mathbb{Z}^{\pi,s}$, da für $A \in \mathcal{F}_{N}^\mathcal{Z}$, $B \in \mathcal{F}_t^\mathcal{Z}$ bedingt auf $\mathcal{F}_{t,0}^\mathcal{Z,Z}$ gilt 
+    $$\mathbb{E}_\chi(\mathds{1}_{z_1 \in A} \mathds{1}_{z_2\in B} \vert \mathcal{F}_{t,0}^\mathcal{Z,Z}) = \mathbb{E}_\chi(\mathds{1}_{z_1 \in A} \mathds{1}_{z_1 \in B} \vert \mathcal{F}_{t,0}^\mathcal{Z,Z}) = \mathbb{E}_\chi(\mathds{1}_{z_1\in A} \vert \mathcal{F}_{t,0}^\mathcal{Z,Z})\mathbb{E}_\chi(\mathds{1}_{z_2\in B} \vert \mathcal{F}_{t,0}^\mathcal{Z,Z})$$
+    Die Mengensysteme $\mathcal{F}_{N,0}^\mathcal{Z,Z}$ und $\mathcal{F}_{0,t}^\mathcal{Z,Z}$ sind also unabhängig bedingt auf $\mathcal{F}_{t,0}^\mathcal{Z,Z}$. $\chi$ ist damit kausal und wegen der Symmetrie bikausal. Somit ist
+    \begin{align*}
+        \mathcal{AW}_p(\mathbb{Z}^{\pi,u}, \mathbb{Z}^{\pi,s}) &\leq \mathbb{E}_\chi\left[d^p(Z^u, Z^s)\right]^\frac{1}{p} \\
+        &= \mathbb{E}_\pi\left[d^p(\gamma_u(X,Y), \gamma_s(X, Y))\right]^\frac{1}{p} \\
+        &= |u-s|\mathbb{E}_\pi\left[d^p(X, Y)\right]^\frac{1}{p} \\
+        &= |u-s|\mathcal{AW}_p(\mathbb{X}, \mathbb{Y})
+    \end{align*}
+    Die letzte Gleichung folgt aus der Optimalität von $\pi$. Mit dem gleichen Argument wie bei Gleichung \ref{eq:eq_arg_geod} folgt mit der Dreiecksungleichung aus der gezeigten Ungleichung schon Gleichheit. Der Interpolationsprozess ist also tatsächlich eine Geodäte.
 \end{proof}

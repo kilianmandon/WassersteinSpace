@@ -3,6 +3,23 @@ from anytree import Node, RenderTree, PreOrderIter
 from anytree.exporter import DotExporter
 
 
+def small_experiment(d):
+    root = Node("s", p=1, s=0)
+    step1 = Node("up", p=0.5, s=d, parent=root)
+    step2 = Node("down", p=0.5, s=-d, parent=root)
+    next_step1 = Node("up2", p=step1.p, parent=step1, s=1)
+    next_step2 = Node("down2", p=step2.p, parent=step2, s=-1)
+
+    return root
+
+def possible_limit():
+    root = Node("s", p=1, s=0)
+    step = Node("center", p=1, s=0, parent=root)
+    next_step1 = Node("up", p=0.5, s=1, parent=step)
+    next_step2 = Node("down", p=0.5, s=-1, parent=step)
+    return root
+
+
 def coin_toss_tree(depth, p=0.5):
     root = Node("s", p=1, s=0)
     last_gen = [root]

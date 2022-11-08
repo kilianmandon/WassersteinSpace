@@ -1,3 +1,4 @@
+Die folgende Charakterisierung von bikausalen Kopplungen stammt aus \cite[Lemma A.1]{main_paper}
 \begin{lemma} \label{thm:causality_kernel_characterization}
 Seien $\mathbb{X}, \mathbb{Y} \in \CFP_p$, $\pi \in \mathcal{P}_p(\mathcal{Z}\times\mathcal{Z})$ und setze $\pi_1 := \operatorname{pj}_{\mathcal{Z}_1\times \mathcal{Z}_1}\pi$. Dann ist $\pi \in \cplbc(\mathbb{X}, \mathbb{Y})$ genau dann, wenn
 $$\pi_1 \in \cpl(\mathcal{L}(\ip_1(\mathbb{X})), \mathcal{L}(\ip_1(\mathbb{Y})))$$
@@ -7,7 +8,7 @@ existieren, sodass
 $$\pi = \pi_1 \otimes k_1 \otimes ... \otimes k_{N-1}$$
 \end{lemma}
 \begin{proof}
-Da $\mathbb{X}, \mathbb{Y} \in \CFP_p$ können wir die Verteilungen schreiben als $\mathbb{P}^{\mathbb{X}} = \uf_1(\mu)$, $\mathbb{P}^{\mathbb{Y}}=\uf_1(\nu)$.
+Da $\mathbb{X}, \mathbb{Y} \in \CFP_p$ können wir die Verteilungen schreiben als $\mathbb{P}^{\mathbb{X}} = \uf_1(\mu)$, $\mathbb{P}^{\mathbb{Y}}=\uf_1(\nu)$ für $\mu, \nu \in \mathcal{P}_p(\mathcal{Z}_1)$.
 \begin{enumerate}
 \item
 Nehmen wir zunächst an, dass $\pi \in \cplbc(\mathbb{X}, \mathbb{Y})$. Dann können wir die Kerne wählen als 
@@ -16,53 +17,57 @@ Für diese Wahl gilt $\pi = \pi_1 \otimes k_1 \otimes ... \otimes k_{N-1}$ und m
 $${\operatorname{pj}_1}_*\mathcal{L}_\pi(z_{t+1}, \hat{z}_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z}, \mathcal{Z}}) = \mathcal{L}_\pi(\operatorname{pj}_1(z_{t+1}, \hat{z}_{t+1}) \vert \mathcal{F}_{t,t}^{\mathcal{Z}, \mathcal{Z}}) = \mathcal{L}_\pi(z_{t+1},  \vert \mathcal{F}_{t,t}^{\mathcal{Z}, \mathcal{Z}})$$
 und $\mathcal{L}_\pi(\hat{z}_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z},\mathcal{Z}})$. Da $\pi$ bikausal ist, gilt nach Lemma \ref{thm:causality_characterization} 
 $$\mathcal{L}_\pi(z_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}}) = \mathcal{L}_\pi(z_{t+1} \vert \mathcal{F}_{t,0}^{\mathcal{Z,Z}})=\mathcal{L}_{\mathbb{P}^{\mathbb{X}}}(z_{t+1} \vert \mathcal{F}_t^\mathcal{Z})$$
-wobei wir für die letzte Gleichheit Lemma \ref{thm:pushforward_expectancy} auf die Projektion auf die erste Koordinate angewendet haben. Aufgrund der Form $\mathbb{P}^{\mathbb{X}} = \uf_1(\mu)$ gilt aber $\mathcal{L}_{\mathbb{P}^{\mathbb{X}}}(z_{t+1} \vert \mathcal{F}_t^{\mathcal{Z}}) = z_t^+$: Dieser Kern ist $\mathcal{F}_t^{\mathcal{Z}}$ messbar, und die gemeinsame Verteilung ist 
+wobei wir für die letzte Gleichheit Lemma \ref{thm:pushforward_expectancy} auf die Projektion auf die erste Koordinate angewendet haben. Aufgrund der Form $\mathbb{P}^{\mathbb{X}} = \uf_1(\mu)$ gilt aber $\mathcal{L}_{\mathbb{P}^{\mathbb{X}}}(z_{t+1} \vert \mathcal{F}_t^{\mathcal{Z}}) = z_t^+$: Dieser Kern ist $\mathcal{F}_t^{\mathcal{Z}}$-messbar, und die induzierte Verteilung ist 
 $$\mathcal{L}_{\mathbb{P}^{\mathbb{X}}}(z_{1:t}) \otimes z_t^+ = \mu \otimes z_1^+ \otimes ... \otimes z_{t-1}^+  \otimes z_t^+ = \operatorname{pj}_{1:t+1}(\uf_1(\mu)) = \mathcal{L}_{\mathbb{P}^{\mathbb{X}}}(z_1,...,z_{t+1})$$
 Es gilt also $\mathcal{L}_\pi(z_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}}) = z_t^+$ und analog $\mathcal{L}_\pi(\hat{z}_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}}) = \hat{z}_t^+$ und somit $k_t^{z_{1:t}, \hat{z}_{1:t}} \in \cpl(z_t^+, \hat{z}_t^+)$.
+
+Nach Bemerkung \ref{thm:ip_of_canonical_process} ist $\mathcal{L}(\ip_1(\mathbb{X})) = \mu = \pj_1(\mathbb{P}^\mathbb{X}) = \pj_1(\pi_1)$. Es gilt also auch $\pi_1 \in \cpl(\mathcal{L}(\ip_1(\mathbb{X})), \mathcal{L}(\ip_1(\mathbb{Y})))$.
 \item
 Nehme nun umgekehrt an, dass es solche Kerne $k_t$ gibt. Dann ist 
 $$\operatorname{pj}_1(\pi) = \operatorname{pj}_1(\pi_1 \otimes k_1 \otimes ... \otimes k_{N-1}) = \mu \otimes z_1^+ \otimes ... \otimes z_{N-1}^+ = \uf_1(\mu) = \mathbb{P}^\mathbb{X}$$
 und $\operatorname{pj}_2(\pi) = \mathbb{P}^\mathbb{Y}$ und somit $\pi \in \cpl(\mathbb{X}, \mathbb{Y})$. 
 
-Weiterhin gilt $k_t = \mathcal{L}_\pi(z_{t+1}, \hat{z}_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}})$ da $\mathcal{L}(z_{1:t}, \hat{z}_{1:t}) \otimes k_t = \mathcal{L}(z_{1:t+1}, \hat{z}_{1:t+1})$. Für ein $\mathcal{F}_{t+1}^\mathcal{Z}$-messbares $U$ gilt dann
+Weiterhin gilt $k_t = \mathcal{L}_\pi(z_{t+1}, \hat{z}_{t+1} \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}})$, da $\mathcal{L}(z_{1:t}, \hat{z}_{1:t}) \otimes k_t = \mathcal{L}(z_{1:t+1}, \hat{z}_{1:t+1})$. Für ein $\mathcal{F}_{t+1}^\mathcal{Z}$-messbares $U$ gilt dann
 \begin{align*}
     \mathbb{E}_\pi(U(z_{1:t+1}) \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}}) &= \int U(z_{1:t}, z_{t+1}) k_t^{z_{1:t}, \hat{z}_{1:t}}(dz_{t+1}, d\hat{z}_{t+1}) \\
     &= \int U(z_{1:t}, z_{t+1}) z_t^+(dz_{t+1})
 \end{align*}
-und der letzte Term ist $\mathcal{F}_{t}^{\mathcal{Z}}$ messbar. Mit der Turmeigenschaft folgt also für ein $\mathcal{F}_N^\mathcal{Z}$-messbares $U$, dass $\mathbb{E}_\pi\left(U \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}}\right)$ $\mathcal{F}_{t,0}^{\mathcal{Z,Z}}$ messbar ist und damit Kausalität von $\pi$. Aus Symmetriegründen ist $\pi$ bikausal, also $\pi \in \cplbc(\mathbb{X}, \mathbb{Y})$.
+und der letzte Term ist $\mathcal{F}_{t,0}^{\mathcal{Z,Z}}$-messbar. Mit der Turmeigenschaft folgt also für ein $\mathcal{F}_N^\mathcal{Z}$-messbares $U$, dass $\mathbb{E}_\pi\left(U \vert \mathcal{F}_{t,t}^{\mathcal{Z,Z}}\right)$ $\mathcal{F}_{t,0}^{\mathcal{Z,Z}}$-messbar ist und damit Kausalität von $\pi$. Aus Symmetriegründen ist $\pi$ bikausal, also $\pi \in \cplbc(\mathbb{X}, \mathbb{Y})$.
 \end{enumerate}
 \end{proof}
-\begin{theorem} \label{thm:separating_measures}%TODO Quelle: Markov Processes, Characterization and Convergence
-    Sei $(A, d)$ ein polnischer Raum und $M \subset C_b(A)$ eine punktetrennende Algebra, das heißt für $x,y\in A$ existiert ein $f\in M$ mit $f(x)\neq f(y)$. Dann ist $M$ separierend für $\mathcal{P}(A)$, das heißt für $\mu, \nu \in \mathcal{P}(A)$ mit
+Der folgende Satz stammt aus \cite[Satz 4.5]{markov_processes_ethier} und charakterisiert separierende Teilmengen von $C_b$ für Verteilungen:
+\begin{theorem} \label{thm:separating_measures}
+    Sei $(A, d)$ ein polnischer Raum und $M \subset C_b(A)$ eine punktetrennende Algebra, das heißt für $x,y\in A$ existiert ein $f\in M$ mit $f(x)\neq f(y)$. Dann ist $M$ \emph{separierend} für $\mathcal{P}(A)$, das heißt für $\mu, \nu \in \mathcal{P}(A)$ mit
     \begin{equation}\label{eq:A20}
         \mu(f)=\nu(f) \quad \forall f \in M 
     \end{equation}
     gilt $\mu=\nu$.
 \end{theorem}
 \begin{proof}
-    Seien $\mu, \nu \in \mathcal{P}(A)$ mit $\mu(f)=\nu(f)\forall f\in M$. Da $M$ eine Algebra ist, ist auch $H:=\{f+a \vert f \in M, a\in \mathbb{R}\}$ eine Algebra, und Gleichung \ref{eq:A20} gilt auch für $h \in H$. Sei $\varepsilon>0$. Da $(A, d)$ polnisch ist sind $\mu$ und $\nu$ straff, wir können also kompakte $K_1,K_2 \subset A$ wählen sodass $\mu(K_1)\geq 1-\varepsilon$ und $nu(K_2)\geq 1-\varepsilon$. Für das kompakte $K:=K_1\cup K_2$ gilt dann $\mu(K)\geq 1-\varepsilon$ und $\nu(K)\geq 1-\varepsilon$. Sei $g \in C_b(A)$ beliebig. Die Menge $\{g_{\vert K} \vert g \in H\}$ ist eine punktetrennende Algebra und enthält die Funktion $g\equiv 1$. Somit liegt sie dicht in $C_b(K)$ bezüglich $\|\cdot \|_\infty$. Wir können also $(g_n) \subset H$ wählen mit $\sup\limits_{x\in K} |g_n(x)-g(x)\| \rightarrow 0$ für $n\rightarrow \infty$. Für jedes $g_n$ gilt
+    Seien $\mu, \nu \in \mathcal{P}(A)$ mit $\mu(f)=\nu(f)\forall f\in M$. Da $M$ eine Algebra ist, ist auch $H:=\{f+a \vert f \in M, a\in \mathbb{R}\}$ eine Algebra, und Gleichung \ref{eq:A20} gilt auch für $h \in H$. Sei $\varepsilon>0$. Da $(A, d)$ polnisch ist, sind $\mu$ und $\nu$ straff, wir können also kompakte $K_1,K_2 \subset A$ wählen, sodass $\mu(K_1)\geq 1-\varepsilon$ und $\nu(K_2)\geq 1-\varepsilon$. Für das kompakte $K:=K_1\cup K_2$ gilt dann $\mu(K)\geq 1-\varepsilon$ und $\nu(K)\geq 1-\varepsilon$. Sei $g \in C_b(A)$ beliebig. Die Menge $\{h_{\vert K} \vert h \in H\}$ ist eine punktetrennende Algebra und enthält die Funktion $h\equiv 1$. Nach dem Satz von Stone-Weierstraß liegt sie dicht in $C_b(K)$ bezüglich $\|\cdot \|_\infty$. Wir können also $(g_n) \subset H$ wählen mit $\sup\limits_{x\in K} |g_n(x)-g(x)| \rightarrow 0$ für $n\rightarrow \infty$. Für jedes $g_n$ gilt
+
     \begin{equation}\label{eq:A21}
-    \int_A g_n \exp{-\varepsilon g_n^2} d\mu = \int_A g_n \exp{-\varepsilon g_n^2} d\nu
+    \int_A g_n \exp(-\varepsilon g_n^2) d\mu = \int_A g_n \exp(-\varepsilon g_n^2) d\nu
     \end{equation}
     nach dominierter Konvergenz, da 
-    $$ g_n \sum_{k=0}^{N} \frac{(-\varepsilon g_n^2)^k}{k!} \rightarrow g_n \exp{-\varepsilon g_n^2}$$
-    dominiert durch $\|g_n\|_{\infty}$, und die Funktionen auf der linken Seite liegen in der Algebra $H$. Somit gilt
+    $$ g_n \sum_{k=0}^{N} \frac{(-\varepsilon g_n^2)^k}{k!} \rightarrow g_n \exp(-\varepsilon g_n^2)$$
+    dominiert durch $\exp\left(\|g_n\|_{\infty}^2\right)$, und die Funktionen auf der linken Seite liegen in der Algebra $H$. Es gilt
     \begin{align*}
-        \left| \int ge^{-\varepsilon g^2}\right. & \left. d\mu - \int ge^{-\varepsilon g^2}d\nu \right|  \\
-        \leq &\left| \int_S ge^{-\varepsilon g^2}d\mu - \int_K ge^{-\varepsilon g^2}d\mu \right| \\
-        &+ \left| \int_K ge^{-\varepsilon g^2}d\mu - \int_K g_ne^{-\varepsilon g_n^2}d\mu \right| \\
-        &+ \left| \int_K g_ne^{-\varepsilon g_n^2}d\mu - \int_S g_ne^{-\varepsilon g_n^2}d\mu \right| \\
-        &+ \left| \int_S g_ne^{-\varepsilon g_n^2}d\mu - \int_S g_ne^{-\varepsilon g_n^2}d\nu \right| \\
-        &+ \left| \int_S g_ne^{-\varepsilon g_n^2}d\nu - \int_K g_ne^{-\varepsilon g_n^2}d\nu \right| \\
-        &+ \left| \int_K g_ne^{-\varepsilon g_n^2}d\nu - \int_K ge^{-\varepsilon g^2}d\nu \right| \\
-        &+ \left| \int_K ge^{-\varepsilon g^2}d\nu - \int_S ge^{-\varepsilon g^2}d\nu \right| \\
+        \left| \int ge^{-\varepsilon g^2} \right.&\left.d\mu - \int ge^{-\varepsilon g^2}d\nu \right|  
+        \leq \left| \int_S ge^{-\varepsilon g^2}d\mu - \int_K ge^{-\varepsilon g^2}d\mu \right| \\
+        &+ \left| \int_K ge^{-\varepsilon g^2}d\mu - \int_K g_ne^{-\varepsilon g_n^2}d\mu \right| 
+        + \left| \int_K g_ne^{-\varepsilon g_n^2}d\mu - \int_S g_ne^{-\varepsilon g_n^2}d\mu \right| \\
+        &+ \left| \int_S g_ne^{-\varepsilon g_n^2}d\mu - \int_S g_ne^{-\varepsilon g_n^2}d\nu \right| 
+        + \left| \int_S g_ne^{-\varepsilon g_n^2}d\nu - \int_K g_ne^{-\varepsilon g_n^2}d\nu \right| \\
+        &+ \left| \int_K g_ne^{-\varepsilon g_n^2}d\nu - \int_K ge^{-\varepsilon g^2}d\nu \right| 
+        + \left| \int_K ge^{-\varepsilon g^2}d\nu - \int_S ge^{-\varepsilon g^2}d\nu \right| \\
     \end{align*}
-    Der 4. Term auf der rechten Seite ist 0 nach Gleichung \ref{eq:A21}. Die Terme 1, 3, 5 und 7 sind jeweils beschränkt durch $\gamma \sqrt{\varepsilon}, \gamma:=\sup_{t\geq 0}te^{-t^2}$, da 
-    $$te^{-\varepsilon t^2}=\frac{1}{\sqrt{\varepsilon}}(\sqrt{\varepsilon} t)e^{-(\sqrt{\varepsilon}t)^2} \leq \frac{1}{\sqrt{\varepsilon}} \gamma$$
-    und $\mu(S\setminus K), \nu(S\setminus K) < \varepsilon$. Die Terme 2 und 6 konvergieren gegen $0$ für $n\rightarrow \infty$, da $g_n \rightarrow g$ gleichmäßig auf $K$ und $t \mapsto te^{-\varepsilon t^2}$ lipschitzstetig ist, also auch $g_n e^{-\varepsilon g_n^2} \rightarrow g e^{-\varepsilon g^2}$ gleichmäßig auf $K$. Wir erhalten also für $n\rightarrow \infty$
-    $$\int ge^{-g^2\varepsilon}d\mu - \int ge^{-\varepsilon g^2} d\nu \leq 4\gamma\sqrt{\varepsilon}$$
-    Für $\varepsilon \rightarrow 0$ folgt mit dominierter Konvergenz ($g$ und somit $ge^{-\varepsilon g^2}$ sind gleichmäßig beschränkt und $ge^{-\varepsilon g^2} \rightarrow g$ punktweise für $\varepsilon \rightarrow 0$) dass
+    Der 4. Summand auf der rechten Seite ist 0 nach Gleichung \ref{eq:A21}. Die Summanden 1, 3, 5 und 7 sind jeweils beschränkt durch $\gamma \sqrt{\varepsilon}, \gamma:=\sup_{t\geq 0}te^{-t^2}$, da 
+    $$te^{-\varepsilon t^2}=\frac{1}{\sqrt{\varepsilon}}(\sqrt{\varepsilon} t)e^{-(\sqrt{\varepsilon}t)^2} \leq \frac{1}{\sqrt{\varepsilon}} \gamma \, \text{ und } \, \mu(S\setminus K), \nu(S\setminus K)<\varepsilon$$
+    Die Summanden 2 und 6 konvergieren gegen $0$ für $n\rightarrow \infty$, da $g_n \rightarrow g$ gleichmäßig auf $K$ und $t \mapsto te^{-\varepsilon t^2}$ lipschitzstetig ist, also auch $g_n e^{-\varepsilon g_n^2} \rightarrow g e^{-\varepsilon g^2}$ gleichmäßig auf $K$. Wir erhalten für $n\rightarrow \infty$
+    $$\left|\int ge^{-g^2\varepsilon}d\mu - \int ge^{-\varepsilon g^2} d\nu \right|\leq 4\gamma\sqrt{\varepsilon}$$
+    Für $\varepsilon \rightarrow 0$ folgt mit dominierter Konvergenz ($g$ und somit $ge^{-\varepsilon g^2}$ sind unabhängig von $\varepsilon$ beschränkt und $ge^{-\varepsilon g^2} \rightarrow g$ punktweise für $\varepsilon \rightarrow 0$), dass
     $$\int gd\mu = \int gd\nu$$
 
-    Sei nun $E \subset A$ abgeschlossen. Für $n\in \mathbb{N}$ sind die Funktionen $g_n: x \mapsto 1 - m \cdot d(x, E)$ stetig und beschränkt, also $\mu(g_n) = \nu(g_n)$ für alle $n \in \mathbb{N}$. Es gilt $g_n \rightarrow \mathds{1}_E$ dominiert durch $1$, mit dominierter Konvergenz gilt also $\mu(E)=\nu(E)$. Abgeschlossene Mengen sind ein $\cap$-stabiler Erzeuger von $\mathcal{B}(A)$, insgesamt folgt also $\mu=\nu$.
+    Sei nun $E \subset A$ abgeschlossen. Für $n\in \mathbb{N}$ sind die Funktionen $g_n: x \mapsto 1 - n \cdot d(x, E)$ stetig und beschränkt, also $\mu(g_n) = \nu(g_n)$ für alle $n \in \mathbb{N}$. Es gilt $g_n \rightarrow \mathds{1}_E$ dominiert durch $1$, mit dominierter Konvergenz gilt also $\mu(E)=\nu(E)$. Abgeschlossene Mengen sind ein $\cap$-stabiler Erzeuger von $\mathcal{B}(A)$, insgesamt folgt also $\mu=\nu$.
 \end{proof}

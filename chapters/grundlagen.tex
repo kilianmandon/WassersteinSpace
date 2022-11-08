@@ -1,22 +1,22 @@
 \subsection{Notation}
 Für den Verlauf dieser Arbeit fixieren wir einen Zeit-Horizont $N \in \mathbb{N}$ und $p \in [1,\infty)$. Für $1\leq t \leq N$ sei $\mathcal{X}_t$ ein polnischer Raum mit einer kompatiblen Metrik $d_{\mathcal{X}_t}$. Für Mengen $\left(A_{i}\right)_{s\leq i \leq r}$ kürzen wir das kartesische Produkt ab durch
 $$A_{s:r} := A_s \times ... \times A_r$$
-Mit dieser Notation schreiben wir $\mathcal{X}:=\mathcal{X}_{1:N}$. Wo dies nicht näher spezifiziert wird benutzen wir auf Produkten von metrischen Räumen $(\mathcal{X}_1, d_1)$ und $(\mathcal{X}_2, d_2)$ die $p$-Produktmetrik, das heißt $d(\cdot, \cdot) = \left(d_1^p(\cdot, \cdot) + d_2^p(\cdot, \cdot) \right)^\frac{1}{p}$.
+Mit dieser Notation schreiben wir $\mathcal{X}:=\mathcal{X}_{1:N}$. Wo dies nicht näher spezifiziert wird, benutzen wir auf Produkten von metrischen Räumen $(\mathcal{X}_1, d_1)$ und $(\mathcal{X}_2, d_2)$ die $p$-Produktmetrik, das heißt $d(\cdot, \cdot) = \left(d_1^p(\cdot, \cdot) + d_2^p(\cdot, \cdot) \right)^\frac{1}{p}$.
 
-Für einen polnischen Raum $\mathcal{A}$ mit kompatibler Metrik $d_\mathcal{A}$ betrachten wir zwei Räume von Maßen: $\mathcal{P}(\mathcal{A})$, den Raum der Borel-Wahrscheinlichkeitsmaße auf $\mathcal{A}$, und die Teilmenge $\mathcal{P}_p(\mathcal{A}) \subset \mathcal{P}(\mathcal{A})$ der Wahrscheinlichkeitsmaße mit endlichem $p$-ten Moment, das heißt
+Für einen polnischen Raum $\mathcal{A}$ mit kompatibler Metrik $d_\mathcal{A}$ betrachten wir zwei Räume von Maßen: $\mathcal{P}(\mathcal{A})$, den Raum der Borel-Wahrscheinlichkeitsmaße auf $\mathcal{A}$, und die Teilmenge $\mathcal{P}_p(\mathcal{A}) \subset \mathcal{P}(\mathcal{A})$ der Wahrscheinlichkeitsmaße mit endlichen $p$-ten Momenten, das heißt
 $$\int d_\mathcal{A}^p(a_0, x) \mu(dx) < \infty$$
-für ein fixes (und damit für alle) $a_0 \in \mathcal{A}$. Für zwei Wahrscheinlichkeitsmaße $\mu \in \mathcal{P}(\mathcal{A}), \nu \in \mathcal{P}(\mathcal{B})$ schreiben wir $\cpl(\mu, \nu)$ für die Menge aller \emph{Kopplungen} von $\mu$ und $\nu$, das heißt Maße $\pi \in \mathcal{P}(\mathcal{A} \times \mathcal{B})$ mit $\pi(\cdot, \mathcal{B})\equiv \mu$ und $\pi(\mathcal{A}, \cdot)=\nu$. 
+für ein fixes (und damit für alle) $a_0 \in \mathcal{A}$. Für zwei Wahrscheinlichkeitsmaße $\mu \in \mathcal{P}(\mathcal{A}), \nu \in \mathcal{P}(\mathcal{B})$ schreiben wir $\cpl(\mu, \nu)$ für die Menge aller \emph{Kopplungen} von $\mu$ und $\nu$, das heißt Maße $\pi \in \mathcal{P}(\mathcal{A} \times \mathcal{B})$ mit $\pi(\cdot, \mathcal{B})= \mu$ und $\pi(\mathcal{A}, \cdot)=\nu$. 
 
-Für ein Maß $\mu \in \mathcal{P}(\mathcal{A})$ und eine messbare Funktion $f: \mathcal{A} \rightarrow \mathbb{R}$ schreiben wir $\mu(f)$ für den Erwartungswert $\mathbb{E}_\mu(f)$. Für eine messbare Abbildung $X: \mathcal{A} \rightarrow \mathcal{C}$ schreiben wir $\mu^X$, $X_*\mu$ oder $\mathcal{L}(X)$ für das Bildmaß $\mu^X(A) = \mu(X^{-1}(A))$. 
+Für ein Maß $\mu \in \mathcal{P}(\mathcal{A})$ und eine messbare Funktion $f: \mathcal{A} \rightarrow \mathbb{R}$ schreiben wir $\mu(f)$ für den Erwartungswert $\mathbb{E}_\mu(f)$. Für eine messbare Abbildung $X: \mathcal{A} \rightarrow \mathcal{C}$ schreiben wir $\mu^X$, $X_*\mu$ oder $\mathcal{L}(X)$ für das Bildmaß $\mu^X(C) = \mu(X^{-1}(C))$. 
 
 Für ein $c>0$ und eine Funktion $f$ mit Werten in $\mathbb{R}$ schreiben wir $\clip_c(f):= \min\{c, \max\{-c, f\}\}$ für die geklippte Funktion.
 
-\subsection{Wasserstein-Distanz}
-\begin{definition}[Wasserstein-Distanz]\label{def:wasserstein_distance}
-    Sei $\mathcal{A}$ polnisch mit einer fixierten kompatiblen Metrik $d_\mathcal{A}$. Die $p$-te Wasserstein"=Distanz zwischen zwei Wahrscheinlichkeitsmaßen $\mu, \nu \in \mathcal{P}_p(\mathcal{A})$ ist definiert als
+\subsection{Wasserstein-Metrik}
+\begin{definition}[Wasserstein-Metrik]\label{def:wasserstein_distance}
+    Sei $\mathcal{A}$ polnisch mit einer fixierten kompatiblen Metrik $d_\mathcal{A}$. Die $p$-te Wasserstein"=Metrik zwischen zwei Wahrscheinlichkeitsmaßen $\mu, \nu \in \mathcal{P}_p(\mathcal{A})$ ist definiert als
     $$\mathcal{W}_p(\mu, \nu) := \left( \inf_{\pi \in \cpl(\mu, \nu)} \int d^p_\mathcal{A}(x, y) \pi(dx, dy) \right)^\frac{1}{p}$$
 \end{definition}
-Wir versehen $\mathcal{P}(\mathcal{A})$ mit der Topologie von schwacher Konvergenz, das heißt eine Basis der Topologie sind Mengen $\{U_{f, x, r} \vert f \in C_b(\mathcal{A}), x\in \mathbb{R}, r>0\}$ der Form 
+Eine mögliche Kopplung ist das Produktmaß. Bezüglich diesem ist das Integral endlich, somit ist auch $\mathcal{W}_p$ endlich. Wir versehen $\mathcal{P}(\mathcal{A})$ mit der Topologie von schwacher Konvergenz, das heißt eine Basis der Topologie sind Mengen $\{U_{f, x, r} \vert f \in C_b(\mathcal{A}), x\in \mathbb{R}, r>0\}$ der Form 
 $$U_{f, x, r} = \left\{ \mu \in \mathcal{P}(\mathcal{A}) \vert \left| \int f d\mu - x\right| < r\right\}$$
 Bezüglich dieser Topologie betrachten wir auf $\mathcal{P}(\mathcal{A})$ die Borel $\sigma$"=Algebra. Auf $\mathcal{P}_p(\mathcal{A})$ ist die Topologie induziert durch $\mathcal{W}_p$, und auch hier betrachten wir die assoziierte Borel $\sigma$-Algebra. Nach dem Satz von Prokhorov (Satz \ref{thm:prokhorov}) ist die Topologie schwacher Konvergenz metrisierbar, insbesondere genügt für viele topologische Fragen die Betrachtung von Folgen. \\
 
@@ -30,7 +30,7 @@ Eine wichtige Eigenschaft in Räumen von Verteilungen ist das Konzept von \emph{
 \begin{theorem}[Satz von Prokhorov]\label{thm:prokhorov}
 Sei $(\mathcal{A}, d)$ ein polnischer Raum. Dann ist die Topologie schwacher Konvergenz auf $\mathcal{P}(\mathcal{A})$ vollständig metrisierbar und es gilt folgende Äquivalenz:
 
-Eine Menge $M \subset \mathcal{P}(\mathcal{A})$ ist straff, genau dann wenn sie relativ kompakt ist.
+Eine Menge $M \subset \mathcal{P}(\mathcal{A})$ ist straff genau dann, wenn sie relativ kompakt ist.
 \end{theorem}
 
 \begin{lemma}\label{thm:closed_couplings}
@@ -39,7 +39,7 @@ Seien $\mathcal{A,B}$ polnische Räume. Dann gilt:
     \item Für eine Folge $(\mu_n)_{n\in \mathbb{N}} \subset\mathcal{P}(A)$ mit $\mu_n \rightarrow \mu \in \mathcal{P}(A)$ ist der Grenzwert eindeutig.
     \item Für eine Folge $(\pi_n) \subset \mathcal{P}(\mathcal{A} \times \mathcal{B})$ mit $\pi_n \rightarrow \pi$ konvergieren auch die Marginalien von $\pi_n$ schwach gegen die von $\pi$. 
     \item Für $\mu \in \mathcal{P}(\mathcal{A}), \nu \in \mathcal{P}(\mathcal{B})$ ist $\cpl(\mu, \nu)$ abgeschlossen.
-    \item Für straffe Menge $\mathcal{Q}\subset \mathcal{P}(\mathcal{A}), \mathcal{R}\subset \mathcal{P}(\mathcal{B})$ ist die Menge $\Pi\subset \mathcal{P}(\mathcal{A}\times\mathcal{B})$ aller Verteilungen mit Marginalien in $\mathcal{Q}$ und $\mathcal{R}$ abgeschlossen.
+    \item Für straffe Mengen $\mathcal{Q}\subset \mathcal{P}(\mathcal{A}), \mathcal{R}\subset \mathcal{P}(\mathcal{B})$ ist die Menge $\Pi\subset \mathcal{P}(\mathcal{A}\times\mathcal{B})$ aller Verteilungen mit Marginalien in $\mathcal{Q}$ und $\mathcal{R}$ straff.
 \end{enumerate}
 \end{lemma}
 \begin{proof}
@@ -57,11 +57,11 @@ Seien $\mathcal{A,B}$ polnische Räume. Dann gilt:
     \item Für eine Folge von Kopplungen $(\pi_n)_{n\in\mathbb{N}} \subset \cpl(\mu,\nu)$ konvergent gegen $\pi$ konvergieren nach dem zweiten Punkt auch die Marginalien von $\pi_n$ gegen die von $\pi$. Die Marginalien sind aber konstant $\mu$ und $\nu$, und wegen der Eindeutigkeit des Grenzwertes nach dem ersten Punkt gilt $\pi \in \cpl(\mu,\nu)$.
 
     \item Sei $\varepsilon > 0$. Wähle kompakte $K_1 \subset \mathcal{A}$ und $K_2 \subset \mathcal{B}$ mit $\mu(K_1^c)<\varepsilon$ und $\nu(K_2^c) < \varepsilon$ für alle $\mu \in \mathcal{Q}$, $\nu \in \mathcal{R}$. Die Menge $K_1 \times K_2$ ist weiterhin kompakt und es gilt für $\pi \in \cpl(\mu,\nu)$, $\mu \in \mathcal{Q}$, $\nu\in\mathcal{R}$
-    $$\pi((K_1\times K_2)^c) \leq \pi((K_1 \times \mathcal{B})^c) + \pi(\mathcal{A} \times K_2^c) = \mu(K_1^c) + \nu(K_2^c) < 2\varepsilon$$
+    $$\pi((K_1\times K_2)^c) \leq \pi((K_1 \times \mathcal{B})^c) + \pi((\mathcal{A} \times K_2)^c) = \mu(K_1^c) + \nu(K_2^c) < 2\varepsilon$$
 \end{enumerate}
 \end{proof}
 \begin{lemma}\label{thm:optimal_coupling}
-In \ref{def:wasserstein_distance} wird dass Infimum tatsächlich angenommen, das heißt es existiert ein $\pi \in \cpl(\mu, \nu)$, sodass
+In \ref{def:wasserstein_distance} wird das Infimum tatsächlich angenommen, das heißt es existiert ein $\pi \in \cpl(\mu, \nu)$, sodass
 $$\mathcal{W}_p(\mu, \nu) = \left( \int d^p_\mathcal{A}(x, y) \pi(dx, dy) \right)^{\frac{1}{p}}$$
 Tatsächlich kann eine Borel-messbare Abbildung $k: \mathcal{P}_p(\mathcal{A}) \times \mathcal{P}_p(\mathcal{A}) \rightarrow \mathcal{P}_p(\mathcal{A}\times \mathcal{A})$ gewählt werden, sodass $k(\mu,\nu)$ für alle $\mu,\nu \in \mathcal{P}_p(\mathcal{A})$ eine optimale Kopplung von $\mu$ und $\nu$ ist.
 \end{lemma}
@@ -76,14 +76,14 @@ Tatsächlich kann eine Borel-messbare Abbildung $k: \mathcal{P}_p(\mathcal{A}) \
     $$\mathbb{E}_{\pi}\left[d^p\left((x,y), (x_0,y_0)\right)\right] = \mathbb{E}_\mu\left[d^p(x,x_0)\right] + \mathbb{E}_\nu\left[d^p(y,y_0)\right] < \infty$$
 \end{proof}
 \begin{lemma}\label{thm:pp_is_polish}
-    Sei $\mathcal{A}$ ein polnischer Raum. Die $p$-te Wassersteindistanz auf $\mathcal{P}_p(\mathcal{A})$ ist tatsächlich eine Metrik und $(\mathcal{P}_p(\mathcal{A}), \mathcal{W}_p)$ ist ein polnischer Raum.
+    Sei $\mathcal{A}$ ein polnischer Raum. Die $p$-te Wasserstein-Metrik auf $\mathcal{P}_p(\mathcal{A})$ ist tatsächlich eine Metrik und $(\mathcal{P}_p(\mathcal{A}), \mathcal{W}_p)$ ist ein polnischer Raum.
 \end{lemma}
 \begin{proof}
     Die Symmetrieeigenschaft ist ersichtlich aus der Definition von $\mathcal{W}_p$. Für zwei Verteilungen $\mu,\nu \in \mathcal{P}_p(\mathcal{A})$ ist $\mathcal{W}_p(\mu, \nu) = 0$ genau dann, wenn ein $\pi \in \cpl(\mu,\nu)$ existiert, bezüglich dem $d^p(X,Y)=0$ fast sicher, also $X=Y$ fast sicher ($X$ und $Y$ bezeichnen die Projektionsabbildungen auf die erste und zweite Koordinate). Falls $\mu=\nu$ ist dies für die Kopplung $(\id, \id)_*\mu$ der Fall. Umgekehrt, falls $X=Y$ fast sicher bezüglich einer Kopplung $\pi$, so gilt für $A \in \mathcal{B}(\mathcal{A})$ 
     $$\mu(A) = \pi(X \in A) = \pi(X\in A, X=Y) = \pi(Y \in A) = \nu(A)$$ 
     Somit ist $\mu=\nu$.
 
-    Für die Dreiecksungleichung, seien $\mu_1, \mu_2, \mu_3 \in \mathcal{P}_p(\mathcal{A})$. Sei $\pi^{12}$ eine optimale Kopplung von $\mu_1$ und $\mu_2$ und sei $\pi^{23}$ eine optimale Kopplung von $\mu_2$ und $\mu_3$ nach Satz \ref{thm:optimal_coupling}. Da $\mathcal{A}$ polnisch ist, können wir nach Satz \ref{thm:disintegration} $\pi^{12}$ gegen $\mu_2$ disintegrieren und erhalten einen Kern $\gamma^{21}$. Genauso können wir $\pi^{23}$ gegen $\mu_2$ disintegrieren und erhalten einen Kern $\gamma^{23}$. Wir betrachten nun den Kern
+    Für die Dreiecksungleichung seien $\mu_1, \mu_2, \mu_3 \in \mathcal{P}_p(\mathcal{A})$. Sei $\pi^{12}$ eine optimale Kopplung von $\mu_1$ und $\mu_2$ und sei $\pi^{23}$ eine optimale Kopplung von $\mu_2$ und $\mu_3$ nach Satz \ref{thm:optimal_coupling}. Da $\mathcal{A}$ polnisch ist, können wir nach Satz \ref{thm:disintegration} $\pi^{12}$ gegen $\mu_2$ disintegrieren und erhalten einen Kern $\gamma^{21}$. Genauso können wir $\pi^{23}$ gegen $\mu_2$ disintegrieren und erhalten einen Kern $\gamma^{23}$. Wir betrachten nun den Kern
     $$\gamma_z(dx, dy) = \gamma_z^{21}(dx)\gamma_z^{23}(dy)$$
     und die induzierte Verteilung
     $$\tilde{\gamma}(dx, dy) = \gamma_z(dx,dy)\mu_2(dz)$$
@@ -106,7 +106,7 @@ $$\mathcal{P}_p(\mathcal{A})\times \mathcal{P}_p(\mathcal{B}) \rightarrow \mathb
 ist halbstetig von unten bezüglich schwacher Konvergenz im linken Raum.
 \end{lemma}
 \begin{proof}
-    Seien $(\mu_n), \mu \in \mathcal{P}_p(\mathcal{A}), (\nu_n), \nu \in \mathcal{P}_p(\mathcal{B})$ mit $\mu_n \rightarrow \mu$ und $\nu_n \rightarrow \nu$ schwach. Wähle entsprechend Satz \ref{thm:optimal_coupling} für $n \in \mathbb{N}$ $\pi_n$ als optimale Kopplung von $\mu_n$ und $\nu_n$. Die Mengen $(\mu_n)$ und $(\nu_n)$ sind konvergent, also straff, und nach Lemma \ref{thm:closed_couplings} ist die Menge alle Kopplungen relativ kompakt. Insbesondere hat $\pi_n$ eine konvergente Teilfolge $\pi_{n_k} \rightarrow \pi \in \mathcal{P}(\mathcal{A}\times\mathcal{B})$. Nach Lemma \ref{thm:closed_couplings} ist $\pi \in \cpl(\mu, \nu)$. 
+    Seien $(\mu_n), \mu \in \mathcal{P}_p(\mathcal{A}), (\nu_n), \nu \in \mathcal{P}_p(\mathcal{B})$ mit $\mu_n \rightarrow \mu$ und $\nu_n \rightarrow \nu$ schwach. Wähle entsprechend Satz \ref{thm:optimal_coupling} für $n \in \mathbb{N}$ $\pi_n$ als optimale Kopplung von $\mu_n$ und $\nu_n$. Die Mengen $(\mu_n)$ und $(\nu_n)$ sind konvergent, also straff, und nach Lemma \ref{thm:closed_couplings} ist die Menge aller Kopplungen relativ kompakt. Insbesondere hat $\pi_n$ eine konvergente Teilfolge $\pi_{n_k} \rightarrow \pi \in \mathcal{P}(\mathcal{A}\times\mathcal{B})$. Nach Lemma \ref{thm:closed_couplings} ist $\pi \in \cpl(\mu, \nu)$. 
     Wegen monotoner und schwacher Konvergenz gilt
     $$\mathbb{E}_\pi(d^p(x,y)) = \lim_{m\rightarrow\infty}\lim_{k\rightarrow\infty} \mathbb{E}_{\pi_{n_k}}(d^p(x,y) \wedge m) \leq \liminf_{k\rightarrow\infty} \mathbb{E}_{\pi_{n_k}}(d^p(x,y))$$
     und somit
@@ -114,10 +114,10 @@ ist halbstetig von unten bezüglich schwacher Konvergenz im linken Raum.
         \mathcal{W}_p^p(\mu, \nu) &\leq \mathbb{E}_\pi(d^p(x,y)) \leq \liminf_{k\rightarrow\infty} \mathbb{E}_{\pi_{n_k}}(d^p(x,y)) \\
         &\leq \liminf_{n\rightarrow\infty}\mathbb{E}_{\pi_n}(d^p(x,y)) = \liminf_{n\rightarrow\infty} \mathcal{W}_p^p(\mu_n, \nu_n)
     \end{align*}
-    Damit ist die Wassersteindistanz in der Tat halbstetig von unten bezüglich schwacher Konvergenz.
+    Damit ist die Wasserstein-Metrik in der Tat halbstetig von unten bezüglich schwacher Konvergenz.
 \end{proof}
 \begin{definition}
-    Sei $\mathcal{A}$ ein polnischer Raum mit fixierter Metrik $d_\mathcal{A}$. Wir nennen eine Familie $\mathcal{K} \subset \mathcal{P}_p(\mathcal{A})$ \emph{$p$-uniform integrierbar}, falls für alle $\varepsilon>0$ und $a_0 \in \mathcal{A}$ ein $R>0$ existiert, sodass
+    Sei $\mathcal{A}$ ein polnischer Raum mit fixierter Metrik $d_\mathcal{A}$. Wir nennen eine Familie $\mathcal{K} \subset \mathcal{P}_p(\mathcal{A})$ \emph{uniform $p$-integrierbar}, falls für alle $\varepsilon>0$ und $a_0 \in \mathcal{A}$ ein $R>0$ existiert, sodass
     $$\sup\limits_{\mu \in \mathcal{K}} \int\limits_{\mathcal{A}\setminus B_{R}(a_0)} d_\mathcal{A}^p(a_0, x)\mu(dx) \leq \varepsilon $$
     Für eine Funktion $f: \mathcal{A} \rightarrow \mathbb{R}$ sagen wir \emph{f hat $p$-Wachstum}, falls 
     $$|f(x)|\leq a(d_\mathcal{A}^p(a_0, x) + 1)$$
@@ -126,22 +126,21 @@ ist halbstetig von unten bezüglich schwacher Konvergenz im linken Raum.
 Mit der Dreiecksungleichung gelten beide Eigenschaften wenn sie für ein $a_0 \in \mathcal{A}$ gelten schon für alle $a_0 \in \mathcal{A}$.
 Für Konvergenz in $\mathcal{P}_p(\mathcal{A})$ gilt folgender Zusammenhang:
 \begin{lemma}\label{thm:conv_char}
-Sei $\mathcal{A}$ ein polnischer Raum mit fixierter Metrik $d_\mathcal{A}$.Sei $(\mu_n) \subset \mathcal{P}_p(\mathcal{A})$, $\mu \in \mathcal{P}_p(\mathcal{A})$. Dann sind die folgenden äquivalent:
+Sei $\mathcal{A}$ ein polnischer Raum mit fixierter Metrik $d_\mathcal{A}$. Sei $(\mu_n) \subset \mathcal{P}_p(\mathcal{A})$, $\mu \in \mathcal{P}_p(\mathcal{A})$. Dann sind die folgenden äquivalent:
 \begin{enumerate}[(i)]
     \item $\mu_n \rightarrow \mu$ bezüglich $\mathcal{W}_p$
-    \item $\mu_n \rightarrow \mu$ schwach und $(\mu_n)$ sind $p$-uniform integrierbar.
+    \item $\mu_n \rightarrow \mu$ schwach und $(\mu_n)$ sind uniform $p$-integrierbar.
     \item $\mu_n(f) \rightarrow \mu(f)$ für jedes stetige $f$ mit $p$-Wachstum.
     \item $\mu_n \rightarrow \mu$ schwach und $\mu_n(d_\mathcal{A}^p(\cdot, a_0)) \rightarrow \mu(d_\mathcal{A}^p(\cdot, a_0))$ für ein $a_0 \in \mathcal{A}$
 \end{enumerate}
 \end{lemma}
 \begin{proof}
-% TODO: Referenz Paper Ambrosio Giggli
-Wir beweisen die Äquivalenz zwischen den Punkten (ii) bis (iv). Die Anbindung an Punkt (i) ist umfangreicher und kann zum Beispiel bei \cite[Satz 6.9]{villani} gefunden werden. \\ 
+Wir beweisen die Äquivalenz zwischen den Punkten (ii) bis (iv) und folgen dafür dem Beweis aus \cite[Proposition 2.4]{Ambrosio2013AUG}. Die Anbindung an Punkt (i) ist umfangreicher und kann zum Beispiel bei \cite[Satz 6.9]{villani} gefunden werden. \\ 
 
 (ii)$\Rightarrow$(iii): \\
 Sei $f$ stetig mit $p$-Wachstum. Wir können $f$ in $f_+ = \max(0, f)$ und $f_-=\max(0, -f)$ zerlegen mit $f=f_+-f_-$. Diese sind nichtnegativ und weiterhin stetig mit $p$-Wachstum. Wir können also annehmen, dass $f\geq 0$. 
 
-Fixiere $a_0 \in \mathcal{A}$. Für $R>0$ seien $\chi_R:\mathcal{A}\rightarrow[0,1]$ stetig, identisch $1$ auf $B_R(a_0)$ und $0$ außerhalb eines Balles. Wir können die $\chi_R$ monoton wachsend in $R$ wählen. Nach der Definition von $p$-Wachstum und weil die $\chi_R$ beschränkten Träger haben, sind die Funktionen $f\chi_R$ stetig und beschränkt und approximieren $f$ von unten. Es gilt $\mu(f) = \lim\limits_{m\rightarrow \infty} \mu(f_m)$ nach monotoner Konvergenz und für jedes $m \in \mathbb{N}$ gilt 
+Fixiere $a_0 \in \mathcal{A}$. Für $R>0$ seien $\chi_R:\mathcal{A}\rightarrow[0,1]$ stetig, identisch $1$ auf $B_R(a_0)$ und $0$ außerhalb eines Balles. Wir können die $\chi_R$ monoton wachsend in $R$ wählen. Nach der Definition von $p$-Wachstum und weil die $\chi_R$ beschränkten Träger haben, sind die Funktionen $f_m := f\chi_m, m\in \mathbb{N}$ stetig und beschränkt und approximieren $f$ von unten. Es gilt $\mu(f) = \lim\limits_{m\rightarrow \infty} \mu(f_m)$ nach monotoner Konvergenz und für jedes $m \in \mathbb{N}$ gilt 
 $$\mu(f_m) = \lim\limits_{n\rightarrow\infty}\mu_n(f_m) \leq \liminf\limits_{n\rightarrow\infty}\mu_n(f)$$
 und somit auch 
 $$\mu(f) = \lim_{m\rightarrow\infty} \mu(f_m) \leq \liminf\limits_{n\rightarrow\infty}\mu_n(f)$$
@@ -152,7 +151,7 @@ Nun ist, da $f(x)\leq C(1+d_\mathcal{A}^p(a_0, x)) \leq 2Cd_\mathcal{A}^p(a_0, x
 $$\int fd\mu_n = \int f\chi d\mu_n + \int f\cdot(1-\chi)d\mu_n \leq \int f\chi d\mu_n + 2C\varepsilon \rightarrow \mu(\chi f) + 2C\varepsilon$$
 und 
 $$\limsup_{n\rightarrow\infty}\mu_n(f) \leq \mu(\chi f) + 2C\varepsilon \leq \mu(f) + 2C\varepsilon$$
-Da $\varepsilon$ beliebig folgt $\mu_n(f) \rightarrow \mu(f)$
+Da $\varepsilon>0$ beliebig gewählt wurde folgt $\mu_n(f) \rightarrow \mu(f)$.
 
 (iii)$\Rightarrow$(iv) ist klar, da $d^p_\mathcal{A}(a_0, \cdot)$ stetig mit $p$-Wachstum ist.
 
@@ -161,7 +160,7 @@ Angenommen es existiert ein $\varepsilon > 0$ und $a_0 \in \mathcal{A}$ sodass f
 \begin{equation} \label{eq:1}
 \sup\limits_{n\in\mathbb{N}}\int_{\mathcal{A}\setminus B_R(a_0)}d_\mathcal{A}^p(a_0, x)\mu_n(dx)>\varepsilon
 \end{equation}
-Beachte, dass es für jedes $\varepsilon>0$ unendlich viele $n \in \mathbb{N}$ geben muss, die Gleichung \ref{eq:1} erfüllen: Ansonsten könnte man R so vergrößern, dass für die endlich vielen Terme das Integral unter $\varepsilon$ gezwungen wird, und hätte damit einen Widerspruch. Es gilt also
+Beachte, dass es für jedes $\varepsilon>0$ unendlich viele $n \in \mathbb{N}$ geben muss, die Gleichung \ref{eq:1} erfüllen: Ansonsten könnte man das $R$ so vergrößern, dass für die endlich vielen Terme das Integral unter $\varepsilon$ gezwungen wird, und hätte damit einen Widerspruch. Es gilt also
 $$\limsup\limits_{n\in\mathbb{N}}\int_{\mathcal{A}\setminus B_R(a_0)}d^p_\mathcal{A}(a_0, x)\mu_n(dx)>\varepsilon$$
 Wähle für jedes $R>0$ $\chi_R: \mathcal{A}\rightarrow [0,1]$ stetig mit Träger in $B_R(a_0)$, identisch $1$ auf $B_{\frac{R}{2}}(a_0)$ und monoton wachsend in $R$. Dann gilt
 \begin{align*}
@@ -172,11 +171,11 @@ Wähle für jedes $R>0$ $\chi_R: \mathcal{A}\rightarrow [0,1]$ stetig mit Träge
     &\leq \int d^p_\mathcal{A}(a_0, x)\mu(dx) - \varepsilon
 \end{align*}
 und nun folgt mit monotoner Konvergenz
-$$\int d^p_\mathcal{A}(a_0, x) = \lim\limits_{n\rightarrow\infty} \int d^p_\mathcal{A}(a_0, x)\chi_n\mu(dx) \leq \int d^p_\mathcal{A}(a_0, x)\mu(dx) - \varepsilon$$
+$$\int d^p_\mathcal{A}(a_0, x)\mu(dx) = \lim\limits_{n\rightarrow\infty} \int d^p_\mathcal{A}(a_0, x)\chi_n\mu(dx) \leq \int d^p_\mathcal{A}(a_0, x)\mu(dx) - \varepsilon$$
 was ein Widerspruch ist.
 \end{proof}
 \begin{lemma} \label{thm:weak_topology_metric}
-Sei $\mathcal{A}$ ein polnischer Raum mit fixierter Metrik $d_\mathcal{A}$. Betrachte weiterhin die beschränkte Metrik $\hat{d}:=d_\mathcal{A} \wedge 1$. Für Verteilungen $\mu_n \subset \mathcal{P}(\mathcal{A})$, $\mu \in \mathcal{P}(\mathcal{A})$ konvergieren $\mu_n \rightarrow \mu$ schwach genau dann, wenn $\mu_n \rightarrow \mu$ bezüglich $\mathcal{W}_p$ auf $(\mathcal{A}, \hat{d})$. Die beschränkte Wassersteinmetrik metrisiert also die schwache Topologie.
+Sei $\mathcal{A}$ ein polnischer Raum mit fixierter Metrik $d_\mathcal{A}$. Betrachte weiterhin die beschränkte Metrik $\hat{d}:=d_\mathcal{A} \wedge 1$. Für Verteilungen $\mu_n \subset \mathcal{P}(\mathcal{A})$, $\mu \in \mathcal{P}(\mathcal{A})$ konvergiert $\mu_n \rightarrow \mu$ schwach genau dann, wenn $\mu_n \rightarrow \mu$ bezüglich $\mathcal{W}_p$ auf $(\mathcal{A}, \hat{d})$. Die Wasserstein-Metrik auf beschränkten Räumen metrisiert also die schwache Topologie.
 \end{lemma}
 \begin{proof}
     Gelte zunächst $\mu_n \rightarrow \mu$ schwach und fixiere ein $a_0 \in \mathcal{A}$. Die Funktion $\hat{d}^p(\cdot, a_0)$ ist stetig und beschränkt, also gilt $\mu_n(\hat{d}^p(\cdot, a_0)) \rightarrow \mu(\hat{d}^p(\cdot, a_0))$ und mit Lemma \ref{thm:conv_char} folgt $\mu_n \rightarrow \mu$ bezüglich $\mathcal{W}_p$ auf $(\mathcal{A}, \hat{d})$.
@@ -184,50 +183,50 @@ Sei $\mathcal{A}$ ein polnischer Raum mit fixierter Metrik $d_\mathcal{A}$. Betr
     Umgekehrt, gelte $\mu_n \rightarrow \mu$ bezüglich $\mathcal{W}_p$ auf $(\mathcal{A}, \hat{d})$. Die Frage von schwacher Konvergenz ist nur eine Frage der Topologie und nicht der konkreten Metrik, und die Topologien auf $(\mathcal{A}, d_\mathcal{A})$ und $(\mathcal{A}, \hat{d})$ sind identisch. Somit folgt auch wieder aus Lemma \ref{thm:conv_char}, dass $\mu_n \rightarrow \mu$ schwach.
 \end{proof}
 \begin{remark}
-    Die genaue Wahl von $\hat{d}$ als $d_\mathcal{A} \wedge 1$ ist nicht zentral für den Beweis, wichtig ist lediglich dass die Metrik beschränkt ist und bei kleinen Abständen identisch, damit die gleiche Topologie erzeugt wird. Wir werden dieses Lemma später auch auf Produkträumen $X \times Y$ benutzen, in denen wir in den einzelnen Räumen die Metrik beschränken und dann die Produktmetrik dieser neuen Metriken verwenden. Das ist kein Problem, da die Metrik trotzdem beschränkt und bei kleinen Abständen identisch ist.
+    Die genaue Wahl von $\hat{d}$ als $d_\mathcal{A} \wedge 1$ ist nicht zentral für den Beweis, wichtig ist lediglich, dass die Metrik beschränkt ist und bei kleinen Abständen identisch, damit die gleiche Topologie erzeugt wird. Wir werden dieses Lemma später auch auf Produkträumen $X \times Y$ benutzen, in denen wir in den einzelnen Räumen die Metrik beschränken und dann die Produktmetrik dieser neuen Metriken verwenden. Das ist kein Problem, da die Metrik trotzdem beschränkt und bei kleinen Abständen identisch ist.
 \end{remark}
-\subsection{Bedingte Erwartungen und Bedingte Verteilungen}
+\subsection{Bedingte Erwartungen und bedingte Verteilungen}
 \begin{definition}
-Seien $(\Omega, \mathcal{F}), (S, \mathcal{S})$ messbare Räume. Mit einem stochastischen Kern $\mu:\Omega \rightarrow S$ bezeichnen eine Abbildung $\Omega \rightarrow \mathcal{P}(S), x\mapsto \mu_x$ sodass für jede Menge $A \in \mathcal{S}$ die Evaluations-Abbildung $x \mapsto \mu_x(A)$ messbar bezüglich der Borel $\sigma$-Algebra auf $[0,1]$ ist.
+Seien $(\Omega, \mathcal{F}), (S, \mathcal{S})$ messbare Räume. Mit einem stochastischen Kern $\mu:\Omega \rightarrow S$ bezeichnen wir eine Abbildung $\Omega \rightarrow \mathcal{P}(S), x\mapsto \mu_x$, sodass für jede Menge $A \in \mathcal{S}$ die Evaluations-Abbildung $x \mapsto \mu_x(A)$ messbar bezüglich der Borel $\sigma$-Algebra auf $[0,1]$ ist.
 \end{definition}
-Die bedingte Verteilung wird ein Kernbaustein der Konstruktion vom Informationsprozess. Die Existenz beruht auf dem Folgenden Satz:
+Die bedingte Verteilung wird ein Kernbaustein der Konstruktion des Informationsprozesses. Die Existenz beruht auf dem folgenden Satz:
 
 \begin{theorem}[Satz 3.4 in \cite{kallenberg}]\label{thm:disintegration}
 Sei $(S, \mathcal{S})$ ein messbarer Raum und $(T,\mathcal{B}(T))$ ein polnischer Raum mit Borel $\sigma$-Algebra. Sei $\rho$ eine Verteilung auf $S\times T$ und $\nu$ die Marginalie von $\rho$ über $S$, d.h. $\nu(A) = \rho(A\times T)$. Dann gibt es einen $\nu$-fast sicher eindeutigen stochastischen Kern $\mu:S\rightarrow T$, sodass $\rho = \nu \otimes \mu$.
 \end{theorem}
 \begin{definition}
-Seien $X, Y$ Zufallsvariablen auf $(\Omega, \mathcal{F}, \mathbb{P})$ mit Werten in messbaren Räumen $(S, \mathcal{S})$ und $(T, \mathcal{B}(T))$, wobei $T$ polnisch ist. Dann existiert nach \ref{thm:disintegration} ein fast sicher eindeutiger Kern $\mu: S\rightarrow T$ mit $\mathbb{P}^{X, Y}=\mathbb{P}^X\otimes \mu$. Diesen bezeichnen wir als \emph{bedingte Verteilung von $Y$ bezüglich $X$} und schreiben $\mathcal{L}(Y \vert X)$.
+Seien $X, Y$ Zufallsvariablen auf $(\Omega, \mathcal{F}, \mathbb{P})$ mit Werten in messbaren Räumen $(S, \mathcal{S})$ und $(T, \mathcal{B}(T))$, wobei $T$ polnisch ist. Dann existiert nach Satz \ref{thm:disintegration} ein fast sicher eindeutiger Kern $\mu: S\rightarrow T$ mit $\mathbb{P}^{X, Y}=\mathbb{P}^X\otimes \mu$. Diesen bezeichnen wir als \emph{bedingte Verteilung von $Y$ bezüglich $X$} und schreiben $\mathcal{L}(Y \vert X)$.
 
-Für eine $\sigma$-Algebra $\mathcal{G} \subset \mathcal{F}$ definieren wir die bedingte Verteilung $\mathcal{L}(Y\vert \mathcal{G})$ wie zuvor bezüglich der Identitätsabbildung $\operatorname{id}:(\Omega, \mathcal{F}) \rightarrow (\Omega, \mathcal{G})$, das heißt als den fast-sicher eindeutigen $\mathcal{G}$-messbaren Kern $\mu:\Omega\rightarrow S$, für den gilt $\left(\mathbb{P}_{\vert \mathcal{G}} \otimes \mu\right)(A\times B)=\mathbb{P}(A, Y\in B)$ für alle $A \in \mathcal{G}, B\in \mathcal{S}$.
+Für eine $\sigma$-Algebra $\mathcal{G} \subset \mathcal{F}$ definieren wir die bedingte Verteilung $\mathcal{L}(Y\vert \mathcal{G})$ wie zuvor bezüglich der Identitätsabbildung $\operatorname{id}:(\Omega, \mathcal{F}) \rightarrow (\Omega, \mathcal{G})$, das heißt als den fast sicher eindeutigen $\mathcal{G}$-messbaren Kern $\mu:\Omega\rightarrow S$, für den gilt $\left(\mathbb{P}_{\vert \mathcal{G}} \otimes \mu\right)(A\times B)=\mathbb{P}(A, Y\in B)$ für alle $A \in \mathcal{G}, B\in \mathcal{S}$.
 \end{definition}
 Eng verwandt mit der bedingten Verteilung ist die bedingte Erwartung:
 \begin{definition}
-Für eine reellwertige, integrierbare Zufallsvariable $X: (\Omega, \mathcal{F}) \rightarrow (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ und eine Unter-$\sigma$-Algebra $\mathcal{G}\subset \mathcal{F}$ definieren wir die bedingte Erwartung $\mathbb{E}(X\vert \mathcal{G})$ als die fast-sicher eindeutige $\mathcal{G}$-messbare Zufallsvariable $\tilde{X}$, sodass für alle beschränkten $\mathcal{G}$-messbaren $Y$ gilt
+Für eine reellwertige, integrierbare Zufallsvariable $X: (\Omega, \mathcal{F}) \rightarrow (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ und eine Unter-$\sigma$-Algebra $\mathcal{G}\subset \mathcal{F}$ definieren wir die bedingte Erwartung $\mathbb{E}(X\vert \mathcal{G})$ als die fast sicher eindeutige $\mathcal{G}$-messbare Zufallsvariable $\tilde{X}$, sodass für alle beschränkten $\mathcal{G}$-messbaren $Y$ gilt
 $$\mathbb{E}(\tilde{X}Y) = \mathbb{E}(XY)$$
 Für Zufallsvariablen $X$ und $Y$ schreiben wir $\mathbb{E}(Y\vert X)$ für $\mathbb{E}(Y \vert \sigma(X))$.
 \end{definition}
 Die bedingte Verteilung und die bedingte Erwartung haben folgenden Zusammenhang:
 \begin{lemma}\label{thm:law_expectancy_connection}
-Seien $X: (\Omega, \mathcal{F})\rightarrow (S, \mathcal{S})$ und $Y: (\Omega, \mathcal{F})\rightarrow(T, \mathcal{B}(T))$ Zufallsvariablen, wobei $T$ polnisch ist. Sei $\mu: S\rightarrow T$ ein stochastischer Kern. Dann ist $\mu = \mathcal{L}(Y\vert X)$ genau dann wenn für alle messbaren, beschränkten $f: T\rightarrow \mathbb{R}$
+Seien $X: (\Omega, \mathcal{F})\rightarrow (S, \mathcal{S})$ und $Y: (\Omega, \mathcal{F})\rightarrow(T, \mathcal{B}(T))$ Zufallsvariablen, wobei $T$ polnisch ist. Sei $\mu: S\rightarrow T$ ein stochastischer Kern. Dann ist $\mu = \mathcal{L}(Y\vert X)$ genau dann, wenn für alle messbaren, beschränkten $f: T\rightarrow \mathbb{R}$
 $$\mathbb{E}(f(Y) \vert X) = \int f(y)\mu_X(dy) \text{ fast sicher}$$
 \end{lemma}
 \begin{proof}
     "$\Rightarrow$": \\
     Sei $f:T\rightarrow \mathbb{R}$ messbar und beschränkt. Mit einem Funktionserweiterungsargument ist $\int f(y)\mu_X(dy)$ messbar bezüglich $\sigma(X)$. Für Mengen $A' \in \sigma(X), A'=X^{-1}(A)$ ist 
     \begin{align*}
-    \mathbb{E}(f(Y(\omega))\mathds{1}_{A'}(\omega)) &= \mathbb{E}(f(Y)\mathds{1}_A(X))\\
+    \mathbb{E}\left[f(Y(\omega))\mathds{1}_{A'}(\omega)\right] &= \mathbb{E}\left[f(Y)\mathds{1}_A(X)\right]\\
     &=\int \int f(y) \mathds{1}_A(x)\mu_x(dy)\mathbb{P}^X(dx) \\
     &= \int \mathds{1}_{A'}(\omega) \int f(y)\mu_{X(\omega)}(dy) \mathbb{P}(d\omega)
     \end{align*}
-    Mit einem Funktionserweiterungsargument folgt für alle beschränkten, $\sigma(X)$ messbaren $g: \Omega\rightarrow \mathbb{R}$
-    $$\mathbb{E}(f(Y(\omega))g(\omega)) = \int g(\omega)\int f(y)\mu_{X(\omega)}(dy)\mathbb{P}(d\omega)$$
+    Mit einem Funktionserweiterungsargument folgt für alle beschränkten, $\sigma(X)$-messbaren $g: \Omega\rightarrow \mathbb{R}$
+    $$\mathbb{E}\left[f(Y(\omega))g(\omega)\right] = \int g(\omega)\int f(y)\mu_{X(\omega)}(dy)\mathbb{P}(d\omega)$$
     und damit die Behauptung. \\
     "$\Leftarrow$": \\
     Seien $A \in \mathcal{S}, B\in \mathcal{B}(T)$. Dann gilt
     \begin{align*}
-        \mathbb{P}(X\in A, Y\in B) &= \mathbb{E}(\mathds{1}_A(X) \mathds{1}_B(Y)) \\
-        &= \mathbb{E}(\mathds{1}_A(X)\mathbb{E}(\mathds{1}_B(Y)\vert X)) \\
-        &= \int \int \mathds{1}_B(Y) \mu_x(dy) \mathds{1}_A(x)\mathbb{P}^X(dx) \\
+        \mathbb{P}(X\in A, Y\in B) &= \mathbb{E}\left[\mathds{1}_A(X) \mathds{1}_B(Y)\right] \\
+        &= \mathbb{E}\left[\mathds{1}_A(X)\mathbb{E}(\mathds{1}_B(Y)\vert X)\right] \\
+        &= \int \int \mathds{1}_B(y) \mu_x(dy) \mathds{1}_A(x)\mathbb{P}^X(dx) \\
         &= (\mathbb{P}^X \otimes \mu)(A\times B)
     \end{align*}
     und somit ist $\mu=\mathcal{L}(Y\vert X)$
@@ -244,13 +243,13 @@ Sei nun die Abbildung $x \mapsto \mu_x$ messbar. Um zu zeigen, dass Abbildungen 
 $$\mathcal{C}:=\left\{A \in \mathcal{B}(T) \vert \mu \mapsto \mu(A) \text{ ist messbar}\right\}$$
 Betrachte zunächst offene Mengen $U\subset T$. Für eine Folge $\mu_n \rightarrow \mu$ bezüglich $\mathcal{W}_p$ gilt insbesondere $\mu_n\rightarrow \mu$ schwach. Somit gilt mit dem Portmonteau Theorem
 $$\liminf_{n\rightarrow\infty}\mu_n(U) \geq \mu(U)$$
-Die Abbildung $\mu \mapsto \mu(U)$ ist also halbstetig von unten und somit messbar. Die offenen Mengen sind ein $\cap$-stabiler Erzeuger von $\mathcal{B}(T)$, es reicht also zu zeigen dass $\mathcal{C}$ ein Dynkin-System ist. Für $A\in\mathcal{C}$ ist die Abbildung $\mu \mapsto \mu(A^c)=1-\mu(A)$ wieder messbar, und für $(A_i)_{i\in\mathbb{N}}\subset \mathcal{C}$ disjunkt ist 
+Die Abbildung $\mu \mapsto \mu(U)$ ist also halbstetig von unten und somit messbar. Die offenen Mengen sind ein $\cap$-stabiler Erzeuger von $\mathcal{B}(T)$, es reicht also zu zeigen, dass $\mathcal{C}$ ein Dynkin-System ist. Für $A\in\mathcal{C}$ ist die Abbildung $\mu \mapsto \mu(A^c)=1-\mu(A)$ wieder messbar, und für $(A_i)_{i\in\mathbb{N}}\subset \mathcal{C}$ disjunkt ist 
 $\mu\mapsto \mu(\bigcup_{i\in\mathbb{N}}A_i)=\sum_{i\in\mathbb{N}}\mu(A_i)$ auch messbar. Somit ist $\mathcal{C}=\mathcal{B}(T)$.
 \end{proof}
 \begin{remark}\label{rem:kernel_char_no_p}
-Mit dem gleichen Argument gilt die Behauptung auch für Abbildungen $\mu: S \mapsto \mathcal{P}(T)$, wenn wir auf $\mathcal{P}(T)$ die Borel-Algebra betrachten, die durch die Topologie schwacher Konvergenz erzeugt wird.
+Mit dem gleichen Argument gilt die Behauptung auch für Abbildungen $\mu: S \rightarrow \mathcal{P}(T)$, wenn wir auf $\mathcal{P}(T)$ die Borel-Algebra betrachten, die durch die Topologie schwacher Konvergenz erzeugt wird.
 \end{remark}
-Wir wollen in den kommenden Kapiteln die Information einer Filtration eines stochastischen Prozesses in einer Zufallsvariable, dem Informationsprozess, kodieren. Für diese Konstruktion wird es zentral sein, dass wir bedingte Verteilungen tatsächlich als Zufallsvariablen auffassen können. Die Grundlage für diese Konstruktion liefert das folgende Korollar:
+Wir wollen in den kommenden Kapiteln die Information einer Filtration eines stochastischen Prozesses in einer Zufallsvariable, dem Informationsprozess, kodieren. Für diese Konstruktion wird es zentral sein, dass wir bedingte Verteilungen tatsächlich als Zufallsvariablen auffassen können. Die Grundlage dafür liefert das folgende Korollar:
 \begin{corollary}\label{thm:pmoments}
     Sei $X:(\Omega, \mathcal{F})\rightarrow(S, \mathcal{B}(S))$ eine Zufallsvariable mit Werten in einem polnischen Raum $S$ mit fixierter Metrik $d$. Weiterhin sei $\mathcal{G}\subset \mathcal{F}$ und $X$ habe $p$-te Momente, das heißt $\mathbb{E}(d^p(a_0, X))<\infty$. Dann gelten folgende Aussagen:
     \begin{enumerate}[(i)]
@@ -263,8 +262,8 @@ Wir wollen in den kommenden Kapiteln die Information einer Filtration eines stoc
     \item Sei $\mu:\Omega\rightarrow\mathcal{P}(S)$ eine beliebige Version der bedingten Verteilung. Betrachte die Menge $A:=\{\omega\in\Omega\vert \mu_\omega(d^p(a_0, \cdot)) = \infty\}$. $A$ ist messbar. Da 
 $$\int_{\Omega}\int_{S} d^p(a_0, x)\mu_{\omega}(dx)\mathbb{P}(d\omega) = \mathbb{E}(d^p(a_0, X))<\infty$$
 ist $A$ eine Nullmenge. Setze nun 
-$$\tilde{\mu}_\omega=\mathds{1}_{A^c}(\omega)\mu_\omega + \mathds{1}_{A}\delta_{a_0}$$
-Für $B\in\mathcal{B}(S)$ ist $(\omega\mapsto\tilde{\mu}_\omega(B)) = (\omega \mapsto \mathds{1}_{A^c}\mu_\omega(B)+\mathds{1}_A \delta_{a_0})$ weiterhin messbar als Kombination messbarer Abbildungen, $\tilde{\mu}$ ist also ein Kern. Da $A$ eine Nullmenge ist, ist $\mathbb{P}_{\vert \mathcal{G}}\otimes \tilde{\mu} = \mathbb{P}_{\vert\mathcal{G}} \otimes \mu$, somit ist $\tilde{\mu}$ eine Version von $\mathcal{L}(X\vert \mathcal{G})$ mit Werten in $\mathcal{P}_p$. Nach dem vorherigen Lemma ist sie messbar bezüglich der Borel-Algebra auf $\mathcal{P}_p$.
+$$\tilde{\mu}_\omega=\mathds{1}_{A^c}\mu_\omega + \mathds{1}_{A}\delta_{a_0}$$
+Für $B\in\mathcal{B}(S)$ ist $(\omega\mapsto\tilde{\mu}_\omega(B)) = (\omega \mapsto \mathds{1}_{A^c}\mu_\omega(B)+\mathds{1}_A \delta_{a_0}(B))$ weiterhin messbar als Kombination messbarer Abbildungen, $\tilde{\mu}$ ist also ein Kern. Da $A$ eine Nullmenge ist, ist $\mathbb{P}_{\vert \mathcal{G}}\otimes \tilde{\mu} = \mathbb{P}_{\vert\mathcal{G}} \otimes \mu$, somit ist $\tilde{\mu}$ eine Version von $\mathcal{L}(X\vert \mathcal{G})$ mit Werten in $\mathcal{P}_p$. Nach dem vorherigen Lemma ist sie messbar bezüglich der Borel-Algebra auf $\mathcal{P}_p$.
 \item Wie immer können wir die fixierte Stelle, gegenüber der wir $p$-te Momente berechnen, frei wählen. Eine einfache Wahl ist $\delta_{a_0}$ für ein $a_0\in S$, da es nur eine Möglichkeit der Kopplung von Dirac-Maßen in der Definition der Wasserstein-Metrik gibt: Das Produktmaß. Es gilt nun
 $$\mathbb{E}\left(\mathcal{W}_p^p\left(\mathcal{L}(X\vert\mathcal{G}), \delta_{a_0}\right)\right)=\mathbb{E}\left(\int d^p(a_0, x)\mathcal{L}(X\vert\mathcal{G})(dx)\right)=\mathbb{E}\left(d^p(a_0, X)\right) < \infty$$
 \end{enumerate}
@@ -276,7 +275,7 @@ Seien $\kappa_1: \Omega\rightarrow T,\kappa_2: \Omega\rightarrow S$ Kerne. Dann 
 \begin{proof}
 Schreibe $\mu:=\kappa_1\otimes\kappa_2$ und setze 
 $$\mathcal{C}:=\left\{C\subset\sigma(A\times B, A\in\mathcal{T}, B\in\mathcal{S})\vert \omega \mapsto \mu_\omega(C) \text{ ist messbar}\right\}$$
-$\mathcal{C}$ ist ein Dynkinsystem: Für $C\in\mathcal{C}$ ist $\mu(C^c)=1-\mu(C)$ wieder messbar, und für $(C_i)_{i\in\mathbb{N}}\subset \mathcal{C}$ ist 
+$\mathcal{C}$ ist ein Dynkinsystem: Für $C\in\mathcal{C}$ ist $\mu(C^c)=1-\mu(C)$ wieder messbar, und für $(C_i)_{i\in\mathbb{N}}\subset \mathcal{C}$ disjunkt ist 
 $$\mu(\bigcup_{i\in\mathbb{N}}(C_i))=\sum_{i\in\mathbb{N}}\mu(C_i)$$
 auch wieder messbar. Ein $\cap$-stabiler Erzeuger von $\sigma(S\times T)$ sind Mengen der Form $A\times B, A\in \mathcal{T}, B\in\mathcal{S}$. Für diese Mengen gilt
 $$\mu(A\times B) = \kappa_1(A)\cdot\kappa_2(B)$$
@@ -287,41 +286,46 @@ Seien $X, Y$ Zufallsvariablen auf $(\Omega, \mathcal{F})$ mit Werten in polnisch
 $$\mathcal{L}\left((X,Y)\vert \mathcal{G}\right) = \delta_X \otimes \mathcal{L}(Y\vert \mathcal{G})$$
 \end{lemma}
 \begin{proof}
-    $\delta_X$ ist ein Kern und messbar bezüglich $\sigma(X)\subset \mathcal{G}$, und auch $\mathcal{L}(Y\vert \mathcal{G})$ ist ein $\mathcal{G}$-messbarer Kern. Somit ist mit dem vorherigen Lemma auch $\delta_X \otimes \mathcal{L}(Y\vert\mathcal{G})$ ein $\mathcal{G}$ messbarer Kern. Ferner gilt für Mengen $A\in \mathcal{G}, B\in\mathcal{B}(S), C \in \mathcal{B}(T)$:
+    $\delta_X$ ist ein Kern und messbar bezüglich $\sigma(X)\subset \mathcal{G}$, und auch $\mathcal{L}(Y\vert \mathcal{G})$ ist ein $\mathcal{G}$-messbarer Kern. Somit ist mit dem vorherigen Lemma auch $\delta_X \otimes \mathcal{L}(Y\vert\mathcal{G})$ ein $\mathcal{G}$-messbarer Kern. Ferner gilt für Mengen $A\in \mathcal{G}, B\in\mathcal{B}(S), C \in \mathcal{B}(T)$:
     \begin{align*}
         \mathbb{P}_{\vert\mathcal{G}} \otimes &\left(\delta_X\otimes \mathcal{L}(Y\vert \mathcal{G})\right)(A\times(B\times C)) \\
         &= \int \int \mathds{1}_A(\omega)\mathds{1}_B(x)\mathds{1}_C(y) (\delta_X\otimes \mathcal{L}(Y\vert\mathcal{G}))(dx, dy)\mathbb{P}_{\vert\mathcal{G}}(d\omega) \\
         &= \int \mathds{1}_A(\omega) \mathds{1}_B(X)\int\mathds{1}_C(y)\mathcal{L}(Y\vert\mathcal{G})(dy)\mathbb{P}_{\vert\mathcal{G}}(d\omega) \\
-        &= \mathbb{E}\left(\mathds{1}_A(\omega)\mathds{1}_B(X(\omega))\mathbb{E}(\mathds{1}_C(Y)\vert \mathcal{G})\right) \\
-        &= \mathbb{E}(\mathds{1}_A(\omega)\mathds{1}_B(X)\mathds{1}_C(Y)) \\
+        &= \mathbb{E}\left[\mathds{1}_A(\omega)\mathds{1}_B(X(\omega))\mathbb{E}(\mathds{1}_C(Y)\vert \mathcal{G})\right] \\
+        &= \mathbb{E}\left[\mathds{1}_A(\omega)\mathds{1}_B(X)\mathds{1}_C(Y)\right] \\
         &= \mathbb{P}(A, X\in B, Y\in C)
     \end{align*}
     Somit gilt 
-    $$\mathbb{P}_{\vert\mathcal{G}} \otimes \left(\delta_X\otimes \mathcal{L}(Y\vert \mathcal{G})\right)(A, (X, Y) \in E) = \mathbb{P}(A, (X, Y)\in E)$$
-    für Mengen $E$ der Form $E=A\times B$. Das ist ein $\cap$-stabiler Erzeuger von $\mathcal{S}\otimes\mathcal{T}$, also gilt die Gleichheit auch allgemein.
+    $$\left[\mathbb{P}_{\vert\mathcal{G}} \otimes \left(\delta_X\otimes \mathcal{L}(Y\vert \mathcal{G})\right)\right](A, (X, Y) \in E) = \mathbb{P}(A, (X, Y)\in E)$$
+    für Mengen $E$ der Form $E=B\times C$. Das ist ein $\cap$-stabiler Erzeuger von $\mathcal{S}\otimes\mathcal{T}$, also gilt die Gleichheit auch allgemein.
 \end{proof}
 \begin{lemma}\label{thm:pushforward_measurable}
-Seien $S, T$ polnische Räume mit Borel-Algebra. Sei $f:S\rightarrow T$ beschränkt und messbar. Dann ist die \emph{Push-Forward Abbildung} 
+Seien $S, T$ polnische Räume mit Borel-Algebra. Sei $f:S\rightarrow T$ messbar und mit $1$-Wachstum. Dann ist die \emph{Push-Forward Abbildung} 
 $$f_*:\mathcal{P}_p(S)\rightarrow\mathcal{P}_p(T), \, \mu \mapsto f_*(\mu)\quad  \text{ mit } f_*(\mu)(A) = \mu(f^{-1}(A))$$
-messbar. Falls $f$ stetig ist, so ist es auch $f_*$.
+messbar und hat $1$-Wachstum. Falls $f$ stetig ist, so ist es auch $f_*$.
 \end{lemma}
 \begin{proof}
-Für $\mu \in \mathcal{P}_p(S)$ und $t_0 \in T$ fix gilt, da $f$ beschränkt ist,
-$$\int d(t_0, x) f_*(\mu)(dx) = \int d(t_0, f(s))\mu(ds) < \infty$$
-Die Abbildung ist also wohldefiniert.
-Mit Lemma \ref{thm:kernel_characterization} ist $f_*$ messbar genau dann, wenn für jedes $A \in \mathcal{B}(T)$ die Abbildung $\mu \mapsto (f_*(\mu))(A)=\mu(f^{-1}(A))$ messbar ist. Das ist aber klar: Auf $\mathcal{P}_p(S)$ ist die Identität messbar und somit gilt, auch mit Lemma \ref{thm:kernel_characterization}, dass $\mu \mapsto \mu(B)$ messbar ist für alle $B\in \mathcal{B}(S)$, also insbesondere für $f^{-1}(A) \in \mathcal{B}(S)$. 
+Fixiere $t_0 \in T, s_0 \in S$ und wähle $c>0$ mit $d(t_0, f(s)) \leq c(1+ d(s, s_0))$. Für $\mu \in \mathcal{P}_p(S)$ gilt
+$$\int d^p(t_0, x) f_*(\mu)(dx) = \int d^p(t_0, f(s))\mu(ds) \leq c^p2^{p-1} \int d^p(s,s_0) + 1 \mu(ds) < \infty$$
+mit einem klassischen Konvexitätsargument, das im Beweis von Proposition \ref{thm:doob_continuous} näher erläutert wird. Die Abbildung ist also wohldefiniert.
+Mit Lemma \ref{thm:kernel_characterization} ist $f_*$ messbar genau dann, wenn für jedes $A \in \mathcal{B}(T)$ die Abbildung $\mu \mapsto (f_*(\mu))(A)=\mu(f^{-1}(A))$ messbar ist. Das ist aber klar: Auf $\mathcal{P}_p(S)$ ist die Identität messbar und somit gilt, auch mit Lemma \ref{thm:kernel_characterization}, dass $\mu \mapsto \mu(B)$ messbar ist für alle $B\in \mathcal{B}(S)$, also insbesondere für $f^{-1}(A) \in \mathcal{B}(S)$. Für den Beweis von $1$-Wachstum ist 
+\begin{align*}
+    \mathcal{W}_p^p(f_*\mu, \delta_{t_0}) &= \int d^p(t_0, f(s))\mu(ds) \leq c^p2^{p-1} \int d^p(s_0, s) + 1\mu(ds) \\
+    &= c^p2^{p-1}(1 + \mathcal{W}_p^p(\delta_{s_0}, \mu))
+\end{align*}
+und somit $\mathcal{W}_p(f_*\mu, \delta_{t_0}) \leq 2c(1 + \mathcal{W}_p(\delta_{s_0}, \mu))$. $f_*$ hat also tatsächlich $1$-Wachstum.
 
-Sei nun $f$ stetig und $(\mu_n)_{n\in\mathbb{N}}, \mu \in \mathcal{P}_p(S)$ mit $\mu_n\rightarrow \mu$ bezüglich $\mathcal{W}_p$. Sei $g:T\rightarrow \mathbb{R}$ stetig mit $p$-Wachstum, das heißt $|g(x)| \leq c(d(x, s_0)+1)$ für fixierte $c\in\mathbb{R}, s_0\in S$. Dann gilt
+Sei nun $f$ stetig und $(\mu_n)_{n\in\mathbb{N}}, \mu \in \mathcal{P}_p(S)$ mit $\mu_n\rightarrow \mu$ bezüglich $\mathcal{W}_p$. Sei $g:T\rightarrow \mathbb{R}$ stetig mit $p$-Wachstum. Dann gilt
     $$(f_*(\mu_n))(g) = \int g(f(s)) \mu(ds)$$
-Für die Funktion $g(f(s))$ gilt $|g(f(s))|\leq c(d(f(s), s_0)+1)$ und das ist beschränkt, da $f$ beschränkt ist. Somit ist $g\circ f$ beschränkt und $\mu_n(g\circ f) \rightarrow \mu(g\circ f) = (f_*(\mu))(g)$. Insgesamt ist $f_*$ stetig.
+Mit ähnlichen Argumenten wie im bisherigen Beweis ist $g\circ f$ stetig mit $p$-Wachstum. Mit Lemma \ref{thm:conv_char} gilt $\mu_n(g\circ f) \rightarrow \mu(g\circ f) = (f_*(\mu))(g)$. Insgesamt ist $f_*$ stetig.
 \end{proof}
 \begin{remark}
-Mit Bemerkung \ref{rem:kernel_char_no_p} ist für ein (möglicherweise nicht beschränkts) messbares $f: S\rightarrow T$ mit dem gleichen Argument $f_*$ auch als Abbildung $f_*: \mathcal{P}(S) \rightarrow \mathcal{P}(T)$ messbar.
+Mit Bemerkung \ref{rem:kernel_char_no_p} ist für jedes messbare $f: S\rightarrow T$ (also möglicherweise ohne $1$-Wachstum) mit dem gleichen Argument $f_*$ auch als Abbildung $f_*: \mathcal{P}(S) \rightarrow \mathcal{P}(T)$ messbar.
 \end{remark}
-\begin{corollary}\label{thm:pushforward_law}
+\begin{lemma}\label{thm:pushforward_law}
 Seien $S, T$ polnische Räume, $f:S\rightarrow T$ messbar. Weiterhin sei $X:(\Omega, \mathcal{F}) \rightarrow (S, \mathcal{B}(S))$ und $\mathcal{G}\subset\mathcal{F}$. Dann ist 
 $$\mathcal{L}(f(X)\vert \mathcal{G}) = f_*\mathcal{L}(X\vert\mathcal{G})$$
-\end{corollary}
+\end{lemma}
 \begin{proof}
 Mit dem vorherigen Lemma und der anschließenden Bemerkung ist $f_*\mathcal{L}(X\vert\mathcal{G})$ eine $\mathcal{G}$-messbare Abbildung. Weiter gilt für $A\in\mathcal{G}, B\in\mathcal{B}(T)$
 \begin{align*}
@@ -331,12 +335,12 @@ Mit dem vorherigen Lemma und der anschließenden Bemerkung ist $f_*\mathcal{L}(X
     &= \mathbb{P}(A, f(X) \in B)
 \end{align*}
 \end{proof}
-An dieser und an einigen kommenden Stellen benötigen wir das folgende Lemma über die Faktorisierung von messbaren Abbildungen in polnische Räume:
+An dieser und an einigen kommenden Stellen benötigen wir das folgende Lemma über die Faktorisierung von Abbildungen mit Werten in polnischen Räumen:
 \begin{lemma}[Lemma 1.14 in \cite{kallenberg}]\label{thm:factorization_lemma}
 Seien $f,g$ messbare Abbildungen von $(\Omega, \mathcal{F})$ nach $(S, \mathcal{B}(S))$ und $(T, \mathcal{T})$, wobei $S$ polnisch ist (zum Beispiel $S=\mathbb{R}$). Dann sind äquivalent:
 \begin{enumerate}[(i)]
     \item $f$ ist messbar bezüglich $\sigma(g)$.
-    \item $f=h\circ g$ für ein messbares $h: S \rightarrow \mathbb{R}$.
+    \item $f=h\circ g$ für ein messbares $h: T \rightarrow S$.
 \end{enumerate}
 \end{lemma}
 \begin{lemma}\label{thm:pushforward_expectancy}
@@ -344,7 +348,7 @@ Sei $(\Omega, \mathcal{F}, \mathbb{P})$ ein Wahrscheinlichkeitsraum und $S$ ein 
 $$\mathbb{E}_{\mathbb{P}}(U(X) \vert \mathcal{G}) = \mathbb{E}_{\mathbb{P}^X}(U \vert \mathcal{A})(X) \quad \text{ fast sicher}$$
 \end{lemma}
 \begin{proof}
-Schreibe $\mu := \mathbb{P}^X$. Da $X: (\Omega, \mathcal{G}) \rightarrow (S, \mathcal{A})$ messbar ist, ist auch $\mathbb{E}_\mu(U\vert \mathcal{A})(X)$ $\mathcal{G}$-messbar. Ein $\mathcal{G}$-messbares, beschränktes $V:\Omega \rightarrow \mathbb{R}$ faktorisiert $V$ nach Lemma \ref{thm:factorization_lemma} als $V(\omega) = \tilde{V}(X(\omega))$ für ein $\mathcal{A}$-messbares $\tilde{V}$. Somit gilt
+Schreibe $\mu := \mathbb{P}^X$. Da $X: (\Omega, \mathcal{G}) \rightarrow (S, \mathcal{A})$ messbar ist, ist auch $\mathbb{E}_\mu(U\vert \mathcal{A})(X)$ $\mathcal{G}$-messbar. Ein $\mathcal{G}$-messbares, beschränktes $V:\Omega \rightarrow \mathbb{R}$ faktorisiert nach Lemma \ref{thm:factorization_lemma} als $V(\omega) = \tilde{V}(X(\omega))$ für ein $\mathcal{A}$-messbares $\tilde{V}$. Somit gilt
 \begin{align*}
 \int V(\omega)U(X(\omega))\mathbb{P}(d\omega) &= \int \tilde{V}(X)U(X) \mu(dX)  \\
 &= \int \tilde{V}(X)\mathbb{E}_\mu(U \vert \mathcal{A})(X) \mu(dX) \\
@@ -356,7 +360,7 @@ und damit ist $\mathbb{E}_{\mathbb{P}^{X}}(U \vert \mathcal{A})(X)$ eine Version
 
 \subsection{Kopplungen und Kausalität}
 \begin{definition}[Bedingte Unabhängigkeit]
-    Für einen Wahrscheinlichkeitsraum $(\Omega, \mathcal{F}, \mathbb{P})$, eine Unter $\sigma$-Algebra $\mathcal{G} \subset \mathcal{F}$ und Mengen $A, B \in \mathcal{F}$ schreiben wir $\mathbb{P}(A \vert \mathcal{G}) := \mathbb{E}(\mathds{1}_A\vert \mathcal{G})$ und nennen $A$ und $B$ \emph{unabhängig bedingt auf $\mathcal{G}$}, falls
+    Für einen Wahrscheinlichkeitsraum $(\Omega, \mathcal{F}, \mathbb{P})$, eine $\sigma$-Algebra $\mathcal{G} \subset \mathcal{F}$ und Mengen $A, B \in \mathcal{F}$ schreiben wir $\mathbb{P}(A \vert \mathcal{G}) := \mathbb{E}(\mathds{1}_A\vert \mathcal{G})$ und nennen $A$ und $B$ \emph{unabhängig bedingt auf $\mathcal{G}$}, falls
     \begin{equation}\label{eq:def_cond_ind}
     \mathbb{P}(A\cap B\vert \mathcal{G}) = \mathbb{P}(A\vert \mathcal{G}) \mathbb{P}(B \vert \mathcal{G}) \quad \text{ fast sicher }
     \end{equation}
@@ -368,18 +372,18 @@ und damit ist $\mathbb{E}_{\mathbb{P}^{X}}(U \vert \mathcal{A})(X)$ eine Version
 Betrachte ein Fünf-Tupel
 $$\mathbb{X}=\left(\Omega, \mathcal{F}, \mathbb{P}, \left(\mathcal{F}_t\right)_{t=1}^N, \left(X_t\right)_{t=1}^N\right)$$
 wobei $(\Omega, \mathcal{F}, \mathbb{P})$ ein Wahrscheinlichkeitsraum, $\left(\mathcal{F}_t\right)_{t=1}^N\subset \mathcal{F}$ eine Filtration und \\
-$(X_t)_{t=1}^N$ ein stochastischer Prozess mit Werten in $\mathcal{X}_{1:N}$ adaptiert an $(\mathcal{F})_{t=1}^N$ ist. Ein solches Tupel $\mathbb{X}$ nennen wir einen \emph{filtrierten (stochastischen) Prozess}. Wir schreiben $\mathcal{FP}$ für den Raum aller filtrierten Prozess und $\mathcal{FP}_p$ für den Raum aller filtrierten Prozesse mit $p$-ten Momenten, das heißt $\mathbb{E}(d_{\mathcal{X}_t}(a_0, X_t))<\infty, a_0\in\mathcal{X}_t, t=1,...,N$.
+$(X_t)_{t=1}^N$ ein stochastischer Prozess mit Werten in $\mathcal{X}_{1:N}$ adaptiert an $(\mathcal{F})_{t=1}^N$ ist. Ein solches Tupel $\mathbb{X}$ nennen wir einen \emph{filtrierten (stochastischen) Prozess}. Wir schreiben $\mathcal{FP}$ für den Raum aller filtrierten Prozesse und $\mathcal{FP}_p$ für den Raum aller filtrierten Prozesse mit $p$-ten Momenten, das heißt $\mathbb{E}(d^p_{\mathcal{X}_t}(a_0, X_t))<\infty, a_0\in\mathcal{X}_t, t=1,...,N$.
 \end{definition}
+Wir schreiben $\mathcal{F}_0 = \left\{\emptyset, \Omega\right\}$. Für zwei Prozesse $\mathbb{X}, \mathbb{Y}$ schreiben wir $\mathcal{F}_{s,t}^\mathbb{X,Y} := \mathcal{F}_s^\mathbb{X} \otimes \mathcal{F}_t^\mathbb{Y}$ für die entsprechenden Produkt-$\sigma$-Algebren auf $\Omega^\mathbb{X}\times\Omega^\mathbb{Y}$.
 \begin{definition}[Kausale Kopplungen]
 Seien $\mathbb{X}, \mathbb{Y}$ filtrierte Prozesse. Wir nennen $\pi$ eine \emph{Kopplung} von $\mathbb{X}$ und $\mathbb{Y}$, falls die Marginalien $\mathbb{P}^\mathbb{X}$ und $\mathbb{P}^\mathbb{Y}$ sind (das heißt $\pi \in \cpl(\mathbb{P}^\mathbb{X}, \mathbb{P}^\mathbb{Y})$). Weiterhin nennen wir $\pi$
 \begin{enumerate}
-\item \emph{kausal} (oder kausal von $\mathbb{X}$ zu $\mathbb{Y}$) falls für jedes $1\leq t\leq N$, bedingt auf $\mathcal{F}_{t, 0}^{\mathbb{X}, \mathbb{Y}}$, die Mengensysteme $\mathcal{F}_{N, 0}^{\mathbb{X}, \mathbb{Y}}$ und $\mathcal{F}_{0, t}^{\mathbb{X},\mathbb{Y}}$ unabhängig sind.
+\item \emph{kausal} (oder kausal von $\mathbb{X}$ zu $\mathbb{Y}$), falls für jedes $1\leq t\leq N$, bedingt auf $\mathcal{F}_{t, 0}^{\mathbb{X}, \mathbb{Y}}$, die Mengensysteme $\mathcal{F}_{N, 0}^{\mathbb{X}, \mathbb{Y}}$ und $\mathcal{F}_{0, t}^{\mathbb{X},\mathbb{Y}}$ unabhängig sind.
 \item \emph{antikausal} (oder kausal von $\mathbb{Y}$ zu $\mathbb{X}$), falls für jedes $1 \leq t \leq N$, bedingt auf $\mathcal{F}_{0, t}^{\mathbb{X}, \mathbb{Y}}$, die Mengensysteme $\mathcal{F}_{0, N}^{\mathbb{X}, \mathbb{Y}}$ und $\mathcal{F}_{t, 0}^{\mathbb{X}, \mathbb{Y}}$ unabhängig sind.
 \item \emph{bikausal}, falls es kausal und antikausal ist.
 \end{enumerate}
 Wir schreiben $\cpl(\mathbb{X}, \mathbb{Y})$, $\cplc(\mathbb{X}, \mathbb{Y})$, $\cplbc(\mathbb{X}, \mathbb{Y})$ für die Mengen der Kopplungen, kausalen Kopplungen und bikausalen Kopplungen von $\mathbb{X}$ und $\mathbb{Y}$.
 \end{definition}
-% TODO: Beweis von Kallenberg übertragen oder zitieren
 \begin{lemma}\label{thm:causality_characterization}
 Sei $\pi$ eine Kopplung von filtrierten Prozessen $\mathbb{X}$ und $\mathbb{Y}$. Dann sind äquivalent:
 \begin{enumerate}[(i)]
